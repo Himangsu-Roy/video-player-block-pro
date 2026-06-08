@@ -1,0 +1,237 @@
+{
+  "apiVersion": 3,
+  "name": "vpb/video-playlist",
+  "title": "Video Playlist",
+  "category": "vpbblocks",
+  "description": "Side-by-side video player and clickable episode queue with chapters, auto-advance, watched-state persistence, and Netflix/YouTube-style sequential viewing.",
+  "keywords": [
+    "video",
+    "playlist",
+    "queue",
+    "episodes",
+    "chapters",
+    "auto-advance"
+  ],
+  "textdomain": "video-player-block",
+  "attributes": {
+    "alignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "engine": {
+      "type": "string",
+      "default": "default"
+    },
+    "layout": {
+      "type": "string",
+      "default": "queue-right"
+    },
+    "items": {
+      "type": "array",
+      "default": [
+        {
+          "id": "vp1",
+          "title": "Episode 1 – Big Buck Bunny",
+          "description": "A short animated film by the Blender Institute.",
+          "source": { "type": "mp4", "url": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/video.mp4", "mediaId": "" },
+          "poster": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/poster.jpg",
+          "duration": "9:56",
+          "badge": "",
+          "chapters": [
+            { "time": 0, "label": "Intro" },
+            { "time": 45, "label": "Chase Scene" },
+            { "time": 180, "label": "Showdown" }
+          ]
+        },
+        {
+          "id": "vp2",
+          "title": "Episode 2 – Sintel Trailer",
+          "description": "A fantasy short film, also by the Blender Institute.",
+          "source": { "type": "youtube", "url": "https://www.youtube.com/watch?v=eRsGyueVLvQ", "mediaId": "eRsGyueVLvQ" },
+          "poster": "https://img.youtube.com/vi/eRsGyueVLvQ/maxresdefault.jpg",
+          "duration": "1:00",
+          "badge": "NEW",
+          "chapters": []
+        },
+        {
+          "id": "vp3",
+          "title": "Episode 3 – Tears of Steel",
+          "description": "Sci-fi short by the Blender Foundation.",
+          "source": { "type": "youtube", "url": "https://www.youtube.com/watch?v=R6MlUcmOul8", "mediaId": "R6MlUcmOul8" },
+          "poster": "https://img.youtube.com/vi/R6MlUcmOul8/maxresdefault.jpg",
+          "duration": "12:14",
+          "badge": "",
+          "chapters": []
+        },
+        {
+          "id": "vp4",
+          "title": "Episode 4 – HLS Sample Stream",
+          "description": "Adaptive bitrate HLS stream demo.",
+          "source": { "type": "hls", "url": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", "mediaId": "" },
+          "poster": "",
+          "duration": "Live",
+          "badge": "HLS",
+          "chapters": []
+        }
+      ]
+    },
+    "autoAdvance": {
+      "type": "boolean",
+      "default": true
+    },
+    "autoAdvanceDelay": {
+      "type": "number",
+      "default": 5
+    },
+    "startIndex": {
+      "type": "number",
+      "default": 0
+    },
+    "loopQueue": {
+      "type": "boolean",
+      "default": false
+    },
+    "shuffle": {
+      "type": "boolean",
+      "default": false
+    },
+    "showChapters": {
+      "type": "boolean",
+      "default": true
+    },
+    "showSearch": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDuration": {
+      "type": "boolean",
+      "default": true
+    },
+    "showThumbnails": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDescription": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCounter": {
+      "type": "boolean",
+      "default": true
+    },
+    "showWatchedCheckmarks": {
+      "type": "boolean",
+      "default": true
+    },
+    "rememberProgress": {
+      "type": "boolean",
+      "default": true
+    },
+    "progressStorageKey": {
+      "type": "string",
+      "default": ""
+    },
+    "deepLinkEnabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "queueTitle": {
+      "type": "string",
+      "default": "Up Next"
+    },
+    "queueWidth": {
+      "type": "number",
+      "default": 32
+    },
+    "queueMaxHeight": {
+      "type": "number",
+      "default": 560
+    },
+    "aspectRatio": {
+      "type": "string",
+      "default": "16:9"
+    },
+    "customAspect": {
+      "type": "string",
+      "default": "16/9"
+    },
+    "accentColor": {
+      "type": "string",
+      "default": "#136EF5"
+    },
+    "queueBackground": {
+      "type": "string",
+      "default": "#0f1115"
+    },
+    "queueTextColor": {
+      "type": "string",
+      "default": "#e6e7eb"
+    },
+    "queueMutedColor": {
+      "type": "string",
+      "default": "rgba(230, 231, 235, 0.65)"
+    },
+    "activeItemBackground": {
+      "type": "string",
+      "default": "rgba(19, 110, 245, 0.18)"
+    },
+    "hoverItemBackground": {
+      "type": "string",
+      "default": "rgba(255, 255, 255, 0.06)"
+    },
+    "playerBackground": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "containerBackground": {
+      "type": "string",
+      "default": "#0b0c10"
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 12
+    },
+    "boxShadow": {
+      "type": "object",
+      "default": {
+        "x": 0,
+        "y": 12,
+        "blur": 36,
+        "spread": 0,
+        "color": "rgba(0, 0, 0, 0.35)"
+      }
+    },
+    "padding": {
+      "type": "number",
+      "default": 0
+    },
+    "gap": {
+      "type": "number",
+      "default": 16
+    },
+    "emitSchema": {
+      "type": "boolean",
+      "default": true
+    },
+    "playlistName": {
+      "type": "string",
+      "default": "Featured Playlist"
+    }
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "html": false,
+    "layout": false
+  },
+  "example": {
+    "attributes": {}
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./view.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

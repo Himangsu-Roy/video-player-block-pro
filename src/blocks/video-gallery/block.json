@@ -1,0 +1,250 @@
+{
+  "apiVersion": 3,
+  "name": "vpb/video-gallery",
+  "title": "Video Gallery",
+  "category": "vpbblocks",
+  "description": "Multi-video showcase block with grid, masonry, carousel, and bento layouts, category filters, and an integrated lightbox player.",
+  "keywords": [
+    "video",
+    "gallery",
+    "playlist",
+    "carousel",
+    "lightbox"
+  ],
+  "textdomain": "video-player-block",
+  "attributes": {
+    "alignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "videos": {
+      "type": "array",
+      "default": [
+        {
+          "id": "v1",
+          "title": "Big Buck Bunny",
+          "description": "A short animated film by the Blender Institute.",
+          "source": "mp4",
+          "url": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/video.mp4",
+          "poster": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/poster.jpg",
+          "duration": "9:56",
+          "category": "Animation",
+          "chapters": []
+        },
+        {
+          "id": "v2",
+          "title": "Sintel Trailer",
+          "description": "A fantasy short film, also by the Blender Institute.",
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+          "poster": "https://img.youtube.com/vi/eRsGyueVLvQ/maxresdefault.jpg",
+          "duration": "1:00",
+          "category": "Trailers",
+          "chapters": []
+        },
+        {
+          "id": "v3",
+          "title": "Tears of Steel",
+          "description": "Sci-fi short by the Blender Foundation.",
+          "source": "youtube",
+          "url": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+          "poster": "https://img.youtube.com/vi/R6MlUcmOul8/maxresdefault.jpg",
+          "duration": "12:14",
+          "category": "Trailers",
+          "chapters": []
+        },
+        {
+          "id": "v4",
+          "title": "Elephants Dream",
+          "description": "The world's first open-source animated film.",
+          "source": "mp4",
+          "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+          "poster": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
+          "duration": "10:53",
+          "category": "Animation",
+          "chapters": []
+        },
+        {
+          "id": "v5",
+          "title": "Sample HLS Stream",
+          "description": "A test HLS adaptive bitrate stream.",
+          "source": "hls",
+          "url": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+          "poster": "",
+          "duration": "Live",
+          "category": "Streams",
+          "chapters": []
+        },
+        {
+          "id": "v6",
+          "title": "Sample Vimeo",
+          "description": "A short Vimeo clip used to demonstrate Vimeo source support.",
+          "source": "vimeo",
+          "url": "https://vimeo.com/76979871",
+          "poster": "",
+          "duration": "0:24",
+          "category": "Trailers",
+          "chapters": []
+        }
+      ]
+    },
+    "layout": {
+      "type": "string",
+      "default": "bento"
+    },
+    "columns": {
+      "type": "object",
+      "default": {
+        "desktop": 3,
+        "tablet": 2,
+        "mobile": 1
+      }
+    },
+    "gap": {
+      "type": "number",
+      "default": 16
+    },
+    "aspectRatio": {
+      "type": "string",
+      "default": "16:9"
+    },
+    "customAspect": {
+      "type": "string",
+      "default": "16/9"
+    },
+    "playerEngine": {
+      "type": "string",
+      "default": "default"
+    },
+    "playbackMode": {
+      "type": "string",
+      "default": "lightbox"
+    },
+    "showFilters": {
+      "type": "boolean",
+      "default": true
+    },
+    "filterStyle": {
+      "type": "string",
+      "default": "pills"
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDuration": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDescription": {
+      "type": "boolean",
+      "default": false
+    },
+    "showPlayIcon": {
+      "type": "boolean",
+      "default": true
+    },
+    "playIconStyle": {
+      "type": "string",
+      "default": "circle"
+    },
+    "playIconColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "playIconBgColor": {
+      "type": "string",
+      "default": "rgba(19, 110, 245, 0.92)"
+    },
+    "hoverEffect": {
+      "type": "string",
+      "default": "zoom"
+    },
+    "lightboxTheme": {
+      "type": "string",
+      "default": "dark"
+    },
+    "autoplayNext": {
+      "type": "boolean",
+      "default": false
+    },
+    "loop": {
+      "type": "boolean",
+      "default": false
+    },
+    "lazyLoad": {
+      "type": "boolean",
+      "default": true
+    },
+    "carouselSettings": {
+      "type": "object",
+      "default": {
+        "slidesToShow": 3,
+        "slidesToScroll": 1,
+        "autoplay": false,
+        "autoplaySpeed": 5000,
+        "showArrows": true,
+        "showDots": true,
+        "infinite": true
+      }
+    },
+    "tileBorderRadius": {
+      "type": "number",
+      "default": 10
+    },
+    "tileShadow": {
+      "type": "object",
+      "default": {
+        "x": 0,
+        "y": 4,
+        "blur": 16,
+        "spread": 0,
+        "color": "rgba(0, 0, 0, 0.18)"
+      }
+    },
+    "tileOverlayColor": {
+      "type": "string",
+      "default": "rgba(0, 0, 0, 0.45)"
+    },
+    "tileBgColor": {
+      "type": "string",
+      "default": "#0f1115"
+    },
+    "titleColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "descriptionColor": {
+      "type": "string",
+      "default": "rgba(255, 255, 255, 0.78)"
+    },
+    "filterActiveColor": {
+      "type": "string",
+      "default": "#136EF5"
+    },
+    "filterTextColor": {
+      "type": "string",
+      "default": "#1d1d1f"
+    },
+    "emptyStateText": {
+      "type": "string",
+      "default": "No videos match the selected filter."
+    }
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "html": false,
+    "layout": false
+  },
+  "example": {
+    "attributes": {}
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./view.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

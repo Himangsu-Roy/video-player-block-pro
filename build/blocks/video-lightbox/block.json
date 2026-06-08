@@ -1,0 +1,241 @@
+{
+  "apiVersion": 3,
+  "name": "vpb/video-lightbox",
+  "title": "Video Lightbox",
+  "category": "vpbblocks",
+  "description": "Click-to-play trigger (thumbnail, button, or play-icon overlay) that opens any supported video inside a responsive modal lightbox, deferring all heavy player assets until the visitor opts in.",
+  "keywords": [
+    "video",
+    "lightbox",
+    "popup",
+    "modal",
+    "youtube"
+  ],
+  "textdomain": "video-player-block",
+  "attributes": {
+    "alignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "triggerType": {
+      "type": "string",
+      "default": "thumbnail"
+    },
+    "thumbnailImage": {
+      "type": "object",
+      "default": {
+        "id": 0,
+        "url": "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1280&q=80",
+        "alt": ""
+      }
+    },
+    "thumbnailAspectRatio": {
+      "type": "string",
+      "default": "16:9"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Watch video"
+    },
+    "buttonIcon": {
+      "type": "string",
+      "default": "play"
+    },
+    "buttonStyle": {
+      "type": "string",
+      "default": "filled"
+    },
+    "buttonBgColor": {
+      "type": "string",
+      "default": "#136EF5"
+    },
+    "buttonTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "buttonBorderRadius": {
+      "type": "number",
+      "default": 8
+    },
+    "playIconStyle": {
+      "type": "string",
+      "default": "circle"
+    },
+    "playIconSize": {
+      "type": "number",
+      "default": 72
+    },
+    "playIconColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "playIconBgColor": {
+      "type": "string",
+      "default": "rgba(0,0,0,0.55)"
+    },
+    "thumbnailOverlayColor": {
+      "type": "string",
+      "default": "rgba(0,0,0,0.15)"
+    },
+    "thumbnailHoverEffect": {
+      "type": "string",
+      "default": "zoom"
+    },
+    "thumbnailBorderRadius": {
+      "type": "number",
+      "default": 12
+    },
+    "videoSource": {
+      "type": "string",
+      "default": "youtube"
+    },
+    "videoUrl": {
+      "type": "string",
+      "default": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+    },
+    "videoEngine": {
+      "type": "string",
+      "default": "plyr"
+    },
+    "modalSize": {
+      "type": "string",
+      "default": "large"
+    },
+    "modalMaxWidth": {
+      "type": "number",
+      "default": 1080
+    },
+    "modalAspectRatio": {
+      "type": "string",
+      "default": "16:9"
+    },
+    "modalTheme": {
+      "type": "string",
+      "default": "dark"
+    },
+    "modalBgColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "modalOverlayColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "modalOverlayOpacity": {
+      "type": "number",
+      "default": 85
+    },
+    "modalBorderRadius": {
+      "type": "number",
+      "default": 10
+    },
+    "modalAnimation": {
+      "type": "string",
+      "default": "fade"
+    },
+    "autoplayOnOpen": {
+      "type": "boolean",
+      "default": true
+    },
+    "muteOnOpen": {
+      "type": "boolean",
+      "default": false
+    },
+    "loopVideo": {
+      "type": "boolean",
+      "default": false
+    },
+    "closeOnOverlayClick": {
+      "type": "boolean",
+      "default": true
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCloseButton": {
+      "type": "boolean",
+      "default": true
+    },
+    "closeButtonStyle": {
+      "type": "string",
+      "default": "circle"
+    },
+    "pauseOnClose": {
+      "type": "boolean",
+      "default": true
+    },
+    "resetOnClose": {
+      "type": "boolean",
+      "default": false
+    },
+    "openTrigger": {
+      "type": "string",
+      "default": "click"
+    },
+    "openDelaySeconds": {
+      "type": "number",
+      "default": 5
+    },
+    "urlHashKey": {
+      "type": "string",
+      "default": ""
+    },
+    "lazyLoadEngine": {
+      "type": "boolean",
+      "default": true
+    },
+    "cookieKey": {
+      "type": "string",
+      "default": ""
+    },
+    "showDuration": {
+      "type": "boolean",
+      "default": false
+    },
+    "durationText": {
+      "type": "string",
+      "default": "2:30"
+    },
+    "showCaption": {
+      "type": "boolean",
+      "default": false
+    },
+    "captionText": {
+      "type": "string",
+      "default": "Watch our product demo"
+    },
+    "captionColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "triggerMaxWidth": {
+      "type": "string",
+      "default": "640px"
+    },
+    "a11yLabel": {
+      "type": "string",
+      "default": "Play video"
+    },
+    "a11yModalLabel": {
+      "type": "string",
+      "default": "Video player dialog"
+    }
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "html": false,
+    "layout": false
+  },
+  "example": {
+    "attributes": {}
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./view.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

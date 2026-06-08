@@ -1,0 +1,6 @@
+{
+  "_comment": "Copy this file to fs-config.json (gitignored) and fill in real values from https://dashboard.freemius.com/#/profile/. Do NOT commit fs-config.json — it contains your secret_key.",
+  "developer_id": 0,
+  "public_key": "pk_24433ae07b8acef1ebd1c99de9fa5",
+  "secret_key": "sk_REPLACE_ME"
+}

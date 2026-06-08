@@ -1,0 +1,77 @@
+{
+  "apiVersion": 3,
+  "name": "vpb/video-testimonial",
+  "title": "Video Testimonial Card",
+  "category": "vpbblocks",
+  "description": "A conversion-focused social-proof card pairing a customer photo, attributed quote, star rating, and an inline-playable video clip.",
+  "keywords": [
+    "video",
+    "testimonial",
+    "review",
+    "social proof",
+    "quote"
+  ],
+  "textdomain": "video-player-block",
+  "attributes": {
+    "alignment": { "type": "string", "default": "center" },
+    "layout": { "type": "string", "default": "media-left" },
+    "videoSource": { "type": "string", "default": "upload" },
+    "videoUrl": {
+      "type": "string",
+      "default": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/video.mp4"
+    },
+    "videoId": { "type": "number", "default": 0 },
+    "posterUrl": {
+      "type": "string",
+      "default": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/poster.jpg"
+    },
+    "playMode": { "type": "string", "default": "inline" },
+    "aspectRatio": { "type": "string", "default": "16:9" },
+    "quote": {
+      "type": "string",
+      "default": "This product completely changed how our team ships. Onboarding took 10 minutes and we doubled output the same week."
+    },
+    "quoteStyle": { "type": "string", "default": "large-quote-mark" },
+    "authorName": { "type": "string", "default": "Jordan Avery" },
+    "authorTitle": { "type": "string", "default": "Head of Product, Northwind" },
+    "authorAvatarId": { "type": "number", "default": 0 },
+    "authorAvatarUrl": {
+      "type": "string",
+      "default": "https://i.pravatar.cc/160?img=47"
+    },
+    "companyLogoId": { "type": "number", "default": 0 },
+    "companyLogoUrl": { "type": "string", "default": "" },
+    "rating": { "type": "number", "default": 5 },
+    "showVerifiedBadge": { "type": "boolean", "default": true },
+    "verifiedLabel": { "type": "string", "default": "Verified customer" },
+    "accentColor": { "type": "string", "default": "#136EF5" },
+    "cardBackground": {
+      "type": "object",
+      "default": { "type": "color", "value": "#ffffff" }
+    },
+    "cardTextColor": { "type": "string", "default": "#0f172a" },
+    "mutedTextColor": { "type": "string", "default": "#64748b" },
+    "borderRadius": { "type": "number", "default": 16 },
+    "cardPadding": { "type": "number", "default": 28 },
+    "cardShadow": { "type": "boolean", "default": true },
+    "mediaWidth": { "type": "number", "default": 48 },
+    "maxWidth": { "type": "number", "default": 980 },
+    "enableSchemaMarkup": { "type": "boolean", "default": true },
+    "reviewItemName": { "type": "string", "default": "" },
+    "playerControls": { "type": "boolean", "default": true },
+    "playerMuted": { "type": "boolean", "default": false },
+    "playerLoop": { "type": "boolean", "default": false },
+    "playerAutoplay": { "type": "boolean", "default": false }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false,
+    "layout": false
+  },
+  "example": { "attributes": {} },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./view.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

@@ -1,0 +1,271 @@
+{
+  "apiVersion": 3,
+  "name": "vpb/video-reels",
+  "title": "Video Reels",
+  "category": "vpbblocks",
+  "description": "A vertical, swipe-driven short-form video feed (TikTok / Instagram Reels / YouTube Shorts style) for any post, page, or template.",
+  "keywords": [
+    "reels",
+    "shorts",
+    "tiktok",
+    "vertical",
+    "video",
+    "swipe",
+    "feed"
+  ],
+  "textdomain": "video-player-block",
+  "attributes": {
+    "alignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "reels": {
+      "type": "array",
+      "default": [
+        {
+          "id": "r1",
+          "source": "mp4",
+          "url": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/video.mp4",
+          "poster": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/poster.jpg",
+          "title": "Big Buck Bunny",
+          "caption": "An open-source animated short clip by the Blender Institute.",
+          "authorName": "Blender Studio",
+          "authorAvatar": "",
+          "ctaLabel": "Watch full film",
+          "ctaUrl": "https://peach.blender.org/",
+          "ctaStyle": "solid",
+          "hashtags": ["animation", "openmovie", "blender"],
+          "durationSec": 0
+        },
+        {
+          "id": "r2",
+          "source": "youtube",
+          "url": "https://www.youtube.com/shorts/eRsGyueVLvQ",
+          "poster": "https://img.youtube.com/vi/eRsGyueVLvQ/maxresdefault.jpg",
+          "title": "Sintel – Teaser",
+          "caption": "A fantasy short film from the Blender Foundation.",
+          "authorName": "Blender Studio",
+          "authorAvatar": "",
+          "ctaLabel": "Explore",
+          "ctaUrl": "https://durian.blender.org/",
+          "ctaStyle": "outline",
+          "hashtags": ["sintel", "shortfilm"],
+          "durationSec": 0
+        },
+        {
+          "id": "r3",
+          "source": "mp4",
+          "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+          "poster": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
+          "title": "Elephants Dream",
+          "caption": "First open movie funded by community donations.",
+          "authorName": "Orange",
+          "authorAvatar": "",
+          "ctaLabel": "Learn more",
+          "ctaUrl": "https://orange.blender.org/",
+          "ctaStyle": "solid",
+          "hashtags": ["openmovie"],
+          "durationSec": 0
+        },
+        {
+          "id": "r4",
+          "source": "hls",
+          "url": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+          "poster": "",
+          "title": "HLS Live Sample",
+          "caption": "Adaptive bitrate HLS stream demo.",
+          "authorName": "Mux",
+          "authorAvatar": "",
+          "ctaLabel": "",
+          "ctaUrl": "",
+          "ctaStyle": "solid",
+          "hashtags": ["hls", "streaming"],
+          "durationSec": 0
+        }
+      ]
+    },
+    "layout": {
+      "type": "string",
+      "default": "feed-fullscreen"
+    },
+    "aspectRatio": {
+      "type": "string",
+      "default": "9:16"
+    },
+    "engine": {
+      "type": "string",
+      "default": "native"
+    },
+    "autoplayOnVisible": {
+      "type": "boolean",
+      "default": true
+    },
+    "autoplayThreshold": {
+      "type": "number",
+      "default": 60
+    },
+    "startMuted": {
+      "type": "boolean",
+      "default": true
+    },
+    "loopClips": {
+      "type": "boolean",
+      "default": true
+    },
+    "showProgressBar": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCaption": {
+      "type": "boolean",
+      "default": true
+    },
+    "showAuthor": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCTA": {
+      "type": "boolean",
+      "default": true
+    },
+    "ctaPosition": {
+      "type": "string",
+      "default": "bottom"
+    },
+    "showHashtags": {
+      "type": "boolean",
+      "default": true
+    },
+    "showActionRail": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCounter": {
+      "type": "boolean",
+      "default": true
+    },
+    "snapBehavior": {
+      "type": "string",
+      "default": "mandatory"
+    },
+    "swipeGestures": {
+      "type": "boolean",
+      "default": true
+    },
+    "keyboardNavigation": {
+      "type": "boolean",
+      "default": true
+    },
+    "preloadStrategy": {
+      "type": "string",
+      "default": "next-one"
+    },
+    "gridColumns": {
+      "type": "object",
+      "default": {
+        "desktop": 4,
+        "tablet": 3,
+        "mobile": 2
+      }
+    },
+    "thumbnailHoverPreview": {
+      "type": "boolean",
+      "default": true
+    },
+    "deepLinkHash": {
+      "type": "boolean",
+      "default": true
+    },
+    "seoJsonLd": {
+      "type": "boolean",
+      "default": true
+    },
+    "feedName": {
+      "type": "string",
+      "default": "Video Reels"
+    },
+    "maxClipsPerPage": {
+      "type": "number",
+      "default": 0
+    },
+    "loadMoreLabel": {
+      "type": "string",
+      "default": "Load more"
+    },
+    "containerHeight": {
+      "type": "number",
+      "default": 720
+    },
+    "feedMaxWidth": {
+      "type": "number",
+      "default": 420
+    },
+    "accentColor": {
+      "type": "string",
+      "default": "#136EF5"
+    },
+    "ctaTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "overlayTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "overlayMutedColor": {
+      "type": "string",
+      "default": "rgba(255, 255, 255, 0.78)"
+    },
+    "containerBackground": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "overlayGradient": {
+      "type": "string",
+      "default": "linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.75) 100%)"
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 18
+    },
+    "cardShadow": {
+      "type": "object",
+      "default": {
+        "x": 0,
+        "y": 18,
+        "blur": 48,
+        "spread": 0,
+        "color": "rgba(0, 0, 0, 0.45)"
+      }
+    },
+    "progressBarColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "progressBarTrackColor": {
+      "type": "string",
+      "default": "rgba(255, 255, 255, 0.25)"
+    },
+    "actionRailIconColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "hashtagColor": {
+      "type": "string",
+      "default": "rgba(255, 255, 255, 0.9)"
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false,
+    "layout": false
+  },
+  "example": {
+    "attributes": {}
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./view.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

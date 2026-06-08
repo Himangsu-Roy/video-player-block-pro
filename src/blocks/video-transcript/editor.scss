@@ -1,0 +1,19 @@
+.components-button.components-autocomplete__result.block-editor-autocompleters__block.is-selected {
+  color: #fff;
+
+  .video-transcript-icon {
+    stroke: #fff !important;
+  }
+}
+
+// Editor-only preview styles
+.wp-block-vpb-video-transcript {
+  * {
+    box-sizing: border-box;
+  }
+
+  // Prevent the transcript panel from being too tall in the editor
+  .vpbt-cues-list {
+    max-height: 320px;
+  }
+}

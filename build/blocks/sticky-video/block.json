@@ -1,0 +1,174 @@
+{
+  "apiVersion": 3,
+  "name": "vpb/sticky-video",
+  "title": "Sticky Video Player",
+  "category": "vpbblocks",
+  "description": "A video that pins itself to a screen corner and minimizes on scroll, keeping playback visible while visitors read, with optional Picture-in-Picture pop-out.",
+  "keywords": [
+    "video",
+    "sticky",
+    "floating",
+    "pip",
+    "picture-in-picture"
+  ],
+  "textdomain": "video-player-block",
+  "attributes": {
+    "alignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "videoSource": {
+      "type": "object",
+      "default": {
+        "url": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/video.mp4",
+        "type": "mp4",
+        "id": "",
+        "poster": ""
+      }
+    },
+    "posterUrl": {
+      "type": "string",
+      "default": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/poster.jpg"
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "muted": {
+      "type": "boolean",
+      "default": false
+    },
+    "loopVideo": {
+      "type": "boolean",
+      "default": false
+    },
+    "playsInline": {
+      "type": "boolean",
+      "default": true
+    },
+    "showControls": {
+      "type": "boolean",
+      "default": true
+    },
+    "preload": {
+      "type": "string",
+      "default": "metadata"
+    },
+    "inlineWidth": {
+      "type": "string",
+      "default": "100%"
+    },
+    "aspectRatio": {
+      "type": "string",
+      "default": "16:9"
+    },
+    "customAspectRatio": {
+      "type": "string",
+      "default": "16/9"
+    },
+    "stickyEnabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "stickyCorner": {
+      "type": "string",
+      "default": "bottom-right"
+    },
+    "stickyWidth": {
+      "type": "number",
+      "default": 360
+    },
+    "stickyMargin": {
+      "type": "number",
+      "default": 20
+    },
+    "triggerThreshold": {
+      "type": "number",
+      "default": 120
+    },
+    "onlyWhenPlaying": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCloseButton": {
+      "type": "boolean",
+      "default": true
+    },
+    "showMinimizeButton": {
+      "type": "boolean",
+      "default": true
+    },
+    "rememberDismissal": {
+      "type": "boolean",
+      "default": true
+    },
+    "pipEnabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "autoPipOnLeave": {
+      "type": "boolean",
+      "default": false
+    },
+    "enableOnMobile": {
+      "type": "boolean",
+      "default": false
+    },
+    "mobileBreakpoint": {
+      "type": "number",
+      "default": 768
+    },
+    "respectReducedMotion": {
+      "type": "boolean",
+      "default": true
+    },
+    "dockAnimation": {
+      "type": "string",
+      "default": "slide"
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 8
+    },
+    "boxShadow": {
+      "type": "string",
+      "default": "medium"
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "accentColor": {
+      "type": "string",
+      "default": "#136EF5"
+    },
+    "controlColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "dockBackground": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "default": "Sticky video player"
+    }
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "html": false,
+    "layout": false
+  },
+  "example": {
+    "attributes": {}
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./view.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

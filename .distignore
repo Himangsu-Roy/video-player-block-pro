@@ -1,0 +1,43 @@
+# Files excluded from the wp.org `npm run plugin-zip` distribution.
+# Source under src/ is intentionally kept so reviewers can audit the
+# minified build/ output.
+
+# Dev tooling and lockfiles
+node_modules
+.git
+.github
+.gitignore
+.gitattributes
+.editorconfig
+.eslintrc.js
+.eslintignore
+.stylelintrc
+.prettierrc
+.prettierignore
+.nvmrc
+.distignore
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+webpack.config.js
+gulpfile.js
+
+# Internal docs and scratch
+readme.md
+todo.txt
+video-player-block-guide.md
+AGENTS.md
+CLAUDE.md
+STUDIO.md
+
+# Output that re-generates on build
+*.log
+*.zip
+*.tar.gz
+*.map
+
+# OS / IDE noise
+.DS_Store
+.idea
+.vscode
+Thumbs.db

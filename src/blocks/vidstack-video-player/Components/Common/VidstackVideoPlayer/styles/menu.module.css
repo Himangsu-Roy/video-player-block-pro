@@ -1,0 +1,662 @@
+/*************************************************************************************************
+ * Menu
+ *************************************************************************************************/
+
+.menu {
+  --enter-transform: translateY(0px);
+  --exit-transform: translateY(12px);
+
+  box-sizing: border-box;
+  display: flex;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: sans-serif;
+  flex-direction: column;
+  transition: height 0.35s ease;
+  min-width: 300px;
+  padding: 8px;
+  /* border-radius: var(--media-menu-border-radius, 12px); */
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: var(--media-menu-bg, rgba(15, 15, 15, 0.72));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  will-change: width, height;
+  overflow: hidden auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior: contain;
+  opacity: 0;
+  max-height: 250px;
+}
+
+.menu::-webkit-scrollbar {
+  display: none;
+}
+
+.menu[data-resizing] {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.menu:not([data-open]) {
+  animation: media-menu-exit 0.2s ease-out;
+}
+
+.menu[data-open] {
+  animation: media-menu-enter 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+.menu[data-placement~='bottom'] {
+  --enter-transform: translateY(0);
+  --exit-transform: translateY(-12px);
+}
+
+.menu :global([role='menuitem'][data-focus]),
+.menu :global([role='menuitemradio'][data-focus]) {
+  outline: none;
+  box-shadow: var(--media-focus-ring);
+}
+
+@keyframes media-menu-enter {
+  from {
+    opacity: 0;
+    transform: var(--exit-transform);
+  }
+
+  to {
+    opacity: 1;
+    transform: var(--enter-transform);
+  }
+}
+
+@keyframes media-menu-exit {
+  from {
+    opacity: 1;
+    transform: var(--enter-transform);
+  }
+
+  to {
+    opacity: 0;
+    transform: var(--exit-transform);
+  }
+}
+
+/*************************************************************************************************
+ * Menu Button
+ *************************************************************************************************/
+
+.rotateIcon {
+  transition: transform 0.2s ease-out;
+}
+
+.menuButton[aria-expanded='true'] .rotateIcon {
+  transform: rotate(90deg);
+  transition: transform 0.2s ease-in;
+  color: var(--media-active-color, var(--media-brand, #B1C5A4)) !important;
+  --media-icon-color: var(--media-active-color, var(--media-brand, #B1C5A4)) !important;
+}
+
+/*************************************************************************************************
+ * Submenu Button
+ *************************************************************************************************/
+
+.submenuButton {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px;
+  border-radius: 2px;
+  color: var(--media-icon-color, white);
+  /* Resets. */
+  user-select: none;
+  appearance: none;
+  background: none;
+  outline: none;
+  border: none;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.submenuButton[data-open] {
+  position: sticky;
+  top: calc(-1 * 10px);
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  border-radius: 0;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom: 1px solid rgb(245 245 245 /0.15);
+  background-color: rgb(10 10 10 / 0.6);
+}
+
+.submenuButton[data-focus] {
+  background-color: var(--media-menu-hover-color, rgb(245 245 245 / 0.08));
+}
+
+.submenuButton[aria-disabled='true'],
+.submenuButton[aria-hidden='true'] {
+  display: none;
+}
+
+.submenuButton[data-open] .submenuCloseIcon {
+  display: inline-block;
+}
+
+.submenuIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.submenuButton[data-open] .submenuIcon {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .submenuButton:hover {
+    cursor: pointer;
+    background-color: var(--media-menu-hover-color, rgb(245 245 245 / 0.08));
+  }
+}
+
+.submenuButton:not([data-open]) .submenuLabel {
+  margin-left: 6px;
+}
+
+.submenuCloseIcon {
+  margin-right: 2px;
+}
+
+.submenuOpenIcon,
+.submenuCloseIcon {
+  width: 18px;
+  height: 18px;
+  display: none;
+}
+
+.submenuHint,
+.submenuOpenIcon {
+  margin-left: auto;
+  color: rgb(245 245 245 / 0.5);
+  font-size: 14px;
+}
+
+.submenuHint:not(:empty)+.submenuOpenIcon {
+  margin-left: 2px;
+}
+
+.submenuButton:not([data-open]) .submenuOpenIcon {
+  display: inline-block;
+}
+
+/*************************************************************************************************
+ * Submenu
+ *************************************************************************************************/
+
+.submenu {
+  display: inline-block;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.submenu[aria-hidden='true'] {
+  display: none;
+}
+
+/*************************************************************************************************
+ * Radio Group
+ *************************************************************************************************/
+
+.radioGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.radio {
+  align-items: flex-start;
+  appearance: none;
+  font-size: 14px;
+  border-radius: 4px;
+  contain: content;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  padding: 12px;
+  position: relative;
+  width: 100%;
+  gap: 16px;
+  user-select: none;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  border-bottom: 1px solid rgb(255 255 255 / 0.05);
+}
+
+.radio[data-focus] {
+  background-color: var(--media-menu-hover-color, rgb(255 255 255 / 0.05));
+}
+
+.radio[data-checked] {
+  color: var(--media-active-color, var(--media-brand, #B1C5A4));
+}
+
+.radioCheck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+
+.radio[data-checked] .radioCheck {
+  border-color: var(--media-active-color, var(--media-brand, #B1C5A4));
+  background-color: var(--media-active-color, var(--media-brand, #B1C5A4));
+  box-shadow: 0 0 8px var(--media-active-color, var(--media-brand, #B1C5A4));
+}
+
+.radio[data-checked] .radioCheck::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.thumbnail {
+  display: block;
+  width: 120px;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #000;
+  flex-shrink: 0;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chapterDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+  min-width: 0;
+  gap: 8px;
+}
+
+.chapterTitle {
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #fff;
+}
+
+.chapterStartTime {
+  display: inline-block;
+  padding: 2px 8px;
+  background-color: rgb(255 255 255 / 0.1);
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.chapterDuration {
+  font-size: 14px;
+  color: rgb(255 255 255 / 0.5);
+}
+
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: rgb(255 255 255 / 0.1);
+  display: none;
+}
+
+.radio[data-checked] .progressBar {
+  display: block;
+}
+
+.progressBar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--progress, 0%);
+  background-color: var(--media-active-color, var(--media-brand, #B1C5A4));
+}
+
+.submenuButton {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--media-menu-border-radius, 12px);
+  color: white;
+  user-select: none;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--media-menu-border-radius, 12px);
+  color: white;
+  user-select: none;
+  cursor: pointer;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.menuItem:hover {
+  background-color: var(--media-menu-hover-color, rgb(245 245 245 / 0.08));
+}
+
+/*************************************************************************************************
+ * Toggle Switch
+ *************************************************************************************************/
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switchTrack {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: background-color 0.25s ease;
+  border-radius: 20px;
+}
+
+.switchTrack:before {
+  position: absolute;
+  content: '';
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  top: 3px;
+  background-color: white;
+  transition: transform 0.25s ease;
+  border-radius: 50%;
+}
+
+input:checked+.switchTrack {
+  background-color: #2fb344;
+}
+
+input:checked+.switchTrack:before {
+  transform: translateX(16px);
+}
+
+/*************************************************************************************************
+ * Caption Styles Panel
+ *************************************************************************************************/
+
+.captionPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  margin: 4px 8px 12px 8px;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.2s ease;
+}
+
+.sectionTitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgb(245 245 245 / 0.45);
+  margin: 14px 12px 6px 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.styleBox {
+  background-color: rgb(255 255 255 / 0.05);
+  border-radius: 8px;
+  margin: 0 8px;
+  padding: 2px 0;
+  overflow: hidden;
+}
+
+.styleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  color: white;
+  font-size: 14px;
+}
+
+.styleLabel {
+  font-weight: 500;
+}
+
+.styleValue {
+  color: rgb(245 245 245 / 0.5);
+  font-size: 13px;
+  min-width: 36px;
+  text-align: right;
+}
+
+/* Family row – functions as menu trigger */
+.familyRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  color: white;
+  font-size: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  box-sizing: border-box;
+}
+
+.familyRow:hover {
+  background-color: var(--media-menu-hover-color, rgb(245 245 245 / 0.05));
+}
+
+.familyValue {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: rgb(245 245 245 / 0.5);
+  font-size: 13px;
+  max-width: 160px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.miniIcon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/*************************************************************************************************
+ * Slider
+ *************************************************************************************************/
+
+.sliderRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 14px 12px 14px;
+}
+
+.sliderIconSmall {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgb(245 245 245 / 0.5);
+  line-height: 1;
+  width: 12px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.sliderIconLarge {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(245 245 245 / 0.5);
+  line-height: 1;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.menuSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  flex-grow: 1;
+  height: 3px;
+  background: linear-gradient(to right,
+      white 0%,
+      white var(--slider-pct, 50%),
+      rgba(255, 255, 255, 0.2) var(--slider-pct, 50%),
+      rgba(255, 255, 255, 0.2) 100%);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.menuSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.menuSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.menuSlider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+
+/*************************************************************************************************
+ * Color Picker
+ *************************************************************************************************/
+
+.colorWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.colorHex {
+  font-size: 12px;
+  color: rgb(245 245 245 / 0.5);
+  font-family: 'Courier New', monospace;
+}
+
+.colorPicker {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.colorPicker:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.colorPicker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.colorPicker::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
+
+/*************************************************************************************************
+ * Reset Button
+ *************************************************************************************************/
+
+.resetButton {
+  display: block;
+  width: calc(100% - 16px);
+  margin: 12px 8px 8px 8px;
+  padding: 9px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: rgb(245 245 245 / 0.7);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.resetButton:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .radio:hover {
+    cursor: pointer;
+    background-color: var(--media-menu-hover-color, rgb(245 245 245 / 0.08));
+  }
+}

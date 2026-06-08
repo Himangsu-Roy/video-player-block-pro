@@ -1,0 +1,15 @@
+.components-button.components-autocomplete__result.block-editor-autocompleters__block.is-selected {
+  color: #fff;
+  .video-lightbox-icon {
+    fill: #fff !important;
+    stroke: #fff !important;
+  }
+}
+
+.vpb-video-lightbox-editor-preview {
+  min-height: 220px;
+
+  .vpb-vl-trigger {
+    pointer-events: none; // Disable opening from the editor canvas.
+  }
+}

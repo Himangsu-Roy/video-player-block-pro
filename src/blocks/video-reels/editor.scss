@@ -1,0 +1,62 @@
+.components-button.components-autocomplete__result.block-editor-autocompleters__block.is-selected {
+  color: #fff;
+  .video-reels-icon {
+    fill: #fff !important;
+    stroke: #fff !important;
+  }
+}
+
+.vpb-video-reels-editor {
+  .vpb-vr-item-row {
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    &.is-collapsed {
+      padding: 8px 10px;
+    }
+
+    .vpb-vr-item-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .vpb-vr-item-title {
+      flex: 1;
+      font-weight: 600;
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .vpb-vr-item-actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    .vpb-vr-item-body {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+
+  .vpb-vr-add {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.wp-block-vpb-video-reels {
+  &.vpb-video-reels-editor-preview {
+    .vpb-vr-root {
+      max-height: 720px;
+    }
+  }
+}

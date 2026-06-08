@@ -1,0 +1,193 @@
+{
+  "apiVersion": 3,
+  "name": "vpb/video-transcript",
+  "title": "Video Transcript",
+  "category": "vpbblocks",
+  "description": "Display a synchronized, clickable transcript alongside any video so viewers can jump to any moment by clicking a line and search engines can index the spoken content.",
+  "keywords": [
+    "video",
+    "transcript",
+    "captions",
+    "subtitles",
+    "accessibility",
+    "seo"
+  ],
+  "textdomain": "video-player-block",
+  "attributes": {
+    "videoSource": {
+      "type": "string",
+      "default": "url"
+    },
+    "videoUrl": {
+      "type": "string",
+      "default": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/video.mp4"
+    },
+    "posterUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "aspectRatio": {
+      "type": "string",
+      "default": "16:9"
+    },
+    "transcriptEntries": {
+      "type": "array",
+      "default": [
+        {
+          "id": "cue-1",
+          "startTime": 0,
+          "endTime": 5,
+          "text": "Welcome to this video. We are going to explore an exciting topic today."
+        },
+        {
+          "id": "cue-2",
+          "startTime": 5,
+          "endTime": 12,
+          "text": "The first thing we will cover is the introduction and overview of the subject matter."
+        },
+        {
+          "id": "cue-3",
+          "startTime": 12,
+          "endTime": 20,
+          "text": "Next, we dive into the core concepts and explain how everything works together."
+        },
+        {
+          "id": "cue-4",
+          "startTime": 20,
+          "endTime": 28,
+          "text": "Here we demonstrate a practical example that you can follow along with at home."
+        },
+        {
+          "id": "cue-5",
+          "startTime": 28,
+          "endTime": 35,
+          "text": "In conclusion, we summarize the key takeaways and suggest next steps for learning."
+        }
+      ]
+    },
+    "layout": {
+      "type": "string",
+      "default": "side-by-side"
+    },
+    "transcriptHeight": {
+      "type": "number",
+      "default": 420
+    },
+    "showSearch": {
+      "type": "boolean",
+      "default": true
+    },
+    "searchPlaceholder": {
+      "type": "string",
+      "default": "Search transcript..."
+    },
+    "autoScroll": {
+      "type": "boolean",
+      "default": true
+    },
+    "highlightColor": {
+      "type": "string",
+      "default": "#EEF3FF"
+    },
+    "highlightTextColor": {
+      "type": "string",
+      "default": "#136EF5"
+    },
+    "transcriptFontSize": {
+      "type": "number",
+      "default": 15
+    },
+    "transcriptLineHeight": {
+      "type": "number",
+      "default": 1.6
+    },
+    "showTimestamps": {
+      "type": "boolean",
+      "default": true
+    },
+    "timestampColor": {
+      "type": "string",
+      "default": "#888888"
+    },
+    "panelBg": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "panelBorderRadius": {
+      "type": "number",
+      "default": 8
+    },
+    "seoJsonLd": {
+      "type": "boolean",
+      "default": true
+    },
+    "containerMaxWidth": {
+      "type": "string",
+      "default": "960px"
+    },
+    "videoTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "videoDescription": {
+      "type": "string",
+      "default": ""
+    },
+    "uploadDate": {
+      "type": "string",
+      "default": ""
+    },
+    "panelBorderColor": {
+      "type": "string",
+      "default": "#e5e7eb"
+    },
+    "searchBg": {
+      "type": "string",
+      "default": "#f9fafb"
+    },
+    "searchBorderColor": {
+      "type": "string",
+      "default": "#e5e7eb"
+    },
+    "cuePadding": {
+      "type": "number",
+      "default": 12
+    },
+    "cueHoverBg": {
+      "type": "string",
+      "default": "#f3f4f6"
+    },
+    "panelHeaderBg": {
+      "type": "string",
+      "default": "#f9fafb"
+    },
+    "panelHeaderTextColor": {
+      "type": "string",
+      "default": "#374151"
+    },
+    "cueTextColor": {
+      "type": "string",
+      "default": "#374151"
+    },
+    "videoSplitRatio": {
+      "type": "string",
+      "default": "60-40"
+    }
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "html": false,
+    "layout": false
+  },
+  "example": {
+    "attributes": {}
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./view.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

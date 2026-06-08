@@ -1,0 +1,15 @@
+.components-button.components-autocomplete__result.block-editor-autocompleters__block.is-selected {
+  color: #fff;
+  .sticky-video-icon {
+    fill: #fff !important;
+    stroke: #fff !important;
+  }
+}
+
+.vpb-sticky-video-editor-preview {
+  // In the editor we always render the static in-flow preview (never docked),
+  // so the author can see and configure the player in place.
+  .vpb-sv-stage {
+    position: relative;
+  }
+}

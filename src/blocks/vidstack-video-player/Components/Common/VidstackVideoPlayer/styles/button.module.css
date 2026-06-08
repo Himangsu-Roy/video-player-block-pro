@@ -1,0 +1,56 @@
+/*************************************************************************************************
+ * Buttons
+ *************************************************************************************************/
+
+.button {
+  display: inline-flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--media-icon-color, white);
+  background: var(--media-controls-bg, none);
+  border-radius: var(--media-border-radius, 8px);
+  cursor: pointer;
+  /* Resets. */
+  padding: 0;
+  user-select: none;
+  appearance: none;
+  outline: none;
+  border: none;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Easy way to hide all buttons that are not supported in current env (e.g. fullscreen/pip). */
+.button[aria-hidden='true'] {
+  display: none;
+}
+
+.button > svg {
+  width: 80%;
+  height: 80%;
+  border-radius: 2px;
+}
+
+.button[data-focus] > svg {
+  box-shadow: var(--focus-ring);
+}
+
+.button[data-active],
+.button[aria-expanded="true"],
+.button[data-active] svg,
+.button[aria-expanded="true"] svg {
+  color: var(--media-active-color, var(--media-brand, #B1C5A4)) !important;
+  fill: var(--media-active-color, var(--media-brand, #B1C5A4)) !important;
+  --media-icon-color: var(--media-active-color, var(--media-brand, #B1C5A4)) !important;
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background-color: var(--media-button-hover-color, rgb(255 255 255 / 0.2)) !important;
+  }
+}

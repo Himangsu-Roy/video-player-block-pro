@@ -1,0 +1,18 @@
+.components-button.components-autocomplete__result.block-editor-autocompleters__block.is-selected {
+  color: #fff;
+  .interactive-video-icon {
+    fill: #fff !important;
+    stroke: #fff !important;
+  }
+}
+
+.vpb-interactive-video-editor-preview {
+  min-height: 240px;
+
+  // Disable real link navigation from the editor canvas so authors can
+  // edit the overlay's URL without accidentally being yanked off-page.
+  .vpb-iv-cta,
+  .vpb-iv-hotspot {
+    pointer-events: none;
+  }
+}

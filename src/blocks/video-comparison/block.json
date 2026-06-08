@@ -1,0 +1,68 @@
+{
+  "apiVersion": 3,
+  "name": "vpb/video-comparison",
+  "title": "Video Comparison",
+  "category": "vpbblocks",
+  "description": "A draggable before/after slider that synchronously plays two videos side-by-side, letting visitors reveal one over the other in real time.",
+  "keywords": [
+    "video",
+    "comparison",
+    "before after",
+    "slider",
+    "reveal"
+  ],
+  "textdomain": "video-player-block",
+  "attributes": {
+    "alignment": { "type": "string", "default": "center" },
+    "beforeVideoUrl": {
+      "type": "string",
+      "default": "https://cdn.pixabay.com/video/2020/05/25/40119-424167011_large.mp4"
+    },
+    "afterVideoUrl": {
+      "type": "string",
+      "default": "https://cdn.pixabay.com/video/2024/03/14/204018-922675627_large.mp4"
+    },
+    "beforePosterUrl": { "type": "string", "default": "" },
+    "afterPosterUrl": { "type": "string", "default": "" },
+    "orientation": { "type": "string", "default": "horizontal" },
+    "initialPosition": { "type": "number", "default": 50 },
+    "beforeLabel": { "type": "string", "default": "Before" },
+    "afterLabel": { "type": "string", "default": "After" },
+    "showLabels": { "type": "boolean", "default": true },
+    "labelBgColor": { "type": "string", "default": "rgba(0,0,0,0.65)" },
+    "labelTextColor": { "type": "string", "default": "#ffffff" },
+    "dividerColor": { "type": "string", "default": "#ffffff" },
+    "dividerWidth": { "type": "number", "default": 3 },
+    "handleStyle": { "type": "string", "default": "circle" },
+    "handleColor": { "type": "string", "default": "#ffffff" },
+    "handleBgColor": { "type": "string", "default": "#136EF5" },
+    "handleSize": { "type": "number", "default": 44 },
+    "autoplay": { "type": "boolean", "default": true },
+    "autoplayOnScroll": { "type": "boolean", "default": true },
+    "loop": { "type": "boolean", "default": true },
+    "muted": { "type": "boolean", "default": true },
+    "playsInline": { "type": "boolean", "default": true },
+    "preload": { "type": "string", "default": "metadata" },
+    "hideControls": { "type": "boolean", "default": false },
+    "playMode": { "type": "string", "default": "synced" },
+    "aspectRatio": { "type": "string", "default": "16:9" },
+    "customAspectRatio": { "type": "string", "default": "21:9" },
+    "borderRadius": { "type": "number", "default": 12 },
+    "maxWidth": { "type": "number", "default": 1200 },
+    "a11yLabel": {
+      "type": "string",
+      "default": "Before and after video comparison"
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false,
+    "layout": false
+  },
+  "example": { "attributes": {} },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./view.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

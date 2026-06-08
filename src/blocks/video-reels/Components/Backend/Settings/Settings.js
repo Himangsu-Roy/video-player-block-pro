@@ -1,0 +1,68 @@
+import { __ } from "@wordpress/i18n";
+import {
+  InspectorControls,
+  BlockControls,
+  AlignmentToolbar,
+} from "@wordpress/block-editor";
+import { TabPanel } from "@wordpress/components";
+import { tabController } from "../../../../../../../bpl-tools/utils/functions";
+import { generalStyleTabs } from "../../../utils/options";
+import General from "./General/General";
+import Style from "./Style/Style";
+
+const Settings = ({ attributes, setAttributes }) => {
+  const { alignment } = attributes;
+
+  return (
+    <>
+      <InspectorControls>
+        <TabPanel
+          className="bPlTabPanel"
+          activeClass="activeTab"
+          tabs={generalStyleTabs}
+          onSelect={tabController}>
+          {(tab) => (
+            <>
+              {"general" === tab.name && (
+                <General
+                  attributes={attributes}
+                  setAttributes={setAttributes}
+                />
+              )}
+              {"style" === tab.name && (
+                <Style attributes={attributes} setAttributes={setAttributes} />
+              )}
+            </>
+          )}
+        </TabPanel>
+      </InspectorControls>
+
+      <BlockControls>
+        <AlignmentToolbar
+          value={alignment}
+          onChange={(val) => setAttributes({ alignment: val })}
+          describedBy={__("Video Reels Alignment", "video-player-block")}
+          alignmentControls={[
+            {
+              title: __("Left", "video-player-block"),
+              align: "left",
+              icon: "align-left",
+            },
+            {
+              title: __("Center", "video-player-block"),
+              align: "center",
+              icon: "align-center",
+            },
+            {
+              title: __("Right", "video-player-block"),
+              align: "right",
+              icon: "align-right",
+            },
+          ]}
+        />
+      </BlockControls>
+    </>
+  );
+};
+
+export default Settings;

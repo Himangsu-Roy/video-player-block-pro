@@ -1,0 +1,5 @@
+node_modules
+*.zip
+
+# Freemius deployment credentials — NEVER commit
+fs-config.json

@@ -1,0 +1,135 @@
+{
+  "apiVersion": 3,
+  "name": "vpb/videojs-player",
+  "title": "VideoJS Player",
+  "category": "vpbblocks",
+  "description": "A powerful and customizable video player for WordPress powered by VideoJS.",
+  "keywords": ["video", "player", "videojs"],
+  "textdomain": "video-player-block",
+  "attributes": {
+    "alignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "items": {
+      "type": "object",
+      "default": {
+        "videoUrl": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/video.mp4",
+        "posterUrl": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/poster.jpg",
+        "thumbnailsUrl": "https://files.vidstack.io/sprite-fight/thumbnails.vtt",
+        "textTracks": [
+          {
+            "src": "https://files.vidstack.io/sprite-fight/subs/english.vtt",
+            "label": "English",
+            "language": "en-US",
+            "kind": "captions",
+            "default": true
+          },
+          {
+            "src": "https://files.vidstack.io/sprite-fight/subs/spanish.vtt",
+            "label": "Spanish",
+            "language": "es-ES",
+            "kind": "captions"
+          }
+        ]
+      }
+    },
+    "controls": {
+      "type": "object",
+      "default": {
+        "showPlayControl": true,
+        "showSeekControls": true,
+        "showMuteControl": true,
+        "showVolumeControl": true,
+        "showTimeControl": true,
+        "showPlaybackRateControl": true,
+        "showCaptionControl": true,
+        "showPipControl": true,
+        "showFullscreenControl": true
+      }
+    },
+    "playerOptions": {
+      "type": "object",
+      "default": {
+        "autoplay": false,
+        "loop": false,
+        "muted": false,
+        "playsInline": true,
+        "crossOrigin": true,
+        "preload": "metadata",
+        "nativeControls": false,
+        "playbackRates": "0.5, 0.75, 1, 1.25, 1.5, 2"
+      }
+    },
+    "playerStyles": {
+      "type": "object",
+      "default": {
+        "primaryColor": "#f5f5f5",
+        "secondaryColor": "#ffffff4d",
+        "backgroundColor": "#000000",
+        "textColor": "#FFFFFF",
+        "shadow": [
+          {
+            "hOffset": "0px",
+            "vOffset": "0px",
+            "blur": "0px",
+            "spreed": "0px",
+            "color": "#7090b0",
+            "isInset": false
+          }
+        ],
+        "playerBackgroundColor": "#212121",
+        "controlBackgroundColor": "#0A0A0A00",
+        "menuBackgroundColor": "rgba(15, 15, 15, 0.75)",
+        "tooltipBackgroundColor": "rgba(20, 20, 20, 0.8)",
+        "iconColor": "#FFFFFF",
+        "activeColor": "#f5f5f5",
+        "menuHoverColor": "rgba(255, 255, 255, 0.1)",
+        "buttonHoverColor": "rgba(255, 255, 255, 0.2)",
+        "menuBorderRadius": 12,
+        "borderRadius": 8,
+        "containerBorderRadius": 8,
+        "controlBackdropBlur": "3px",
+        "controlBorderRadius": "calc(infinity * 1px)",
+        "surfaceInnerBorderColor": "oklch(1 0 0 / 0.05)",
+        "surfaceOuterBorderColor": "oklch(0 0 0 / 0.1)",
+        "surfaceShadowColor": "oklch(0 0 0 / 0.15)",
+        "surfaceBackdropFilter": "blur(16px) saturate(1.5)"
+      }
+    },
+    "captionStyles": {
+      "type": "object",
+      "default": {
+        "fontFamily": "Proportional Sans-Serif",
+        "fontSize": 100,
+        "textColor": "#ffffff",
+        "textOpacity": 100,
+        "textBgColor": "#000000",
+        "textBgOpacity": 80,
+        "displayBgColor": "#000000",
+        "displayBgOpacity": 0
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "default": {
+        "width": "100%",
+        "height": "",
+        "aspectRatio": "16/9"
+      }
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false,
+    "layout": false
+  },
+  "example": {
+    "attributes": {}
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./view.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

@@ -1,0 +1,229 @@
+// Dashicon
+.dashicons {
+  font-family: dashicons !important;
+}
+
+// Video Player
+.wp-block-vpb-react-video-player {
+
+  // Fix media-chrome control bar positioning in WordPress editor
+  media-controller {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    border-radius: inherit; // Ensure border-radius inherits properly
+  }
+
+  media-control-bar {
+    position: absolute !important;
+    bottom: 0 !important;
+    z-index: 1;
+    width: 100%;
+
+    // Custom backdrop blur logic
+    backdrop-filter: var(--custom-control-backdrop-blur, none);
+    -webkit-backdrop-filter: var(--custom-control-backdrop-blur, none);
+
+    :where(.wp-site-blocks :focus) {
+      outline-width: 0px;
+      outline-style: solid;
+    }
+  }
+
+  // Shared menu styles for main and sub-menus
+  media-settings-menu,
+  media-playback-rate-menu,
+  media-captions-menu,
+  media-rendition-menu,
+  media-audio-track-menu {
+    border-radius: var(--media-menu-border-radius, 12px);
+    background: var(--media-menu-background, rgba(20, 20, 20, 0.9));
+    color: var(--media-text-color, #fff);
+
+    // Modern standardized scrollbar styling (Firefox/Chrome 121+)
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent !important;
+
+    // Ultra-thin scrollbar for WebKit (Chrome/Safari/Edge)
+    &::-webkit-scrollbar {
+      width: 3px !important;
+      height: 3px !important;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent !important;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.2) !important;
+      border-radius: 10px !important;
+      // Use border and background-clip to make it look even thinner
+      border: 1px solid transparent !important;
+      background-clip: content-box !important;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    // Target ALL possible internal shadow parts to eliminate fat scrollbars
+    &::part(menu), &::part(list), &::part(container), &::part(listbox), &::part(scroller) {
+      scrollbar-width: thin !important;
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent !important;
+
+      &::-webkit-scrollbar {
+        width: 3px !important;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        border-radius: 10px !important;
+        border: 1px solid transparent !important;
+        background-clip: content-box !important;
+      }
+    }
+  }
+
+  // Fix settings menu
+  media-settings-menu {
+    z-index: 10;
+    position: absolute !important;
+    bottom: 50px !important;
+    right: 10px !important;
+    
+    // Main menu should not have a scrollbar
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+
+    // Hide the parent background when a sub-menu is active to avoid "floating" items outside a static box
+    &:has([slot="submenu"]:not([hidden])) {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    :where(.wp-site-blocks :focus) {
+      outline-width: 0px;
+      outline-style: solid;
+    }
+  }
+
+  // Ensure menu items have consistent appearance
+  media-settings-menu-item {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 14px !important;
+  }
+
+  // Sub-menus should inherit styles and be visible when managed by Media Chrome
+  media-playback-rate-menu,
+  media-captions-menu,
+  media-rendition-menu,
+  media-audio-track-menu {
+    width: 100%;
+    max-height: 250px !important;
+    overflow-y: auto !important;
+    --media-menu-overflow: auto;
+
+    &[hidden] {
+      display: none !important;
+    }
+  }
+
+  // Volume smart slider
+  .vpb-volume-container {
+    display: flex;
+    align-items: center;
+
+    media-volume-range {
+      width: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin-left: 0;
+      padding-left: 0;
+      padding-right: 0;
+      transition: width 0.3s ease, opacity 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+    }
+
+    &:hover media-volume-range,
+    &:focus-within media-volume-range,
+    media-volume-range:focus-within {
+      width: 80px; // Standard volume slider size
+      opacity: 1;
+      margin-left: 5px;
+      padding-left: 5px;   // Standard media-chrome volume range internal paddings might be overridden, just in case
+      padding-right: 5px; 
+    }
+  }
+
+  // Preview thumbnails container
+  .vpb-preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    pointer-events: none;
+  }
+
+  media-preview-thumbnail {
+    width: 160px;
+    aspect-ratio: 16 / 9;
+    background-color: #000;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+  }
+
+  media-preview-time-display {
+    margin-top: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+  }
+
+  // Captions Overlay Styling
+  .vpb-overlays-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99999; // EXTREME PRIORITY
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 70px; // Stay above control bar
+  }
+
+  .vpb-captions-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+
+    .vpb-caption-debug {
+      background: rgba(255, 0, 0, 0.4);
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .vpb-caption-line {
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 20px;
+      margin-bottom: 6px;
+      text-align: center;
+      line-height: 1.4;
+      max-width: 90%;
+      word-wrap: break-word;
+      font-family: inherit;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+  }
+}

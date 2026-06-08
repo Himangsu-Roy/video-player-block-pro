@@ -1,0 +1,14 @@
+.react-video-player-icon {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+.components-button.components-autocomplete__result.block-editor-autocompleters__block.is-selected {
+  // color: #fff;
+  .react-video-player {
+    stroke: #fff !important;
+    fill: none !important;
+    stroke-miterlimit: 10;
+    stroke-width: 1.92;
+  }
+}
