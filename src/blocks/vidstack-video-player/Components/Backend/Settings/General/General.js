@@ -75,6 +75,19 @@ const General = ({ attributes, setAttributes }) => {
           onChange={(val) => updateItems("videoUrl", val)}
         />
 
+        <p
+          style={{
+            margin: "6px 0 0",
+            fontSize: 11,
+            fontStyle: "italic",
+            color: "#757575",
+          }}>
+          {__(
+            "Editor preview only: some player interactions (click-to-seek, captions, and the hover thumbnail preview) may be limited here — they work fully on the published page.",
+            "video-player-block",
+          )}
+        </p>
+
         <InlineMediaUpload
           className="mt15"
           label={__("Poster URL", "video-player-block")}

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { clamp } from "../../utils/functions";
+import AdaptiveVideo from "../../../_shared/media/AdaptiveVideo";
 import {
   handleArrowsIcon,
   muteIcon,
@@ -263,7 +264,7 @@ const Comparison = ({ attributes, blockId, inEditor = false }) => {
       onClick={onContainerClick}
     >
       <div className="vpb-vc-frame">
-        <video
+        <AdaptiveVideo
           ref={afterRef}
           className="vpb-vc-video vpb-vc-video--after"
           src={afterVideoUrl || undefined}
@@ -276,7 +277,7 @@ const Comparison = ({ attributes, blockId, inEditor = false }) => {
           // clipped "before" video reveals it. It is the audio-bearing track
           // when unmuted because it represents the post-state.
         />
-        <video
+        <AdaptiveVideo
           ref={beforeRef}
           className="vpb-vc-video vpb-vc-video--before"
           src={beforeVideoUrl || undefined}

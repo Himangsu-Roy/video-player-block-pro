@@ -18,7 +18,7 @@ const Edit = (props) => {
           className: "vpb-video-lightbox-editor-preview",
         })}
       >
-        <Style attributes={attributes} id={id} />
+        <Style attributes={attributes} id={id} inEditor={true} />
         <Lightbox attributes={attributes} blockId={id} inEditor={true} />
       </div>
     </>

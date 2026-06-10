@@ -9,7 +9,10 @@
 .vpb-video-lightbox-editor-preview {
   min-height: 220px;
 
+  // Make the trigger clickable in the editor so it opens the modal preview
+  // (the old overlay button has been removed).
   .vpb-vl-trigger {
-    pointer-events: none; // Disable opening from the editor canvas.
+    pointer-events: auto;
+    cursor: pointer;
   }
 }

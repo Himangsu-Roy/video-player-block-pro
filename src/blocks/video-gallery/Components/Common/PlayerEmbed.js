@@ -1,10 +1,101 @@
+import { useEffect, useRef } from "react";
 import {
   getYoutubeId,
   getVimeoId,
   isYoutube,
   isVimeo,
+  isHls,
+  isDash,
 } from "../../utils/functions";
 import EditorEmbedPortal from "./EditorEmbedPortal";
+
+/**
+ * Native <video> for self-hosted / adaptive sources. MP4 and WebM play
+ * natively. HLS (.m3u8) and DASH (.mpd) are NOT natively supported outside
+ * Safari, so we lazily load hls.js / dash.js (already bundled by the plugin)
+ * and attach them to the element. The libraries are code-split via dynamic
+ * import(), so they only download when an HLS/DASH video actually plays.
+ */
+const NativeVideo = ({ video, autoplay, onEnded }) => {
+  const ref = useRef(null);
+  const url = video.url;
+  const wantHls = video.source === "hls" || isHls(url);
+  const wantDash = video.source === "dash" || isDash(url);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+
+    let destroyed = false;
+    let hls = null;
+    let dashPlayer = null;
+
+    if (wantDash) {
+      // dash.js drives the element for .mpd streams.
+      import("dashjs")
+        .then((mod) => {
+          if (destroyed || !ref.current) return;
+          const dashjs = mod.default || mod;
+          dashPlayer = dashjs.MediaPlayer().create();
+          dashPlayer.initialize(el, url, autoplay);
+        })
+        .catch(() => {
+          el.src = url; // last-ditch: let the browser try
+        });
+    } else if (wantHls && !el.canPlayType("application/vnd.apple.mpegurl")) {
+      // hls.js for browsers without native HLS (i.e. everything but Safari).
+      import("hls.js")
+        .then((mod) => {
+          if (destroyed || !ref.current) return;
+          const Hls = mod.default || mod;
+          if (Hls.isSupported()) {
+            hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(el);
+          } else {
+            el.src = url;
+          }
+        })
+        .catch(() => {
+          el.src = url;
+        });
+    } else {
+      // MP4/WebM, or Safari with native HLS.
+      el.src = url;
+    }
+
+    return () => {
+      destroyed = true;
+      if (hls) {
+        try {
+          hls.destroy();
+        } catch (_) {
+          /* ignore */
+        }
+      }
+      if (dashPlayer) {
+        try {
+          dashPlayer.reset();
+        } catch (_) {
+          /* ignore */
+        }
+      }
+    };
+  }, [url, wantHls, wantDash, autoplay]);
+
+  return (
+    <video
+      ref={ref}
+      controls
+      playsInline
+      autoPlay={autoplay}
+      poster={video.poster || undefined}
+      onEnded={onEnded}
+    >
+      <track kind="captions" />
+    </video>
+  );
+};
 
 /**
  * Renders an in-page video player using a lightweight strategy:
@@ -12,16 +103,10 @@ import EditorEmbedPortal from "./EditorEmbedPortal";
  *  - youtube  -> iframe with the youtube embed URL
  *  - vimeo    -> iframe with the vimeo embed URL
  *  - mp4/hls/dash/anything else -> native <video> tag
- *
- * The `playerEngine` attribute is preserved on the wrapper as a data-attribute
- * so a future enhancement can swap to the React/Video.js/Vidstack engines
- * already bundled by the plugin. The Plyr global is also opportunistically
- * used when available, since the free block already ships it.
  */
-const PlayerEmbed = ({ video, attributes, onEnded, isEditor = false }) => {
+const PlayerEmbed = ({ video, onEnded, isEditor = false }) => {
   if (!video?.url) return null;
   const url = video.url;
-  const engine = attributes?.playerEngine || "default";
   const autoplay = true;
 
   if (video.source === "youtube" || isYoutube(url)) {
@@ -45,7 +130,6 @@ const PlayerEmbed = ({ video, attributes, onEnded, isEditor = false }) => {
         title={video.title || "YouTube video"}
         allow={allow}
         allowFullScreen
-        data-engine={engine}
       />
     );
   }
@@ -69,26 +153,17 @@ const PlayerEmbed = ({ video, attributes, onEnded, isEditor = false }) => {
         title={video.title || "Vimeo video"}
         allow={allow}
         allowFullScreen
-        data-engine={engine}
       />
     );
   }
 
-  // Native video for mp4/hls/dash; HLS/DASH on Safari plays via Apple Native;
-  // other browsers will fall back gracefully (and we leave the door open for
-  // hls.js/dash.js wiring via the engine selector in a future iteration).
+  // Native video for mp4/webm, plus hls.js/dash.js-driven HLS/DASH.
   return (
-    <video
-      src={url}
-      controls
-      playsInline
-      autoPlay={autoplay}
-      poster={video.poster || undefined}
-      data-engine={engine}
+    <NativeVideo
+      video={video}
+      autoplay={autoplay}
       onEnded={onEnded}
-    >
-      <track kind="captions" />
-    </video>
+    />
   );
 };
 

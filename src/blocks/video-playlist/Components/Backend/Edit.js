@@ -17,7 +17,11 @@ const Edit = (props) => {
           className: "vpb-video-playlist-editor-preview",
         })}>
         <Style attributes={attributes} id={`block-${clientId}`} />
-        <Playlist attributes={attributes} clientId={`block-${clientId}`} />
+        <Playlist
+          attributes={attributes}
+          clientId={`block-${clientId}`}
+          inEditor={true}
+        />
       </div>
     </>
   );

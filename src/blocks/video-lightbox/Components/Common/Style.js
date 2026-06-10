@@ -1,10 +1,14 @@
+import { useEffect, useRef } from "react";
 import { aspectToCss, resolveModalMaxWidth } from "../../utils/functions";
 
 /**
  * Per-instance CSS custom properties + rules. Inlined as a scoped <style>
  * tag so the same logic works in the editor preview and on the frontend.
+ *
+ * When `inEditor` is true, the modal-specific rules are also injected into
+ * the top-level admin window (since the modal is portaled there).
  */
-const Style = ({ attributes, id }) => {
+const Style = ({ attributes, id, inEditor = false }) => {
   const {
     thumbnailAspectRatio = "16:9",
     thumbnailBorderRadius = 12,
@@ -23,7 +27,7 @@ const Style = ({ attributes, id }) => {
     modalOverlayColor = "#000000",
     modalOverlayOpacity = 85,
     modalBorderRadius = 10,
-    captionColor = "#ffffff",
+    captionColor = "#000000",
   } = attributes;
 
   const sel = `#${id}`;
@@ -34,7 +38,7 @@ const Style = ({ attributes, id }) => {
   // Convert percent opacity to 0-1 with two decimal precision.
   const overlayAlpha = Math.max(0, Math.min(100, modalOverlayOpacity)) / 100;
 
-  const css = `
+  const triggerCss = `
     ${sel} .vpb-vl-wrap { max-width: ${triggerMaxWidth || "100%"}; }
     ${sel} .vpb-vl-thumb-wrap {
       border-radius: ${thumbnailBorderRadius}px;
@@ -57,7 +61,9 @@ const Style = ({ attributes, id }) => {
     ${sel} .vpb-vl-btn.vpb-vl-btn--ghost,
     ${sel} .vpb-vl-btn.vpb-vl-btn--underline { color: ${buttonBgColor}; }
     ${sel} .vpb-vl-caption { color: ${captionColor}; }
+  `;
 
+  const modalCss = `
     /* Modal styles are scoped via a data attribute since the modal is
        portaled to the document root, not nested inside the block.       */
     [data-vpb-vl-modal="${id}"] .vpb-vl-modal-backdrop {
@@ -74,7 +80,41 @@ const Style = ({ attributes, id }) => {
     }
   `;
 
-  return <style dangerouslySetInnerHTML={{ __html: css }} />;
+  const styleId = `vpb-vl-modal-instance-${id}`;
+  const prevStyleRef = useRef(null);
+
+  // In the editor the modal is portaled to the top window, so the
+  // per-instance modal CSS must also live there.
+  useEffect(() => {
+    if (!inEditor) return undefined;
+
+    const topDoc = window.top?.document || window.document;
+
+    // Remove any previous version of this style.
+    topDoc.getElementById(styleId)?.remove();
+
+    const el = topDoc.createElement("style");
+    el.id = styleId;
+    el.textContent = modalCss;
+    topDoc.head.appendChild(el);
+    prevStyleRef.current = el;
+
+    return () => {
+      el.remove();
+      prevStyleRef.current = null;
+    };
+  }, [inEditor, modalCss, styleId]);
+
+  // On the frontend the full CSS (trigger + modal) lives inline.
+  const fullCss = `${triggerCss}\n${modalCss}`;
+
+  return (
+    <style
+      dangerouslySetInnerHTML={{
+        __html: inEditor ? triggerCss : fullCss,
+      }}
+    />
+  );
 };
 
 export default Style;

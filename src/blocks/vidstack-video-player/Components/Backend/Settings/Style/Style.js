@@ -8,16 +8,6 @@ const Style = ({ attributes, setAttributes }) => {
   const updatePlayerStyles = (key, value) =>
     setAttributes({ playerStyles: { ...playerStyles, [key]: value } });
 
-  //  "primaryColor": "#B1C5A4",
-  //       "secondaryColor": "#B1C5A4",
-  //       "backgroundColor": "#000000",
-  //       "textColor": "#FFFFFF",
-  //       "playerBackgroundColor": "#212121",
-  //       "controlBackgroundColor": "",
-  //       "borderRadius": 8
-
-  console.log(playerStyles.primaryColor, "playerStyles.primaryColor");
-
   return (
     <PanelBody
       className="bPlPanelBody"

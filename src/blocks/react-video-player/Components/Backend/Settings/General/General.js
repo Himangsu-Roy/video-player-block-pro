@@ -7,6 +7,7 @@ import {
   __experimentalUnitControl as UnitControl,
 } from "@wordpress/components";
 import { InlineMediaUpload } from "../../../../../../../../bpl-tools/Components";
+import { isYouTube } from "../../../../utils/functions";
 
 const General = ({ attributes, setAttributes }) => {
   const { items = {}, playerOptions = {}, controls = {}, dimensions = {} } = attributes;
@@ -65,6 +66,21 @@ const General = ({ attributes, setAttributes }) => {
           types={["video"]}
           onChange={(val) => updateItems("videoUrl", val)}
         />
+
+        {isYouTube(items.videoUrl) && (
+          <p
+            style={{
+              margin: "6px 0 0",
+              fontSize: 11,
+              fontStyle: "italic",
+              color: "#757575",
+            }}>
+            {__(
+              "YouTube shows the player skin over a poster in the editor — the video itself plays on the published page.",
+              "video-player-block",
+            )}
+          </p>
+        )}
 
         <InlineMediaUpload
           className="mt15"

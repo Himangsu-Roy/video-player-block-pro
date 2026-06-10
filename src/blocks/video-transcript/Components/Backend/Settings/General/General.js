@@ -13,10 +13,9 @@ import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import {
 	layoutOptions,
 	aspectRatioOptions,
-	videoSourceOptions,
 	splitRatioOptions,
 } from '../../../../utils/options';
-import { formatTime } from '../../../../utils/functions';
+import { formatTime, detectSource } from '../../../../utils/functions';
 
 const General = ({ attributes, setAttributes }) => {
 	const {
@@ -79,19 +78,13 @@ const General = ({ attributes, setAttributes }) => {
 				title={__('Video Source', 'video-player-block')}
 				initialOpen={true}
 			>
-				<SelectControl
-					label={__('Source Type', 'video-player-block')}
-					value={videoSource}
-					options={videoSourceOptions}
-					onChange={(val) => setAttributes({ videoSource: val })}
-				/>
-
 				<TextControl
-					className="mt15"
 					label={__('Video URL', 'video-player-block')}
 					value={videoUrl}
 					placeholder="https://example.com/video.mp4"
-					onChange={(val) => setAttributes({ videoUrl: val })}
+					onChange={(val) =>
+						setAttributes({ videoUrl: val, videoSource: detectSource(val) })
+					}
 					help={videoSource === 'youtube'
 						? __('Paste the YouTube watch URL or shortened URL.', 'video-player-block')
 						: videoSource === 'vimeo'

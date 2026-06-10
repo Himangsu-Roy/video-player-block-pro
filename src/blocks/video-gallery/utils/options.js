@@ -29,13 +29,6 @@ export const sourceOptions = [
   { label: "DASH (.mpd)", value: "dash" },
 ];
 
-export const playerEngineOptions = [
-  { label: __("Default (Plyr)", "video-player-block"), value: "default" },
-  { label: __("React (react-player)", "video-player-block"), value: "react" },
-  { label: __("Video.js", "video-player-block"), value: "videojs" },
-  { label: __("Vidstack", "video-player-block"), value: "vidstack" },
-];
-
 export const playbackModeOptions = [
   { label: __("Lightbox", "video-player-block"), value: "lightbox" },
   { label: __("Inline", "video-player-block"), value: "inline" },

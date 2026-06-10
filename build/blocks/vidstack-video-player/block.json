@@ -9,7 +9,7 @@
     "player",
     "vidstack"
   ],
-  "textdomain": "video-player-block",
+  "textdomain": "video-player",
   "attributes": {
     "alignment": {
       "type": "string",

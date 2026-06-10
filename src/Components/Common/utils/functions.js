@@ -239,15 +239,12 @@ export const premiumBlocks = [
   "vpb/videojs-player",
   "vpb/vidstack-video-player",
   "vpb/video-gallery",
-  "vpb/video-hero",
   "vpb/video-lightbox",
   "vpb/video-comparison",
   "vpb/video-testimonial",
   "vpb/video-playlist",
   "vpb/video-reels",
-  "vpb/interactive-video",
   "vpb/video-transcript",
-  "vpb/sticky-video",
 ];
 
 export const isBlockEnabled = (name) => {

@@ -5,6 +5,12 @@ import {
   isYoutube,
   isVimeo,
 } from "../../utils/functions";
+import EditorEmbedPortal from "../../../_shared/media/EditorEmbedPortal";
+import AdaptiveVideo from "../../../_shared/media/AdaptiveVideo";
+
+const YT_ALLOW =
+  "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+const VIMEO_ALLOW = "autoplay; fullscreen; picture-in-picture";
 
 /**
  * Resolves a playable URL for an item.
@@ -34,18 +40,24 @@ const resolveSource = (item) => {
 
 const Player = ({
   item,
-  attributes,
   startTime = 0,
   onEnded,
   onTimeUpdate,
   onLoaded,
+  inEditor = false,
 }) => {
   const videoRef = useRef(null);
   const iframeRef = useRef(null);
   const seekedRef = useRef(false);
 
+  // Keep the latest callbacks in refs so the postMessage effects below don't
+  // re-subscribe on every parent render (the parent passes inline callbacks).
+  const onTimeUpdateRef = useRef(onTimeUpdate);
+  const onLoadedRef = useRef(onLoaded);
+  onTimeUpdateRef.current = onTimeUpdate;
+  onLoadedRef.current = onLoaded;
+
   const resolved = resolveSource(item);
-  const engine = attributes?.engine || "default";
 
   // Native <video>: handle initial seek + play
   useEffect(() => {
@@ -66,14 +78,138 @@ const Player = ({
         }
         seekedRef.current = true;
       }
-      if (onLoaded) onLoaded(el);
+      // Expose a uniform controller so chapter seeking is source-agnostic.
+      if (onLoadedRef.current) {
+        onLoadedRef.current({
+          el,
+          seek: (t) => {
+            try {
+              el.currentTime = t;
+              if (el.paused) el.play().catch(() => {});
+            } catch (e) {
+              /* noop */
+            }
+          },
+        });
+      }
     };
 
     el.addEventListener("loadedmetadata", handleLoaded);
     return () => {
       el.removeEventListener("loadedmetadata", handleLoaded);
     };
-  }, [resolved.type, resolved.url, startTime, onLoaded]);
+  }, [resolved.type, resolved.url, startTime]);
+
+  // YouTube: drive seek/play and read currentTime over the iframe postMessage
+  // API so chapter clicks work without reloading the embed.
+  useEffect(() => {
+    if (resolved.type !== "youtube") return undefined;
+    const iframe = iframeRef.current;
+    if (!iframe) return undefined;
+
+    const post = (msg) => {
+      try {
+        iframe.contentWindow?.postMessage(
+          JSON.stringify(msg),
+          "https://www.youtube.com",
+        );
+      } catch (e) {
+        /* noop */
+      }
+    };
+
+    const startListening = () =>
+      post({ event: "listening", id: "vpb-vp", channel: "widget" });
+
+    const onMessage = (e) => {
+      if (typeof e.data !== "string" || !/youtube\.com/.test(e.origin)) return;
+      let data;
+      try {
+        data = JSON.parse(e.data);
+      } catch (_) {
+        return;
+      }
+      if (
+        data?.event === "infoDelivery" &&
+        data.info &&
+        typeof data.info.currentTime === "number"
+      ) {
+        onTimeUpdateRef.current?.(data.info.currentTime);
+      }
+    };
+
+    window.addEventListener("message", onMessage);
+    iframe.addEventListener("load", startListening);
+    startListening();
+
+    onLoadedRef.current?.({
+      seek: (t) => {
+        post({ event: "command", func: "seekTo", args: [t, true] });
+        post({ event: "command", func: "playVideo", args: [] });
+      },
+    });
+
+    return () => {
+      window.removeEventListener("message", onMessage);
+      iframe.removeEventListener("load", startListening);
+    };
+  }, [resolved.type, resolved.mediaId]);
+
+  // Vimeo: same idea via the Vimeo player postMessage protocol.
+  useEffect(() => {
+    if (resolved.type !== "vimeo") return undefined;
+    const iframe = iframeRef.current;
+    if (!iframe) return undefined;
+
+    const post = (msg) => {
+      try {
+        iframe.contentWindow?.postMessage(
+          JSON.stringify(msg),
+          "https://player.vimeo.com",
+        );
+      } catch (e) {
+        /* noop */
+      }
+    };
+
+    const subscribe = () =>
+      post({ method: "addEventListener", value: "timeupdate" });
+
+    const onMessage = (e) => {
+      if (!/player\.vimeo\.com/.test(e.origin)) return;
+      let data = e.data;
+      if (typeof data === "string") {
+        try {
+          data = JSON.parse(data);
+        } catch (_) {
+          return;
+        }
+      }
+      if (
+        data?.event === "timeupdate" &&
+        data.data &&
+        typeof data.data.seconds === "number"
+      ) {
+        onTimeUpdateRef.current?.(data.data.seconds);
+      }
+    };
+
+    window.addEventListener("message", onMessage);
+    iframe.addEventListener("load", subscribe);
+    subscribe();
+
+    onLoadedRef.current?.({
+      seek: (t) => {
+        post({ method: "setCurrentTime", value: t });
+        post({ method: "play" });
+      },
+    });
+
+    return () => {
+      window.removeEventListener("message", onMessage);
+      iframe.removeEventListener("load", subscribe);
+    };
+  }, [resolved.type, resolved.mediaId]);
 
   if (!resolved.url && resolved.type === "native") {
     return (
@@ -89,18 +225,26 @@ const Player = ({
       rel: "0",
       modestbranding: "1",
       playsinline: "1",
+      // enablejsapi + origin let us drive seek/play and read currentTime via
+      // postMessage, so chapter clicks work for YouTube (not just MP4/HTML5).
+      enablejsapi: "1",
+      origin:
+        typeof window !== "undefined" ? window.location.origin : "",
     });
     if (startTime > 0) params.set("start", String(Math.floor(startTime)));
     const src = `https://www.youtube.com/embed/${resolved.mediaId}?${params.toString()}`;
+    if (inEditor) {
+      return (
+        <EditorEmbedPortal src={src} title={item?.title || "YouTube video"} allow={YT_ALLOW} />
+      );
+    }
     return (
       <iframe
         ref={iframeRef}
         src={src}
         title={item?.title || "YouTube video"}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        data-engine={engine}
-      />
+        allow={YT_ALLOW}
+        allowFullScreen      />
     );
   }
 
@@ -113,34 +257,36 @@ const Player = ({
     });
     if (startTime > 0) params.set("#t", `${Math.floor(startTime)}s`);
     const src = `https://player.vimeo.com/video/${resolved.mediaId}?${params.toString()}`;
+    if (inEditor) {
+      return (
+        <EditorEmbedPortal src={src} title={item?.title || "Vimeo video"} allow={VIMEO_ALLOW} />
+      );
+    }
     return (
       <iframe
         ref={iframeRef}
         src={src}
         title={item?.title || "Vimeo video"}
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowFullScreen
-        data-engine={engine}
-      />
+        allow={VIMEO_ALLOW}
+        allowFullScreen      />
     );
   }
 
   return (
-    <video
+    <AdaptiveVideo
       ref={videoRef}
       key={resolved.url}
       src={resolved.url}
+      sourceType={item?.source?.type}
       controls
       playsInline
       autoPlay
-      poster={item?.poster || undefined}
-      data-engine={engine}
-      onEnded={onEnded}
+      poster={item?.poster || undefined}      onEnded={onEnded}
       onTimeUpdate={(e) =>
         onTimeUpdate && onTimeUpdate(e.currentTarget.currentTime || 0)
       }>
       <track kind="captions" />
-    </video>
+    </AdaptiveVideo>
   );
 };
 

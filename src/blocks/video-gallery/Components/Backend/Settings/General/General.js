@@ -14,7 +14,6 @@ import {
   layoutOptions,
   aspectRatioOptions,
   sourceOptions,
-  playerEngineOptions,
   playbackModeOptions,
   filterStyleOptions,
 } from "../../../../utils/options";
@@ -28,7 +27,6 @@ const General = ({ attributes, setAttributes }) => {
     gap,
     aspectRatio,
     customAspect,
-    playerEngine,
     playbackMode,
     showFilters,
     filterStyle,
@@ -296,17 +294,6 @@ const General = ({ attributes, setAttributes }) => {
         title={__("Playback", "video-player-block")}
         initialOpen={false}
       >
-        <SelectControl
-          label={__("Player Engine", "video-player-block")}
-          value={playerEngine}
-          options={playerEngineOptions}
-          onChange={(val) => setAttributes({ playerEngine: val })}
-          help={__(
-            "The engine used inside the in-page player. Default uses the bundled Plyr/HTML5 player.",
-            "video-player-block",
-          )}
-        />
-
         <SelectControl
           label={__("Playback Mode", "video-player-block")}
           value={playbackMode}

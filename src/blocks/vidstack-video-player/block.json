@@ -4,12 +4,8 @@
   "title": "Vidstack Video Player",
   "category": "vpbblocks",
   "description": "A powerful and customizable video player for WordPress powered by Vidstack.",
-  "keywords": [
-    "video",
-    "player",
-    "vidstack"
-  ],
-  "textdomain": "video-player-block",
+  "keywords": ["video", "player", "vidstack"],
+  "textdomain": "video-player",
   "attributes": {
     "alignment": {
       "type": "string",
@@ -138,10 +134,7 @@
     }
   },
   "supports": {
-    "align": [
-      "wide",
-      "full"
-    ],
+    "align": ["wide", "full"],
     "html": false,
     "layout": false
   },

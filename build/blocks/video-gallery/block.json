@@ -37,7 +37,7 @@
           "description": "A fantasy short film, also by the Blender Institute.",
           "source": "youtube",
           "url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
-          "poster": "https://img.youtube.com/vi/eRsGyueVLvQ/maxresdefault.jpg",
+          "poster": "",
           "duration": "1:00",
           "category": "Trailers",
           "chapters": []
@@ -58,8 +58,8 @@
           "title": "Elephants Dream",
           "description": "The world's first open-source animated film.",
           "source": "mp4",
-          "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-          "poster": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
+          "url": "https://www.youtube.com/watch?v=TLkA0RELQ1g",
+          "poster": "https://m.media-amazon.com/images/M/MV5BMzI3NTFlOGUtOWE2MS00NDliLWJmODgtYTY3NDA5MmIzMjg5XkEyXkFqcGc@._V1_.jpg",
           "duration": "10:53",
           "category": "Animation",
           "chapters": []
@@ -70,7 +70,7 @@
           "description": "A test HLS adaptive bitrate stream.",
           "source": "hls",
           "url": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-          "poster": "",
+          "poster": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/poster.jpg",
           "duration": "Live",
           "category": "Streams",
           "chapters": []
@@ -111,10 +111,6 @@
     "customAspect": {
       "type": "string",
       "default": "16/9"
-    },
-    "playerEngine": {
-      "type": "string",
-      "default": "default"
     },
     "playbackMode": {
       "type": "string",
@@ -242,8 +238,7 @@
   "example": {
     "attributes": {}
   },
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
+  "editorScript": "file:../index.js",
   "style": "file:./view.css",
   "render": "file:./render.php",
   "viewScript": "file:./view.js"

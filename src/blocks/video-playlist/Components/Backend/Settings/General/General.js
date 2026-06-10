@@ -12,7 +12,6 @@ import {
 } from "@wordpress/components";
 import { InlineMediaUpload } from "../../../../../../../../bpl-tools/Components";
 import {
-  engineOptions,
   layoutOptions,
   sourceTypeOptions,
   aspectRatioOptions,
@@ -35,7 +34,6 @@ const ensureMediaId = (type, url) => {
 const General = ({ attributes, setAttributes }) => {
   const {
     items = [],
-    engine,
     layout,
     autoAdvance,
     autoAdvanceDelay,
@@ -274,6 +272,18 @@ const General = ({ attributes, setAttributes }) => {
                         }}>
                         {__("Chapters", "video-player-block")}
                       </label>
+                      <p
+                        style={{
+                          margin: "0 0 8px",
+                          fontSize: 11,
+                          fontStyle: "italic",
+                          color: "#757575",
+                        }}>
+                        {__(
+                          "Chapters work best with HTML5 / MP4 (self-hosted) videos.",
+                          "video-player-block",
+                        )}
+                      </p>
                       {(item.chapters || []).map((ch, ci) => (
                         <div className="vpb-vp-chapter-row" key={ci}>
                           <TextControl
@@ -333,16 +343,6 @@ const General = ({ attributes, setAttributes }) => {
         className="bPlPanelBody"
         title={__("Layout", "video-player-block")}
         initialOpen={false}>
-        <SelectControl
-          label={__("Player Engine", "video-player-block")}
-          value={engine}
-          options={engineOptions}
-          onChange={(val) => setAttributes({ engine: val })}
-          help={__(
-            "The playback engine for every item in this playlist.",
-            "video-player-block",
-          )}
-        />
 
         <SelectControl
           label={__("Layout", "video-player-block")}

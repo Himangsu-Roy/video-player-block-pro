@@ -18,10 +18,6 @@
       "type": "string",
       "default": "center"
     },
-    "engine": {
-      "type": "string",
-      "default": "default"
-    },
     "layout": {
       "type": "string",
       "default": "queue-right"
@@ -65,7 +61,7 @@
             "url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
             "mediaId": "eRsGyueVLvQ"
           },
-          "poster": "https://img.youtube.com/vi/eRsGyueVLvQ/maxresdefault.jpg",
+          "poster": "",
           "duration": "1:00",
           "badge": "NEW",
           "chapters": []
@@ -254,8 +250,7 @@
   "example": {
     "attributes": {}
   },
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
+  "editorScript": "file:../index.js",
   "style": "file:./view.css",
   "render": "file:./render.php",
   "viewScript": "file:./view.js"

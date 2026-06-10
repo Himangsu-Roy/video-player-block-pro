@@ -50,7 +50,7 @@ class Init {
 
 		if ( ! function_exists( 'vpb_fs' ) || ! vpb_fs()->can_use_premium_code() ) return;
 
-		foreach ( [ 'react-video-player', 'videojs-player', 'vidstack-video-player', 'video-gallery', 'video-hero', 'video-lightbox', 'video-comparison', 'video-testimonial', 'video-playlist', 'video-reels', 'interactive-video', 'video-transcript', 'sticky-video' ] as $name ) {
+		foreach ( [ 'react-video-player', 'videojs-player', 'vidstack-video-player', 'video-gallery', 'video-lightbox', 'video-comparison', 'video-testimonial', 'video-playlist', 'video-reels', 'video-transcript' ] as $name ) {
 			if ( in_array( 'vpb/' . $name, $disabled, true ) ) continue;
 			$dir = $path . $name;
 			if ( is_dir( $dir ) ) register_block_type( $dir );

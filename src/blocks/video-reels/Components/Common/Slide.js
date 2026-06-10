@@ -4,6 +4,8 @@ import {
   formatHashtag,
   resolvePoster,
 } from "../../utils/functions";
+import EditorEmbedPortal from "../../../_shared/media/EditorEmbedPortal";
+import AdaptiveVideo from "../../../_shared/media/AdaptiveVideo";
 import {
   playIcon,
   pauseIcon,
@@ -69,16 +71,26 @@ const Slide = ({
   const [progress, setProgress] = useState(0);
   const [posterHidden, setPosterHidden] = useState(false);
   const [liked, setLiked] = useState(false);
+  // Editor-only: a YouTube/Vimeo embed is mounted (via portal) only after the
+  // user clicks play, and torn down when the slide is scrolled out of view.
+  const [editorPlaying, setEditorPlaying] = useState(false);
 
   useEffect(() => {
     const lk = loadLiked();
     setLiked(!!lk[reel.id]);
   }, [reel?.id]);
 
-  // IntersectionObserver: report visibility to parent for autoplay decisions
+  // Stop the editor embed (and free the scroll-blocking overlay) once this
+  // slide is no longer the active one.
+  useEffect(() => {
+    if (!isActive) setEditorPlaying(false);
+  }, [isActive]);
+
+  // IntersectionObserver: report visibility to the parent so it can track the
+  // active slide. Runs in the editor too, so scrolling pauses the previous clip.
   useEffect(() => {
     const el = ref.current;
-    if (!el || isEditor) return undefined;
+    if (!el) return undefined;
 
     const obs = new IntersectionObserver(
       (entries) => {
@@ -94,14 +106,15 @@ const Slide = ({
     return () => obs.disconnect();
   }, [index, isEditor, onVisibilityChange]);
 
-  // Native video play/pause based on isActive
+  // Native video play/pause based on isActive. Non-active clips are paused in
+  // BOTH the editor and frontend so scrolling away stops the previous audio;
+  // autoplay of the active clip only happens on the frontend.
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    if (isEditor) return;
-    if (!autoplayOnVisible) return;
 
     if (isActive) {
+      if (isEditor || !autoplayOnVisible) return;
       try {
         v.muted = isMuted;
         const p = v.play();
@@ -118,9 +131,6 @@ const Slide = ({
       try {
         v.pause();
         setIsPlaying(false);
-        if (v.currentTime > 1) {
-          // Reset offscreen clips so they re-engage from start.
-        }
       } catch (e) {
         /* noop */
       }
@@ -188,6 +198,10 @@ const Slide = ({
   const isIframe = source === "youtube" || source === "vimeo";
   const srcUrl = buildSrcUrl(reel);
   const poster = resolvePoster(reel);
+  // Where the embed is actually mounted (vs. just showing the poster).
+  const iframeFrontend = isIframe && !!srcUrl && isActive && !isEditor;
+  const iframeEditor =
+    isIframe && !!srcUrl && isActive && isEditor && editorPlaying;
   const preloadAttr =
     preloadStrategy === "none"
       ? "none"
@@ -203,7 +217,8 @@ const Slide = ({
   return (
     <div className="vpb-vr-slide" ref={ref} data-reel-index={index}>
       <div className="vpb-vr-media">
-        {isIframe && srcUrl && (isActive || shouldPreload || isEditor) ? (
+        {/* Frontend: live embed for the active slide. */}
+        {iframeFrontend ? (
           <iframe
             src={srcUrl}
             title={reel.title || `Reel ${index + 1}`}
@@ -212,10 +227,24 @@ const Slide = ({
           />
         ) : null}
 
+        {/* Editor: portal the embed to the top window (the Studio canvas is a
+            sandboxed iframe). Mounted only for the active slide after the user
+            clicks play, so it doesn't block feed scrolling by default and is
+            torn down on scroll-away. */}
+        {iframeEditor ? (
+          <EditorEmbedPortal
+            src={srcUrl}
+            title={reel.title || `Reel ${index + 1}`}
+            allow="autoplay; encrypted-media; picture-in-picture"
+            clickThrough
+          />
+        ) : null}
+
         {!isIframe && srcUrl && (isActive || shouldPreload || isEditor) ? (
-          <video
+          <AdaptiveVideo
             ref={videoRef}
             src={srcUrl}
+            sourceType={source}
             poster={poster || undefined}
             preload={preloadAttr}
             muted={startMuted ? true : isMuted}
@@ -230,7 +259,11 @@ const Slide = ({
 
       {poster ? (
         <img
-          className={`vpb-vr-poster ${posterHidden && isPlaying ? "is-hidden" : ""}`}
+          className={`vpb-vr-poster ${
+            (posterHidden && isPlaying) || iframeFrontend || iframeEditor
+              ? "is-hidden"
+              : ""
+          }`}
           src={poster}
           alt={reel.title || ""}
           loading="lazy"
@@ -257,6 +290,17 @@ const Slide = ({
           onClick={togglePlay}
           aria-label={isPlaying ? "Pause" : "Play"}>
           {isPlaying ? pauseIcon : playIcon}
+        </button>
+      )}
+
+      {/* Editor: click to mount the YouTube/Vimeo embed for the active slide. */}
+      {isIframe && isEditor && isActive && srcUrl && !editorPlaying && (
+        <button
+          type="button"
+          className="vpb-vr-big-play is-visible"
+          onClick={() => setEditorPlaying(true)}
+          aria-label="Play video">
+          {playIcon}
         </button>
       )}
 

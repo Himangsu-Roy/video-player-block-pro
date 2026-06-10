@@ -14,7 +14,6 @@ import { InlineMediaUpload } from "../../../../../../../../bpl-tools/Components"
 import {
   layoutOptions,
   aspectRatioOptions,
-  engineOptions,
   sourceTypeOptions,
   snapBehaviorOptions,
   preloadStrategyOptions,
@@ -32,7 +31,6 @@ const General = ({ attributes, setAttributes }) => {
     reels = [],
     layout,
     aspectRatio,
-    engine,
     autoplayOnVisible,
     autoplayThreshold,
     startMuted,
@@ -175,6 +173,14 @@ const General = ({ attributes, setAttributes }) => {
                         });
                       }}
                       placeholder="https://..."
+                      help={
+                        reel.source === "youtube" || reel.source === "vimeo"
+                          ? __(
+                              "YouTube/Vimeo previews are muted in the editor — sound plays on the published page.",
+                              "video-player-block",
+                            )
+                          : undefined
+                      }
                     />
 
                     <InlineMediaUpload
@@ -275,17 +281,6 @@ const General = ({ attributes, setAttributes }) => {
           value={aspectRatio}
           options={aspectRatioOptions}
           onChange={(val) => setAttributes({ aspectRatio: val })}
-        />
-
-        <SelectControl
-          label={__("Player Engine", "video-player-block")}
-          value={engine}
-          options={engineOptions}
-          onChange={(val) => setAttributes({ engine: val })}
-          help={__(
-            "Native HTML5 is the most efficient for vertical feeds. Engine choice mainly affects controls UI when fullscreen.",
-            "video-player-block",
-          )}
         />
 
         <RangeControl

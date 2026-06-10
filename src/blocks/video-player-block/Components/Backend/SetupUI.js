@@ -2,12 +2,9 @@ import { useDispatch, useSelect } from "@wordpress/data";
 import { createBlock } from "@wordpress/blocks";
 import { useState } from "@wordpress/element";
 import {
-    interactiveVideoIcon,
     reactVideoPlayerIcon,
-    stickyVideoIcon,
     videoComparisonIcon,
     videoGalleryIcon,
-    videoHeroIcon,
     videoLightboxIcon,
     videoPlayerIcon,
     videoPlaylistIcon,
@@ -67,13 +64,6 @@ const SetupUI = ({ clientId, setAttributes, currentPostType }) => {
       isPro: true,
     },
     {
-      name: "vpb/video-hero",
-      title: "Video Hero",
-      description: "Full-bleed landing-page hero with autoplay background video, headline, and CTAs.",
-      icon: videoHeroIcon,
-      isPro: true,
-    },
-    {
       name: "vpb/video-lightbox",
       title: "Video Lightbox",
       description: "Click-to-play trigger that opens any video in a responsive modal lightbox.",
@@ -109,24 +99,10 @@ const SetupUI = ({ clientId, setAttributes, currentPostType }) => {
       isPro: true,
     },
     {
-      name: "vpb/interactive-video",
-      title: "Interactive Video",
-      description: "Timeline-triggered CTAs, hotspots, image cards, end-screen, chapter markers, and an email gate inside the video.",
-      icon: interactiveVideoIcon,
-      isPro: true,
-    },
-    {
       name: "vpb/video-transcript",
       title: "Video Transcript",
       description: "Synchronized, clickable transcript alongside any video — viewers jump to any moment, search engines index spoken content.",
       icon: videoTranscriptIcon,
-      isPro: true,
-    },
-    {
-      name: "vpb/sticky-video",
-      title: "Sticky Video Player",
-      description: "A video that pins to a screen corner and minimizes on scroll, with optional Picture-in-Picture pop-out.",
-      icon: stickyVideoIcon,
       isPro: true,
     }
   ];

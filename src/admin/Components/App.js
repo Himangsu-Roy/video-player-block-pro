@@ -12,10 +12,10 @@ import FeatureCompare from "../../../../bpl-tools/Admin/FeatureCompare";
 import Activation from "../../../../bpl-tools/Admin/Activation";
 import OurPlugins from "../../../../bpl-tools/Admin/OurPlugins";
 import Blocks from "../../../../bpl-tools/Admin/Blocks";
-import Settings from "./Settings";
+import Welcome from "../../../../bpl-tools/Admin/Welcome";
+import Settings from "../../../../bpl-tools/Admin/Settings"
 import Layout from "./Layout";
-import Welcome from "./Welcome";
-import { demoInfo, pricingInfo } from "../utils/data";
+import { demoInfo, pricingInfo, welcomeInfo } from "../utils/data";
 
 
 const App = (props) => {
@@ -69,8 +69,14 @@ const App = (props) => {
     <Router>
       <Routes>
         <Route path="/" element={<Layout {...appProps} />}>
-          <Route index element={<Welcome {...appProps} />} />
-          <Route path="welcome" element={<Welcome {...appProps} />} />
+          <Route
+            index
+            element={<Welcome {...appProps} {...welcomeInfo(adminUrl)} />}
+          />
+          <Route
+            path="welcome"
+            element={<Welcome {...appProps} {...welcomeInfo(adminUrl)} />}
+          />
           <Route
             path="demos"
             element={<Demos demoInfo={demoInfo} {...appProps} />}
@@ -98,7 +104,12 @@ const App = (props) => {
           <Route path="blocks" element={<Blocks {...appProps} />} />
 
           <Route path="our-plugins" element={<OurPlugins {...appProps} />} />
-          <Route path="settings" element={<Settings {...appProps} />} />
+          <Route
+            path="settings"
+            element={
+              <Settings {...appProps} ajaxAction="vpbSaveUninstallOption" />
+            }
+          />
           <Route path="*" element={<Navigate to="/welcome" replace />} />
         </Route>
       </Routes>

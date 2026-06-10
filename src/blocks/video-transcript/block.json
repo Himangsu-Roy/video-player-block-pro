@@ -24,7 +24,7 @@
     },
     "posterUrl": {
       "type": "string",
-      "default": ""
+      "default": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/poster.jpg"
     },
     "aspectRatio": {
       "type": "string",
@@ -185,8 +185,7 @@
   "example": {
     "attributes": {}
   },
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
+  "editorScript": "file:../index.js",
   "style": "file:./view.css",
   "render": "file:./render.php",
   "viewScript": "file:./view.js"

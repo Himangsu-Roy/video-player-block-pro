@@ -110,9 +110,11 @@ export const buildSrcUrl = (reel) => {
     const id = getYoutubeId(url);
     if (!id) return "";
     const params = new URLSearchParams({
-      autoplay: "0",
+      // Muted autoplay is allowed by browsers; controls let the viewer unmute /
+      // pause since the reels tap-layer only drives native <video>.
+      autoplay: "1",
       mute: "1",
-      controls: "0",
+      controls: "1",
       modestbranding: "1",
       playsinline: "1",
       loop: "1",
@@ -125,10 +127,10 @@ export const buildSrcUrl = (reel) => {
     const id = getVimeoId(url);
     if (!id) return "";
     const params = new URLSearchParams({
-      autoplay: "0",
+      autoplay: "1",
       muted: "1",
       loop: "1",
-      controls: "0",
+      controls: "1",
       playsinline: "1",
     });
     return `https://player.vimeo.com/video/${id}?${params.toString()}`;

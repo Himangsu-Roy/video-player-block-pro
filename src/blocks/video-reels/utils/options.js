@@ -26,13 +26,6 @@ export const aspectRatioOptions = [
   { label: "1:1 (Square)", value: "1:1" },
 ];
 
-export const engineOptions = [
-  { label: __("Native HTML5", "video-player-block"), value: "native" },
-  { label: __("Plyr", "video-player-block"), value: "plyr" },
-  { label: __("Video.js", "video-player-block"), value: "videojs" },
-  { label: __("Vidstack", "video-player-block"), value: "vidstack" },
-];
-
 export const sourceTypeOptions = [
   { label: "MP4 / Direct", value: "mp4" },
   { label: "YouTube / Shorts", value: "youtube" },

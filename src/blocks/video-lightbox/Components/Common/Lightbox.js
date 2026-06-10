@@ -95,7 +95,7 @@ const Lightbox = ({ attributes, blockId, inEditor = false }) => {
 
   return (
     <div className={`vpb-vl-align-${alignment}`}>
-      <div className="vpb-vl-wrap">
+      <div className="vpb-vl-wrap" style={{ position: "relative" }}>
         <Trigger
           attributes={attributes}
           onOpen={handleOpen}
@@ -107,6 +107,7 @@ const Lightbox = ({ attributes, blockId, inEditor = false }) => {
           attributes={attributes}
           blockId={blockIdRef.current}
           onClose={handleClose}
+          inEditor={inEditor}
         />
       )}
     </div>

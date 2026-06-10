@@ -1,6 +1,8 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { buildEmbedUrl } from "../../utils/functions";
 import { checkIcon, playIcon, starIcon } from "../../utils/icons";
+import EditorEmbedPortal from "../../../_shared/media/EditorEmbedPortal";
+import AdaptiveVideo from "../../../_shared/media/AdaptiveVideo";
 
 /**
  * Video Testimonial Card. Renders a single testimonial with an inline-playable
@@ -33,8 +35,13 @@ const Testimonial = ({ attributes, inEditor = false }) => {
   const [hoverPlay, setHoverPlay] = useState(false);
   const videoRef = useRef(null);
 
+  useEffect(() => {
+    setActivated(false);
+    setLightboxOpen(false);
+    setHoverPlay(false);
+  }, [playMode, videoUrl, posterUrl]);
+
   const handleActivate = useCallback(() => {
-    if (inEditor) return;
     if (playMode === "lightbox") {
       setLightboxOpen(true);
       return;
@@ -48,10 +55,10 @@ const Testimonial = ({ attributes, inEditor = false }) => {
         if (p && typeof p.catch === "function") p.catch(() => {});
       }
     });
-  }, [inEditor, playMode]);
+  }, [playMode]);
 
   const onHoverStart = useCallback(() => {
-    if (playMode !== "hover-preview" || inEditor) return;
+    if (playMode !== "hover-preview") return;
     setHoverPlay(true);
     const v = videoRef.current;
     if (v && typeof v.play === "function") {
@@ -59,10 +66,10 @@ const Testimonial = ({ attributes, inEditor = false }) => {
       const p = v.play();
       if (p && typeof p.catch === "function") p.catch(() => {});
     }
-  }, [playMode, inEditor]);
+  }, [playMode]);
 
   const onHoverEnd = useCallback(() => {
-    if (playMode !== "hover-preview" || inEditor) return;
+    if (playMode !== "hover-preview") return;
     setHoverPlay(false);
     const v = videoRef.current;
     if (v && typeof v.pause === "function") {
@@ -73,7 +80,7 @@ const Testimonial = ({ attributes, inEditor = false }) => {
         /* noop */
       }
     }
-  }, [playMode, inEditor]);
+  }, [playMode]);
 
   const renderPlayer = (forceAutoplay = false, forceControls = true) => {
     if (videoSource === "youtube" || videoSource === "vimeo") {
@@ -84,22 +91,36 @@ const Testimonial = ({ attributes, inEditor = false }) => {
         controls: forceControls && playerControls,
       });
       if (!src) return null;
+      const allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      const title = authorName ? `${authorName} testimonial` : "Testimonial video";
+      if (inEditor) {
+        return (
+          <EditorEmbedPortal
+            className="vpb-vt-video"
+            src={src}
+            title={title}
+            allow={allow}
+          />
+        );
+      }
       return (
         <iframe
           className="vpb-vt-video"
           src={src}
-          title={authorName ? `${authorName} testimonial` : "Testimonial video"}
+          title={title}
           frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow={allow}
           allowFullScreen
         />
       );
     }
     return (
-      <video
+      <AdaptiveVideo
         ref={videoRef}
         className="vpb-vt-video"
         src={videoUrl || undefined}
+        sourceType={videoSource}
         poster={posterUrl || undefined}
         controls={forceControls && playerControls}
         muted={playerMuted}
@@ -120,9 +141,9 @@ const Testimonial = ({ attributes, inEditor = false }) => {
   });
 
   const shouldShowPoster =
-    !activated && !hoverPlay && playMode !== "lightbox" && posterUrl;
+    !activated && !hoverPlay && posterUrl;
   const inlineWithoutPoster =
-    !activated && !hoverPlay && playMode !== "lightbox" && !posterUrl;
+    !activated && !hoverPlay && !posterUrl;
 
   return (
     <div
@@ -144,7 +165,9 @@ const Testimonial = ({ attributes, inEditor = false }) => {
           {playMode === "hover-preview" &&
             !inEditor &&
             renderPlayer(hoverPlay, false)}
-          {inEditor && renderPlayer(false, true)}
+          {inEditor &&
+            (activated || !shouldShowPoster) &&
+            renderPlayer(activated, true)}
 
           {shouldShowPoster && (
             <img
@@ -156,8 +179,7 @@ const Testimonial = ({ attributes, inEditor = false }) => {
           )}
           {(shouldShowPoster ||
             inlineWithoutPoster ||
-            playMode === "lightbox") &&
-            !inEditor && (
+            playMode === "lightbox") && (
               <button
                 type="button"
                 className="vpb-vt-play"
@@ -251,7 +273,7 @@ const Testimonial = ({ attributes, inEditor = false }) => {
         </div>
       </div>
 
-      {lightboxOpen && !inEditor && (
+      {lightboxOpen && (
         <div
           className="vpb-vt-lightbox"
           role="dialog"

@@ -40,7 +40,7 @@ export function Player({
   useEffect(() => {
     // Subscribe to state updates.
     if (player.current) {
-      return player.current.subscribe(({ paused, viewType }) => {
+      return player.current.subscribe(() => {
         // console.log('is paused?', '->', state.paused);
         // console.log('is audio view?', '->', state.viewType === 'audio');
       });
@@ -124,6 +124,24 @@ export function Player({
     activeTracks = textTracks;
   }
 
+  // Vidstack's YouTube/Vimeo providers only match a source whose `type` is
+  // "video/youtube" / "video/vimeo" — a bare URL string falls through to the
+  // native <video> provider and won't play. Detect those hosts and hand the
+  // player a typed source object (the provider resolves the video id from the
+  // full URL). Everything else stays a plain string for native/HLS playback.
+  const rawSrc = items.videoUrl || "";
+  const isYouTubeSrc = /(?:youtube\.com|youtu\.be|youtube-nocookie\.com)/i.test(
+    rawSrc,
+  );
+  const isVimeoSrc = /vimeo\.com/i.test(rawSrc);
+  const playerSrc = !rawSrc
+    ? ""
+    : isYouTubeSrc
+      ? { src: rawSrc, type: "video/youtube" }
+      : isVimeoSrc
+        ? { src: rawSrc, type: "video/vimeo" }
+        : rawSrc;
+
   const playerKey = `${items.videoUrl}-${activeTracks
     .map((t) => t.src)
     .join("-")}`;
@@ -147,7 +165,7 @@ export function Player({
       key={playerKey}
       className={`${styles.player} player`}
       title={items.playerTitle || ""}
-      src={items.videoUrl || ""}
+      src={playerSrc}
       crossOrigin={effectivePlayerOptions.crossOrigin ? "anonymous" : undefined}
       playsInline={!!effectivePlayerOptions.playsInline}
       onProviderChange={onProviderChange}

@@ -167,6 +167,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  // Override .vpb-vl-trigger { width: 100% } so the button hugs the icon.
+  width: auto;
+
+  // For the standalone play-icon trigger the play badge is the button's only
+  // child, so it must stay in normal flow — otherwise (position: absolute) the
+  // button collapses to zero height and nothing is clickable.
+  .vpb-vl-play {
+    position: static;
+    transform: none;
+  }
 }
 
 /* Caption + duration -------------------------------------------------- */

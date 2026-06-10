@@ -16,7 +16,6 @@ import {
   playIconStyleOptions,
   thumbnailHoverEffectOptions,
   videoSourceOptions,
-  videoEngineOptions,
   modalSizeOptions,
   modalThemeOptions,
   modalAnimationOptions,
@@ -41,7 +40,6 @@ const General = ({ attributes, setAttributes }) => {
     captionText,
     videoSource,
     videoUrl,
-    videoEngine,
     modalSize,
     modalMaxWidth,
     modalAspectRatio,
@@ -215,7 +213,7 @@ const General = ({ attributes, setAttributes }) => {
           }}
           placeholder="https://..."
           help={__(
-            "YouTube, Vimeo, Wistia, Bunny Stream, MP4 / WebM or HLS (.m3u8) URL.",
+            "YouTube, Vimeo, MP4 / WebM or HLS (.m3u8) URL.",
             "video-player-block",
           )}
         />
@@ -224,16 +222,6 @@ const General = ({ attributes, setAttributes }) => {
           value={videoSource || "youtube"}
           options={videoSourceOptions}
           onChange={(val) => setAttributes({ videoSource: val })}
-        />
-        <SelectControl
-          label={__("Player engine", "video-player-block")}
-          value={videoEngine || "plyr"}
-          options={videoEngineOptions}
-          onChange={(val) => setAttributes({ videoEngine: val })}
-          help={__(
-            "For YouTube / Vimeo / Wistia the native iframe is always used. For MP4 / HLS / Bunny the selected engine takes over inside the modal.",
-            "video-player-block",
-          )}
         />
         <ToggleControl
           label={__("Lazy-load player engine", "video-player-block")}

@@ -9,7 +9,7 @@
     "player",
     "videojs"
   ],
-  "textdomain": "video-player-block",
+  "textdomain": "video-player",
   "attributes": {
     "alignment": {
       "type": "string",
@@ -134,8 +134,7 @@
   "example": {
     "attributes": {}
   },
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
+  "editorScript": "file:../index.js",
   "style": "file:./view.css",
   "render": "file:./render.php",
   "viewScript": "file:./view.js"

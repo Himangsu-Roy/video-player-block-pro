@@ -19,15 +19,15 @@
     },
     "beforeVideoUrl": {
       "type": "string",
-      "default": "https://cdn.pixabay.com/video/2020/05/25/40119-424167011_large.mp4"
+      "default": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/video.mp4"
     },
     "afterVideoUrl": {
       "type": "string",
-      "default": "https://cdn.pixabay.com/video/2024/03/14/204018-922675627_large.mp4"
+      "default": "https://test-videos.co.uk/vids/bigbuckbunny/webm/vp8/360/Big_Buck_Bunny_360_10s_1MB.webm"
     },
     "beforePosterUrl": {
       "type": "string",
-      "default": ""
+      "default": "https://cdn.jsdelivr.net/npm/big-buck-bunny-1080p@0.0.6/poster.jpg"
     },
     "afterPosterUrl": {
       "type": "string",
@@ -149,8 +149,7 @@
   "example": {
     "attributes": {}
   },
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
+  "editorScript": "file:../index.js",
   "style": "file:./view.css",
   "render": "file:./render.php",
   "viewScript": "file:./view.js"

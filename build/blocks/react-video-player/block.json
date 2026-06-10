@@ -11,7 +11,7 @@
     "react player",
     "video player"
   ],
-  "textdomain": "video-player-block",
+  "textdomain": "video-player",
   "attributes": {
     "alignment": {
       "type": "string",
@@ -138,9 +138,12 @@
   "example": {
     "attributes": {}
   },
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
+  "editorScript": [
+    "file:../index.js",
+    "plyr"
+  ],
   "style": "file:./view.css",
+  "script": "file:./iframe-init.js",
   "render": "file:./render.php",
   "viewScript": "file:./view.js"
 }

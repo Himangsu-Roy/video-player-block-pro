@@ -35,7 +35,7 @@ const saveProgress = (key, data) => {
   }
 };
 
-const Playlist = ({ attributes, clientId }) => {
+const Playlist = ({ attributes, clientId, inEditor = false }) => {
   const {
     items: rawItems = [],
     layout = "queue-right",
@@ -242,21 +242,17 @@ const Playlist = ({ attributes, clientId }) => {
     setCurrentTime(t);
   };
 
-  const handleLoaded = (el) => {
-    playerElRef.current = el;
+  const handleLoaded = (controller) => {
+    playerElRef.current = controller;
   };
 
   const handleSeekChapter = (t) => {
-    const el = playerElRef.current;
-    if (el && typeof el.currentTime === "number") {
-      try {
-        el.currentTime = t;
-        if (el.paused) el.play().catch(() => {});
-      } catch (e) {
-        /* noop */
-      }
+    const ctrl = playerElRef.current;
+    if (ctrl && typeof ctrl.seek === "function") {
+      // Native <video>, YouTube and Vimeo all expose a uniform seek().
+      ctrl.seek(t);
     } else {
-      // For non-native players (iframes), changing initialSeek triggers reload.
+      // Fallback (controller not ready yet): reload the embed at the timestamp.
       setInitialSeek(t);
     }
   };
@@ -334,6 +330,7 @@ const Playlist = ({ attributes, clientId }) => {
           onEnded={handleEnded}
           onTimeUpdate={handleTimeUpdate}
           onLoaded={handleLoaded}
+          inEditor={inEditor}
         />
 
         {countdown > 0 && (

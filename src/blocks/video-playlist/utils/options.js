@@ -5,13 +5,6 @@ export const generalStyleTabs = [
   { name: "style", title: __("Style", "video-player-block") },
 ];
 
-export const engineOptions = [
-  { label: __("Default (Plyr / HTML5)", "video-player-block"), value: "default" },
-  { label: __("React (react-player)", "video-player-block"), value: "react" },
-  { label: __("Video.js", "video-player-block"), value: "videojs" },
-  { label: __("Vidstack", "video-player-block"), value: "vidstack" },
-];
-
 export const layoutOptions = [
   { label: __("Queue on Right", "video-player-block"), value: "queue-right" },
   { label: __("Queue on Left", "video-player-block"), value: "queue-left" },

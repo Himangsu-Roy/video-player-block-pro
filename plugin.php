@@ -3,7 +3,7 @@
  * Plugin Name: Video Player Block
  * Plugin URI: https://wordpress.org/plugins/video-player-block/
  * Description: A Simple, accessible, Easy to Use & fully Customizable video player.
- * Version: 1.12.0
+ * Version: 2.0.0
  * Author: bPlugins
  * Author URI: https://bplugins.com
  * License: GPLv3
@@ -14,7 +14,7 @@
  * Tested up to: 7.0
  * Requires PHP: 7.4
  *
- * @fs_premium_only /vendor/freemius, /includes/fs.php, /includes/LicenseActivation.php, /build/blocks/react-video-player, /build/blocks/videojs-player, /build/blocks/vidstack-video-player, /build/blocks/video-gallery, /build/blocks/video-hero, /build/blocks/video-lightbox, /build/blocks/video-comparison, /build/blocks/video-testimonial, /build/blocks/video-playlist, /build/blocks/video-reels, /build/blocks/interactive-video, /build/blocks/video-transcript, /build/blocks/sticky-video, /build/blocks/index.js, /build/blocks/index.css, /build/blocks/index.asset.php, /build/blocks/index.js.LICENSE.txt
+ * @fs_premium_only /vendor/freemius, /includes/fs.php, /includes/LicenseActivation.php, /build/blocks/react-video-player, /build/blocks/videojs-player, /build/blocks/vidstack-video-player, /build/blocks/video-gallery, /build/blocks/video-lightbox, /build/blocks/video-comparison, /build/blocks/video-testimonial, /build/blocks/video-playlist, /build/blocks/video-reels, /build/blocks/video-transcript, /build/blocks/index.js, /build/blocks/index.css, /build/blocks/index.asset.php, /build/blocks/index.js.LICENSE.txt
  * @fs_free_only /vendor/freemius-lite, /includes/fs-lite.php
  */
 
@@ -29,7 +29,7 @@ function vpbp_bootstrap() {
 	$host = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
 	$is_local = 'localhost' === $host || str_starts_with( $host, 'localhost:' ) || str_ends_with( $host, '.local' );
 
-	define( 'VPBP_PLUGIN_VERSION', $is_local ? time() : '1.12.0' );
+	define( 'VPBP_PLUGIN_VERSION', $is_local ? time() : '2.0.0' );
 	define( 'VPBP_DIR_URL', plugin_dir_url( __FILE__ ) );
 	define( 'VPBP_PUBLIC_DIR', VPBP_DIR_URL . 'public/' );
 	define( 'VPBP_DIR_PATH', plugin_dir_path( __FILE__ ) );
@@ -76,13 +76,13 @@ function vpbp_bootstrap() {
 			}
 
 			public function wpEnqueueScripts() {
-				wp_enqueue_script( 'plyr' );
-				wp_enqueue_style( 'plyr' );
+				// wp_enqueue_script( 'plyr' );
+				// wp_enqueue_style( 'plyr' );
 			}
 
 			public function vpbpEnqueueBlockEditorAssets() {
-				wp_enqueue_script( 'plyr' );
-				wp_enqueue_style( 'plyr' );
+				// wp_enqueue_script( 'plyr' );
+				// wp_enqueue_style( 'plyr' );
 				wp_add_inline_style( 'wp-block-editor', '.dashicons-categories-icon,.dashicons.dashicons-media-video.categories-icon{color:#136EF5!important}' );
 
 				$disabled_blocks = get_option( 'vpbDisabledBlocks', [] );
@@ -94,15 +94,12 @@ function vpbp_bootstrap() {
 					'vpb-videojs-player-editor-script',
 					'vpb-vidstack-video-player-editor-script',
 					'vpb-video-gallery-editor-script',
-					'vpb-video-hero-editor-script',
 					'vpb-video-lightbox-editor-script',
 					'vpb-video-comparison-editor-script',
 					'vpb-video-testimonial-editor-script',
 					'vpb-video-playlist-editor-script',
 					'vpb-video-reels-editor-script',
-					'vpb-interactive-video-editor-script',
 					'vpb-video-transcript-editor-script',
-					'vpb-sticky-video-editor-script',
 				];
 				foreach ( $handles as $h ) {
 					if ( ! wp_script_is( $h, 'registered' ) ) continue;

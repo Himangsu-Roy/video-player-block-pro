@@ -52,3 +52,15 @@ export const getSplitWidths = (splitRatio, layout) => {
 	}
 	return { video: `${a}%`, transcript: `${b}%` };
 };
+
+/**
+ * Detect the video source type from a URL. YouTube and Vimeo links are
+ * recognised by their host patterns; everything else is treated as a direct /
+ * self-hosted URL. Used to drop the manual "Source Type" control — the source
+ * is inferred from the pasted Video URL instead.
+ */
+export const detectSource = (url = '') => {
+	if (/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)/i.test(url)) return 'youtube';
+	if (/vimeo\.com\/\d+/i.test(url)) return 'vimeo';
+	return 'url';
+};

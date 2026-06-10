@@ -93,10 +93,6 @@
       "type": "string",
       "default": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
     },
-    "videoEngine": {
-      "type": "string",
-      "default": "plyr"
-    },
     "modalSize": {
       "type": "string",
       "default": "large"
@@ -207,7 +203,7 @@
     },
     "captionColor": {
       "type": "string",
-      "default": "#ffffff"
+      "default": "#000000"
     },
     "triggerMaxWidth": {
       "type": "string",
@@ -233,8 +229,7 @@
   "example": {
     "attributes": {}
   },
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
+  "editorScript": "file:../index.js",
   "style": "file:./view.css",
   "render": "file:./render.php",
   "viewScript": "file:./view.js"

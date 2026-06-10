@@ -54,15 +54,6 @@ export const videoSourceOptions = [
   { label: "Vimeo", value: "vimeo" },
   { label: "MP4 / WebM", value: "mp4" },
   { label: "HLS (.m3u8)", value: "hls" },
-  { label: "Wistia", value: "wistia" },
-  { label: "Bunny Stream", value: "bunny" },
-];
-
-export const videoEngineOptions = [
-  { label: __("Plyr (default)", "video-player-block"), value: "plyr" },
-  { label: __("Video.js", "video-player-block"), value: "videojs" },
-  { label: __("Vidstack", "video-player-block"), value: "vidstack" },
-  { label: __("Native iframe", "video-player-block"), value: "nativeIframe" },
 ];
 
 export const modalSizeOptions = [
