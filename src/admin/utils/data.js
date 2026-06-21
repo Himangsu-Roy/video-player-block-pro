@@ -208,6 +208,11 @@ export const welcomeInfo = (adminUrl = "") => ({
 
   changelogs: [
     {
+      version: "2.0.1 - 22 Jun 26",
+      type: "fix",
+      list: ["<strong>Fix:</strong> UI Issue"],
+    },
+    {
       version: "2.0.0 - 10 Jun 26",
       type: "new",
       list: [

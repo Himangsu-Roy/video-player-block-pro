@@ -1,1 +1,1345 @@
-(()=>{"use strict";var e,t,o={},n={};function r(e){var t=n[e];if(void 0!==t)return t.exports;var a=n[e]={exports:{}};return o[e](a,a.exports,r),a.exports}r.m=o,r.d=(e,t)=>{for(var o in t)r.o(t,o)&&!r.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})},r.f={},r.e=e=>Promise.all(Object.keys(r.f).reduce(((t,o)=>(r.f[o](e,t),t)),[])),r.u=e=>e+".js?ver="+{303:"0c02b6de7ad88a71090e",945:"1da712603e7a401afe80"}[e],r.miniCssF=e=>{},r.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),e={},t="video-player-block:",r.l=(o,n,a,l)=>{if(e[o])e[o].push(n);else{var i,s;if(void 0!==a)for(var d=document.getElementsByTagName("script"),c=0;c<d.length;c++){var p=d[c];if(p.getAttribute("src")==o||p.getAttribute("data-webpack")==t+a){i=p;break}}i||(s=!0,(i=document.createElement("script")).charset="utf-8",r.nc&&i.setAttribute("nonce",r.nc),i.setAttribute("data-webpack",t+a),i.src=o),e[o]=[n];var u=(t,n)=>{i.onerror=i.onload=null,clearTimeout(v);var r=e[o];if(delete e[o],i.parentNode&&i.parentNode.removeChild(i),r&&r.forEach((e=>e(n))),t)return t(n)},v=setTimeout(u.bind(null,void 0,{type:"timeout",target:i}),12e4);i.onerror=u.bind(null,i.onerror),i.onload=u.bind(null,i.onload),s&&document.head.appendChild(i)}},r.r=e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},(()=>{var e;globalThis.importScripts&&(e=globalThis.location+"");var t=globalThis.document;if(!e&&t&&(t.currentScript&&"SCRIPT"===t.currentScript.tagName.toUpperCase()&&(e=t.currentScript.src),!e)){var o=t.getElementsByTagName("script");if(o.length)for(var n=o.length-1;n>-1&&(!e||!/^http(s?):/.test(e));)e=o[n--].src}if(!e)throw new Error("Automatic publicPath is not supported in this browser");e=e.replace(/^blob:/,"").replace(/#.*$/,"").replace(/\?.*$/,"").replace(/\/[^\/]+$/,"/"),r.p=e+"../../"})(),(()=>{var e={227:0};r.f.j=(t,o)=>{var n=r.o(e,t)?e[t]:void 0;if(0!==n)if(n)o.push(n[2]);else{var a=new Promise(((o,r)=>n=e[t]=[o,r]));o.push(n[2]=a);var l=r.p+r.u(t),i=new Error;r.l(l,(o=>{if(r.o(e,t)&&(0!==(n=e[t])&&(e[t]=void 0),n)){var a=o&&("load"===o.type?"missing":o.type),l=o&&o.target&&o.target.src;i.message="Loading chunk "+t+" failed.\n("+a+": "+l+")",i.name="ChunkLoadError",i.type=a,i.request=l,n[1](i)}}),"chunk-"+t,t)}};var t=(t,o)=>{var n,a,[l,i,s]=o,d=0;if(l.some((t=>0!==e[t]))){for(n in i)r.o(i,n)&&(r.m[n]=i[n]);s&&s(r)}for(t&&t(o);d<l.length;d++)a=l[d],r.o(e,a)&&e[a]&&e[a][0](),e[a]=0},o=globalThis.webpackChunkvideo_player_block=globalThis.webpackChunkvideo_player_block||[];o.forEach(t.bind(null,0)),o.push=t.bind(null,o.push.bind(o))})();const a=window.ReactDOM,l=window.React,i=e=>e&&"original"!==e?e.replace(":"," / "):null,s=e=>{if("undefined"==typeof document||!e)return"";const t=document.cookie.split("; ");for(const o of t){const[t,n]=o.split("=");if(t===e)return decodeURIComponent(n||"")}return""},d=(e,t,o=30)=>{if("undefined"==typeof document||!e)return;const n=new Date;n.setTime(n.getTime()+864e5*o),document.cookie=`${e}=${encodeURIComponent(t)}; expires=${n.toUTCString()}; path=/; SameSite=Lax`},c=window.ReactJSXRuntime,p=({attributes:e,id:t,inEditor:o=!1})=>{const{thumbnailAspectRatio:n="16:9",thumbnailBorderRadius:r=12,playIconSize:a=72,playIconColor:s="#ffffff",playIconBgColor:d="rgba(0,0,0,0.55)",thumbnailOverlayColor:p="rgba(0,0,0,0.15)",buttonBgColor:u="#136EF5",buttonTextColor:v="#ffffff",buttonBorderRadius:b=8,triggerMaxWidth:m="640px",modalSize:f="large",modalMaxWidth:h=1080,modalAspectRatio:y="16:9",modalBgColor:g="#000000",modalOverlayColor:w="#000000",modalOverlayOpacity:x=85,modalBorderRadius:k=10,captionColor:$="#000000"}=e,j=`#${t}`,S=i(n),E=i(y),C=((e,t)=>{switch(e){case"small":return"560px";case"medium":return"800px";case"large":default:return"1080px";case"fullscreen":return"100vw";case"custom":return`${t||1080}px`}})(f,h),N=`\n    ${j} .vpb-vl-wrap { max-width: ${m||"100%"}; }\n    ${j} .vpb-vl-thumb-wrap {\n      border-radius: ${r}px;\n      ${S?`aspect-ratio: ${S};`:""}\n    }\n    ${j} .vpb-vl-overlay { background: ${p}; }\n    ${j} .vpb-vl-play {\n      width: ${a}px;\n      height: ${a}px;\n      color: ${s};\n      background: ${d};\n    }\n    ${j} .vpb-vl-play--minimal { color: ${s}; }\n    ${j} .vpb-vl-btn {\n      background: ${u};\n      color: ${v};\n      border-radius: ${b}px;\n    }\n    ${j} .vpb-vl-btn.vpb-vl-btn--outline,\n    ${j} .vpb-vl-btn.vpb-vl-btn--ghost,\n    ${j} .vpb-vl-btn.vpb-vl-btn--underline { color: ${u}; }\n    ${j} .vpb-vl-caption { color: ${$}; }\n  `,T=`\n    /* Modal styles are scoped via a data attribute since the modal is\n       portaled to the document root, not nested inside the block.       */\n    [data-vpb-vl-modal="${t}"] .vpb-vl-modal-backdrop {\n      background: ${w};\n      opacity: ${Math.max(0,Math.min(100,x))/100};\n    }\n    [data-vpb-vl-modal="${t}"] .vpb-vl-modal-body {\n      max-width: ${C};\n      background: ${g};\n      border-radius: ${k}px;\n    }\n    [data-vpb-vl-modal="${t}"] .vpb-vl-modal-frame {\n      ${E?`aspect-ratio: ${E};`:"aspect-ratio: 16 / 9;"}\n    }\n  `,I=`vpb-vl-modal-instance-${t}`,R=(0,l.useRef)(null);(0,l.useEffect)((()=>{if(!o)return;const e=window.top?.document||window.document;e.getElementById(I)?.remove();const t=e.createElement("style");return t.id=I,t.textContent=T,e.head.appendChild(t),R.current=t,()=>{t.remove(),R.current=null}}),[o,T,I]);const O=`${N}\n${T}`;return(0,c.jsx)("style",{dangerouslySetInnerHTML:{__html:o?N:O}})},u=(0,c.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 24 24",width:"100%",height:"100%",fill:"currentColor","aria-hidden":"true",children:(0,c.jsx)("polygon",{points:"7,5 19,12 7,19"})}),v=(0,c.jsxs)("svg",{xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 24 24",width:"100%",height:"100%",fill:"none",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round",strokeLinejoin:"round","aria-hidden":"true",children:[(0,c.jsx)("line",{x1:"6",y1:"6",x2:"18",y2:"18"}),(0,c.jsx)("line",{x1:"6",y1:"18",x2:"18",y2:"6"})]}),b=({attributes:e,onOpen:t,a11yId:o})=>{const{triggerType:n="thumbnail",thumbnailImage:r={},buttonText:a="Watch video",buttonIcon:l="play",buttonStyle:i="filled",playIconStyle:s="circle",thumbnailHoverEffect:d="zoom",showDuration:p,durationText:v,showCaption:b,captionText:m,a11yLabel:f="Play video"}=e,h={"aria-label":f,"aria-haspopup":"dialog","aria-controls":o};if("button"===n)return(0,c.jsxs)("button",{type:"button",className:`vpb-vl-trigger vpb-vl-btn vpb-vl-btn--${i}`,onClick:t,...h,children:["play"===l&&(0,c.jsx)("span",{className:"vpb-vl-btn-icon","aria-hidden":"true",children:u}),(0,c.jsx)("span",{className:"vpb-vl-btn-label",children:a})]});if("playIcon"===n)return(0,c.jsx)("button",{type:"button",className:"vpb-vl-trigger vpb-vl-icon-trigger",onClick:t,...h,children:(0,c.jsx)("span",{className:`vpb-vl-play vpb-vl-play--${s}`,children:u})});const y=`vpb-vl-hover-${d||"none"}`;return(0,c.jsxs)(c.Fragment,{children:[(0,c.jsx)("button",{type:"button",className:`vpb-vl-trigger ${y}`,onClick:t,...h,children:(0,c.jsxs)("span",{className:"vpb-vl-thumb-wrap",children:[r?.url?(0,c.jsx)("img",{src:r.url,alt:r.alt||"",className:"vpb-vl-thumb",loading:"lazy"}):(0,c.jsx)("span",{className:"vpb-vl-thumb",style:{background:"#0a0a0a",display:"block"}}),(0,c.jsx)("span",{className:"vpb-vl-overlay","aria-hidden":"true"}),(0,c.jsx)("span",{className:`vpb-vl-play vpb-vl-play--${s}`,"aria-hidden":"true",children:u}),p&&v&&(0,c.jsx)("span",{className:"vpb-vl-duration",children:v})]})}),b&&m&&(0,c.jsx)("div",{className:"vpb-vl-meta",children:(0,c.jsx)("span",{className:"vpb-vl-caption",children:m})})]})},m=(0,l.forwardRef)((({src:e,sourceType:t,muted:o,children:n,...a},i)=>{const s=(0,l.useRef)(null);return(0,l.useImperativeHandle)(i,(()=>s.current),[]),(0,l.useEffect)((()=>{const e=s.current;e&&(e.muted=!!o)}),[o]),(0,l.useEffect)((()=>{const o=s.current;if(!o||!e)return;let n=!1,a=null,l=null;const i=(t||"").toLowerCase(),d="dash"===i||/\.mpd(\?|$)/i.test(e||""),c="hls"===i||/\.m3u8(\?|$)/i.test(e||"");return d?r.e(303).then(r.bind(r,303)).then((t=>{if(n||!s.current)return;const r=t.default||t;l=r.MediaPlayer().create(),l.initialize(o,e,!!o.autoplay)})).catch((()=>{o.src=e})):c&&!o.canPlayType("application/vnd.apple.mpegurl")?r.e(945).then(r.bind(r,4945)).then((t=>{if(n||!s.current)return;const r=t.default||t;r.isSupported()?(a=new r,a.loadSource(e),a.attachMedia(o),o.autoplay&&a.on(r.Events.MANIFEST_PARSED,(()=>{o.play().catch((()=>{}))}))):o.src=e})).catch((()=>{o.src=e})):o.src=e,()=>{if(n=!0,a)try{a.destroy()}catch(e){}if(l)try{l.reset()}catch(e){}}}),[e,t]),(0,c.jsx)("video",{ref:s,...a,children:n})}));m.displayName="AdaptiveVideo";const f=m,h="vpb-vl-modal-editor-styles",y=({attributes:e,blockId:t,onClose:o,inEditor:n=!1})=>{const{videoUrl:r,videoSource:i="youtube",modalTheme:s="dark",modalAnimation:d="fade",modalSize:p="large",autoplayOnOpen:u=!0,muteOnOpen:b=!1,loopVideo:m=!1,closeOnOverlayClick:y=!0,closeOnEsc:g=!0,showCloseButton:w=!0,closeButtonStyle:x="circle",a11yModalLabel:k="Video player dialog"}=e,$=(0,l.useRef)(null),[j,S]=(0,l.useState)(null);if((0,l.useEffect)((()=>{if(n){(()=>{const e=window.top?.document||window.document;if(e.getElementById(h))return;const t=e.createElement("style");t.id=h,t.textContent='\n    .vpb-vl-modal {\n      position: fixed;\n      inset: 0;\n      z-index: 100000;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      padding: 24px;\n      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;\n    }\n    .vpb-vl-modal--anim-fade { animation: vpbVlFade 0.2s ease-out; }\n    .vpb-vl-modal--anim-scale .vpb-vl-modal-body { animation: vpbVlScale 0.22s cubic-bezier(0.2,0.8,0.2,1); }\n    .vpb-vl-modal--anim-slide .vpb-vl-modal-body { animation: vpbVlSlide 0.28s cubic-bezier(0.2,0.8,0.2,1); }\n    @keyframes vpbVlFade { from { opacity: 0; } to { opacity: 1; } }\n    @keyframes vpbVlScale { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }\n    @keyframes vpbVlSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }\n    .vpb-vl-modal-backdrop { position: absolute; inset: 0; }\n    .vpb-vl-modal-body {\n      position: relative;\n      width: 100%;\n      max-height: calc(100vh - 48px);\n      overflow: hidden;\n      box-shadow: 0 40px 80px rgba(0,0,0,0.6);\n      z-index: 1;\n    }\n    .vpb-vl-modal--theme-dark .vpb-vl-modal-body { background: #000; color: #fff; }\n    .vpb-vl-modal--theme-light .vpb-vl-modal-body { background: #fff; color: #111; }\n    .vpb-vl-modal--theme-glass .vpb-vl-modal-body {\n      background: rgba(20,20,20,0.55); color: #fff;\n      backdrop-filter: blur(18px) saturate(180%);\n      -webkit-backdrop-filter: blur(18px) saturate(180%);\n      border: 1px solid rgba(255,255,255,0.08);\n    }\n    .vpb-vl-modal--size-fullscreen .vpb-vl-modal-body {\n      width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0 !important;\n    }\n    .vpb-vl-modal-frame {\n      position: relative; width: 100%;\n    }\n    .vpb-vl-modal-frame > iframe,\n    .vpb-vl-modal-frame > video {\n      position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000;\n    }\n    .vpb-vl-modal--size-fullscreen .vpb-vl-modal-frame { aspect-ratio: auto !important; height: 100%; }\n    .vpb-vl-close {\n      position: absolute; top: 10px; right: 10px; z-index: 5;\n      background: rgba(255,255,255,0.16); color: #fff; border: 0;\n      cursor: pointer; display: inline-flex; align-items: center; justify-content: center;\n      transition: background 0.15s ease, transform 0.15s ease;\n    }\n    .vpb-vl-close:hover { background: rgba(255,255,255,0.28); transform: rotate(90deg); }\n    .vpb-vl-close--circle { width: 38px; height: 38px; border-radius: 50%; padding: 9px; }\n    .vpb-vl-close--square { width: 38px; height: 38px; border-radius: 4px; padding: 9px; }\n    .vpb-vl-close--minimal { background: transparent; width: 32px; height: 32px; padding: 4px; }\n    .vpb-vl-modal--theme-light .vpb-vl-close { background: rgba(0,0,0,0.08); color: #111; }\n    .vpb-vl-modal--theme-light .vpb-vl-close:hover { background: rgba(0,0,0,0.16); }\n    .vpb-vl-modal-empty { padding: 64px 24px; text-align: center; color: inherit; opacity: 0.85; }\n  ',e.head.appendChild(t)})();const e=window.top?.document?.body||document.body;S(e)}else S(document.body);return()=>{n&&(()=>{const e=window.top?.document||window.document;e.getElementById(h)?.remove()})()}}),[n]),(0,l.useEffect)((()=>{if(!g)return;const e=n&&window.top?.document||document,t=e=>{"Escape"===e.key&&o?.()};e.addEventListener("keydown",t);const r=document.body.style.overflow;let a;return document.body.style.overflow="hidden",n&&window.top?.document?.body&&(a=window.top.document.body.style.overflow,window.top.document.body.style.overflow="hidden"),$.current?.focus?.(),()=>{e.removeEventListener("keydown",t),document.body.style.overflow=r,n&&window.top?.document?.body&&void 0!==a&&(window.top.document.body.style.overflow=a)}}),[g,o,n]),"undefined"==typeof document||!j)return null;const E=(0,c.jsxs)("div",{"data-vpb-vl-modal":t,className:`vpb-vl-modal vpb-vl-modal--theme-${s} vpb-vl-modal--size-${p} vpb-vl-modal--anim-${d}`,role:"dialog","aria-modal":"true","aria-label":k,ref:$,tabIndex:"-1",children:[(0,c.jsx)("div",{className:"vpb-vl-modal-backdrop",onClick:y?o:void 0,"aria-hidden":"true"}),(0,c.jsxs)("div",{className:"vpb-vl-modal-body",children:[w&&(0,c.jsx)("button",{type:"button",className:`vpb-vl-close vpb-vl-close--${x}`,onClick:o,"aria-label":"Close video",children:v}),(()=>{if(!r)return(0,c.jsx)("div",{className:"vpb-vl-modal-empty",children:"No video URL configured."});const e=(()=>{const e=i;if("youtube"===e||(t=r)&&/(?:youtube\.com|youtu\.be)/i.test(t)){const e=(e=>{if(!e)return"";const t=e.match(/(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);return t?t[1]:""})(r);if(!e)return null;const t=new URLSearchParams({autoplay:u?"1":"0",mute:b?"1":"0",loop:m?"1":"0",rel:"0",modestbranding:"1"});return m&&t.set("playlist",e),`https://www.youtube.com/embed/${e}?${t.toString()}`}var t;if("vimeo"===e||(e=>!!e&&/vimeo\.com/i.test(e))(r)){const e=(e=>{if(!e)return"";const t=e.match(/vimeo\.com\/(?:.*#|.*\/videos?\/)?([0-9]+)/i);return t?t[1]:""})(r);return e?`https://player.vimeo.com/video/${e}?${new URLSearchParams({autoplay:u?"1":"0",muted:b?"1":"0",loop:m?"1":"0",title:"0",byline:"0",portrait:"0"}).toString()}`:null}if("wistia"===e||(e=>!!e&&/(?:wistia\.com|wi\.st)/i.test(e))(r)){const e=(e=>{if(!e)return"";const t=e.match(/wistia\.(?:com|net)\/(?:medias|embed\/iframe)\/([a-zA-Z0-9]+)/);if(t)return t[1];const o=e.match(/wi\.st\/medias\/([a-zA-Z0-9]+)/);return o?o[1]:""})(r);return e?`https://fast.wistia.net/embed/iframe/${e}?${new URLSearchParams({autoPlay:u?"true":"false",muted:b?"true":"false"}).toString()}`:null}return null})();if(e){const t="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";return(0,c.jsx)("div",{className:"vpb-vl-modal-frame",children:(0,c.jsx)("iframe",{src:e,title:k,allow:t,allowFullScreen:!0,loading:"eager"})})}return(0,c.jsx)("div",{className:"vpb-vl-modal-frame",children:(0,c.jsx)(f,{src:r,sourceType:i,controls:!0,autoPlay:!!u,muted:!!b,loop:!!m,playsInline:!0,children:(0,c.jsx)("track",{kind:"captions"})})})})()]})]});return(0,a.createPortal)(E,j)},g=({attributes:e,blockId:t,inEditor:o=!1})=>{const{alignment:n="center",openTrigger:r="click",openDelaySeconds:a=5,urlHashKey:i="",cookieKey:p=""}=e,[u,v]=(0,l.useState)(!1),m=(0,l.useId)(),f=t||`vpb-vl-${m.replace(/[:]/g,"")}`,h=(0,l.useRef)(f),g=`${f}-dialog`;return(0,l.useEffect)((()=>{if(o)return;if("undefined"==typeof window)return;const e=()=>{if(!i)return!1;const e=(window.location.hash||"").replace(/^#/,"");if(e===i)return!0;const[t,o]=e.split("=");return"watch"===t&&o===i};if("urlHash"===r||i){e()&&v(!0);const t=()=>{e()&&v(!0)};return window.addEventListener("hashchange",t),()=>window.removeEventListener("hashchange",t)}}),[o,i,r]),(0,l.useEffect)((()=>{if(o)return;if("autoDelay"!==r)return;if(p&&s(p))return;const e=1e3*Math.max(0,Number(a)||0),t=setTimeout((()=>{v(!0),p&&d(p,"1")}),e);return()=>clearTimeout(t)}),[o,r,a,p]),(0,l.useEffect)((()=>{if(o)return;if("exitIntent"!==r)return;if("undefined"==typeof document)return;if(p&&s(p))return;let e=!0;const t=t=>{e&&t.clientY<=0&&(e=!1,v(!0),p&&d(p,"1"))};return document.addEventListener("mouseout",t),()=>document.removeEventListener("mouseout",t)}),[o,r,p]),(0,c.jsxs)("div",{className:`vpb-vl-align-${n}`,children:[(0,c.jsx)("div",{className:"vpb-vl-wrap",style:{position:"relative"},children:(0,c.jsx)(b,{attributes:e,onOpen:()=>v(!0),a11yId:g})}),u&&(0,c.jsx)(y,{attributes:e,blockId:h.current,onClose:()=>v(!1),inEditor:o})]})};document.addEventListener("DOMContentLoaded",(()=>{document.querySelectorAll(".wp-block-vpb-video-lightbox").forEach((e=>{let t;try{t=JSON.parse(e.dataset.attributes||"{}")}catch(e){t={}}(0,a.createRoot)(e).render((0,c.jsxs)(c.Fragment,{children:[(0,c.jsx)(p,{attributes:t,id:e.id}),(0,c.jsx)(g,{attributes:t,blockId:e.id})]})),e?.removeAttribute("data-attributes")}))}))})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/blocks/_shared/media/AdaptiveVideo.js"
+/*!***************************************************!*\
+  !*** ./src/blocks/_shared/media/AdaptiveVideo.js ***!
+  \***************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * A native <video> that transparently plays adaptive streams:
+ *   - DASH (.mpd)  -> dash.js
+ *   - HLS  (.m3u8) -> native on Safari, otherwise hls.js
+ *   - mp4/webm     -> plain native playback
+ *
+ * Both libraries are loaded with dynamic import() so they are code-split and
+ * only fetched when a DASH/HLS source actually plays. Any standard <video>
+ * prop (controls, autoPlay, muted, loop, poster, className, style, event
+ * handlers, children such as <track>) is passed straight through, and the
+ * underlying element ref is forwarded so callers can drive play state.
+ *
+ * NOTE: `src` is handled imperatively (not rendered as an attribute) so the
+ * adaptive libraries can attach cleanly.
+ */
+
+const isHlsUrl = u => /\.m3u8(\?|$)/i.test(u || "");
+const isDashUrl = u => /\.mpd(\?|$)/i.test(u || "");
+const AdaptiveVideo = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(({
+  src,
+  sourceType,
+  muted,
+  children,
+  ...rest
+}, ref) => {
+  const innerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle)(ref, () => innerRef.current, []);
+
+  // React only sets the `muted` HTML attribute, not the DOM property, but
+  // browsers consult the property when enforcing autoplay policy. Setting it
+  // imperatively keeps muted autoplay (and mute toggles) working reliably.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const el = innerRef.current;
+    if (el) el.muted = !!muted;
+  }, [muted]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const el = innerRef.current;
+    if (!el || !src) return undefined;
+    let destroyed = false;
+    let hls = null;
+    let dash = null;
+    const type = (sourceType || "").toLowerCase();
+    const wantDash = type === "dash" || isDashUrl(src);
+    const wantHls = type === "hls" || isHlsUrl(src);
+    if (wantDash) {
+      __webpack_require__.e(/*! import() */ "vendors-node_modules_dashjs_dist_modern_esm_dash_all_min_js").then(__webpack_require__.bind(__webpack_require__, /*! dashjs */ "./node_modules/dashjs/dist/modern/esm/dash.all.min.js")).then(mod => {
+        if (destroyed || !innerRef.current) return;
+        const dashjs = mod.default || mod;
+        dash = dashjs.MediaPlayer().create();
+        dash.initialize(el, src, !!el.autoplay);
+      }).catch(() => {
+        el.src = src;
+      });
+    } else if (wantHls && !el.canPlayType("application/vnd.apple.mpegurl")) {
+      __webpack_require__.e(/*! import() */ "vendors-node_modules_hls_js_dist_hls_mjs").then(__webpack_require__.bind(__webpack_require__, /*! hls.js */ "./node_modules/hls.js/dist/hls.mjs")).then(mod => {
+        if (destroyed || !innerRef.current) return;
+        const Hls = mod.default || mod;
+        if (Hls.isSupported()) {
+          hls = new Hls();
+          hls.loadSource(src);
+          hls.attachMedia(el);
+          if (el.autoplay) {
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+              el.play().catch(() => {});
+            });
+          }
+        } else {
+          el.src = src;
+        }
+      }).catch(() => {
+        el.src = src;
+      });
+    } else {
+      el.src = src;
+    }
+    return () => {
+      destroyed = true;
+      if (hls) {
+        try {
+          hls.destroy();
+        } catch (_) {
+          /* ignore */
+        }
+      }
+      if (dash) {
+        try {
+          dash.reset();
+        } catch (_) {
+          /* ignore */
+        }
+      }
+    };
+  }, [src, sourceType]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("video", {
+    ref: innerRef,
+    ...rest,
+    children: children
+  });
+});
+AdaptiveVideo.displayName = "AdaptiveVideo";
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AdaptiveVideo);
+
+/***/ },
+
+/***/ "./src/blocks/video-lightbox/Components/Common/Lightbox.js"
+/*!*****************************************************************!*\
+  !*** ./src/blocks/video-lightbox/Components/Common/Lightbox.js ***!
+  \*****************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Trigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Trigger */ "./src/blocks/video-lightbox/Components/Common/Trigger.js");
+/* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal */ "./src/blocks/video-lightbox/Components/Common/Modal.js");
+/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/functions */ "./src/blocks/video-lightbox/utils/functions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+/**
+ * Top-level wrapper for the Video Lightbox.
+ *
+ * Owns: open/close state, all auto-open triggers (delay / exit-intent /
+ * url hash), cookie gating, and the deep-link contract.
+ *
+ * The actual modal markup is built only when `open === true`, which keeps
+ * the initial DOM (and the player iframe) cost down to whatever the
+ * trigger renders.
+ */
+
+const Lightbox = ({
+  attributes,
+  blockId,
+  inEditor = false
+}) => {
+  const {
+    alignment = "center",
+    openTrigger = "click",
+    openDelaySeconds = 5,
+    urlHashKey = "",
+    cookieKey = ""
+  } = attributes;
+  const [open, setOpen] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const fallbackId = (0,react__WEBPACK_IMPORTED_MODULE_0__.useId)();
+  // The frontend mount passes the rendered wrapper id (e.g. "vpbVideoLightbox-1");
+  // the editor preview can fall back to the React-generated useId.
+  const effectiveId = blockId || `vpb-vl-${fallbackId.replace(/[:]/g, "")}`;
+  const blockIdRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(effectiveId);
+  const dialogId = `${effectiveId}-dialog`;
+
+  // Honour URL-hash deep links (#<urlHashKey> auto-opens the modal).
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (inEditor) return undefined;
+    if (typeof window === "undefined") return undefined;
+    const matchesHash = () => {
+      if (!urlHashKey) return false;
+      const h = (window.location.hash || "").replace(/^#/, "");
+      // Support both `#watch=hero` and `#hero` shorthand.
+      if (h === urlHashKey) return true;
+      const [k, v] = h.split("=");
+      return k === "watch" && v === urlHashKey;
+    };
+    if (openTrigger === "urlHash" || urlHashKey) {
+      if (matchesHash()) setOpen(true);
+      const onHash = () => {
+        if (matchesHash()) setOpen(true);
+      };
+      window.addEventListener("hashchange", onHash);
+      return () => window.removeEventListener("hashchange", onHash);
+    }
+    return undefined;
+  }, [inEditor, urlHashKey, openTrigger]);
+
+  // Honour the auto-open-after-delay trigger.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (inEditor) return undefined;
+    if (openTrigger !== "autoDelay") return undefined;
+    if (cookieKey && (0,_utils_functions__WEBPACK_IMPORTED_MODULE_3__.readCookie)(cookieKey)) return undefined;
+    const ms = Math.max(0, Number(openDelaySeconds) || 0) * 1000;
+    const t = setTimeout(() => {
+      setOpen(true);
+      if (cookieKey) (0,_utils_functions__WEBPACK_IMPORTED_MODULE_3__.writeCookie)(cookieKey, "1");
+    }, ms);
+    return () => clearTimeout(t);
+  }, [inEditor, openTrigger, openDelaySeconds, cookieKey]);
+
+  // Honour the exit-intent trigger (mouse leaves the viewport top).
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (inEditor) return undefined;
+    if (openTrigger !== "exitIntent") return undefined;
+    if (typeof document === "undefined") return undefined;
+    if (cookieKey && (0,_utils_functions__WEBPACK_IMPORTED_MODULE_3__.readCookie)(cookieKey)) return undefined;
+    let armed = true;
+    const onLeave = e => {
+      if (!armed) return;
+      // Only fire when the cursor crosses the top of the viewport.
+      if (e.clientY <= 0) {
+        armed = false;
+        setOpen(true);
+        if (cookieKey) (0,_utils_functions__WEBPACK_IMPORTED_MODULE_3__.writeCookie)(cookieKey, "1");
+      }
+    };
+    document.addEventListener("mouseout", onLeave);
+    return () => document.removeEventListener("mouseout", onLeave);
+  }, [inEditor, openTrigger, cookieKey]);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    className: `vpb-vl-align-${alignment}`,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "vpb-vl-wrap",
+      style: {
+        position: "relative"
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Trigger__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        attributes: attributes,
+        onOpen: handleOpen,
+        a11yId: dialogId
+      })
+    }), open && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      attributes: attributes,
+      blockId: blockIdRef.current,
+      onClose: handleClose,
+      inEditor: inEditor
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Lightbox);
+
+/***/ },
+
+/***/ "./src/blocks/video-lightbox/Components/Common/Modal.js"
+/*!**************************************************************!*\
+  !*** ./src/blocks/video-lightbox/Components/Common/Modal.js ***!
+  \**************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom/client");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/functions */ "./src/blocks/video-lightbox/utils/functions.js");
+/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/icons */ "./src/blocks/video-lightbox/utils/icons.js");
+/* harmony import */ var _shared_media_AdaptiveVideo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../_shared/media/AdaptiveVideo */ "./src/blocks/_shared/media/AdaptiveVideo.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+/**
+ * Inline CSS injected into the top-level admin window when the lightbox modal
+ * is open inside the block editor. We portal the modal there so it isn't
+ * confined to the editor iframe, and this ensures the styles travel with it.
+ */
+
+const MODAL_STYLES_ID = "vpb-vl-modal-editor-styles";
+const injectTopWindowStyles = () => {
+  const topDoc = window.top?.document || window.document;
+  if (topDoc.getElementById(MODAL_STYLES_ID)) return;
+  const style = topDoc.createElement("style");
+  style.id = MODAL_STYLES_ID;
+  style.textContent = `
+    .vpb-vl-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .vpb-vl-modal--anim-fade { animation: vpbVlFade 0.2s ease-out; }
+    .vpb-vl-modal--anim-scale .vpb-vl-modal-body { animation: vpbVlScale 0.22s cubic-bezier(0.2,0.8,0.2,1); }
+    .vpb-vl-modal--anim-slide .vpb-vl-modal-body { animation: vpbVlSlide 0.28s cubic-bezier(0.2,0.8,0.2,1); }
+    @keyframes vpbVlFade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes vpbVlScale { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+    @keyframes vpbVlSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .vpb-vl-modal-backdrop { position: absolute; inset: 0; }
+    .vpb-vl-modal-body {
+      position: relative;
+      width: 100%;
+      max-height: calc(100vh - 48px);
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+      z-index: 1;
+    }
+    .vpb-vl-modal--theme-dark .vpb-vl-modal-body { background: #000; color: #fff; }
+    .vpb-vl-modal--theme-light .vpb-vl-modal-body { background: #fff; color: #111; }
+    .vpb-vl-modal--theme-glass .vpb-vl-modal-body {
+      background: rgba(20,20,20,0.55); color: #fff;
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .vpb-vl-modal--size-fullscreen .vpb-vl-modal-body {
+      width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0 !important;
+    }
+    .vpb-vl-modal-frame {
+      position: relative; width: 100%;
+    }
+    .vpb-vl-modal-frame > iframe,
+    .vpb-vl-modal-frame > video {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000;
+    }
+    .vpb-vl-modal--size-fullscreen .vpb-vl-modal-frame { aspect-ratio: auto !important; height: 100%; }
+    .vpb-vl-close {
+      position: absolute; top: 10px; right: 10px; z-index: 5;
+      background: rgba(255,255,255,0.16); color: #fff; border: 0;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .vpb-vl-close:hover { background: rgba(255,255,255,0.28); transform: rotate(90deg); }
+    .vpb-vl-close--circle { width: 38px; height: 38px; border-radius: 50%; padding: 9px; }
+    .vpb-vl-close--square { width: 38px; height: 38px; border-radius: 4px; padding: 9px; }
+    .vpb-vl-close--minimal { background: transparent; width: 32px; height: 32px; padding: 4px; }
+    .vpb-vl-modal--theme-light .vpb-vl-close { background: rgba(0,0,0,0.08); color: #111; }
+    .vpb-vl-modal--theme-light .vpb-vl-close:hover { background: rgba(0,0,0,0.16); }
+    .vpb-vl-modal-empty { padding: 64px 24px; text-align: center; color: inherit; opacity: 0.85; }
+  `;
+  topDoc.head.appendChild(style);
+};
+const removeTopWindowStyles = () => {
+  const topDoc = window.top?.document || window.document;
+  topDoc.getElementById(MODAL_STYLES_ID)?.remove();
+};
+
+/**
+ * The lightbox modal. Lazy: we build the player <iframe> / <video> only
+ * once the modal mounts, so nothing heavy ships on the initial page load.
+ *
+ * In the editor the modal is portaled to the top-level admin window so it
+ * renders above the editor iframe. On the frontend it portals to the
+ * current document body as usual.
+ */
+const Modal = ({
+  attributes,
+  blockId,
+  onClose,
+  inEditor = false
+}) => {
+  const {
+    videoUrl,
+    videoSource = "youtube",
+    modalTheme = "dark",
+    modalAnimation = "fade",
+    modalSize = "large",
+    autoplayOnOpen = true,
+    muteOnOpen = false,
+    loopVideo = false,
+    closeOnOverlayClick = true,
+    closeOnEsc = true,
+    showCloseButton = true,
+    closeButtonStyle = "circle",
+    a11yModalLabel = "Video player dialog"
+  } = attributes;
+  const dialogRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const [portalTarget, setPortalTarget] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+
+  // Determine portal target: top window body for editor, current body for frontend.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (inEditor) {
+      injectTopWindowStyles();
+      const topBody = window.top?.document?.body || document.body;
+      setPortalTarget(topBody);
+    } else {
+      setPortalTarget(document.body);
+    }
+    return () => {
+      if (inEditor) removeTopWindowStyles();
+    };
+  }, [inEditor]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!closeOnEsc) return undefined;
+
+    // In the editor, listen on the top window so Escape works even when
+    // focus is on the top-window-portaled modal.
+    const targetDoc = inEditor ? window.top?.document || document : document;
+    const onKey = e => {
+      if (e.key === "Escape") onClose?.();
+    };
+    targetDoc.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    // Also lock the top window scroll in the editor.
+    let prevTopOverflow;
+    if (inEditor && window.top?.document?.body) {
+      prevTopOverflow = window.top.document.body.style.overflow;
+      window.top.document.body.style.overflow = "hidden";
+    }
+
+    // Focus the dialog so SR users hear the dialog label.
+    dialogRef.current?.focus?.();
+    return () => {
+      targetDoc.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+      if (inEditor && window.top?.document?.body && prevTopOverflow !== undefined) {
+        window.top.document.body.style.overflow = prevTopOverflow;
+      }
+    };
+  }, [closeOnEsc, onClose, inEditor]);
+  if (typeof document === "undefined" || !portalTarget) return null;
+  const buildIframeSrc = () => {
+    const src = videoSource;
+    if (src === "youtube" || (0,_utils_functions__WEBPACK_IMPORTED_MODULE_2__.isYoutube)(videoUrl)) {
+      const id = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_2__.getYoutubeId)(videoUrl);
+      if (!id) return null;
+      const params = new URLSearchParams({
+        autoplay: autoplayOnOpen ? "1" : "0",
+        mute: muteOnOpen ? "1" : "0",
+        loop: loopVideo ? "1" : "0",
+        rel: "0",
+        modestbranding: "1"
+      });
+      if (loopVideo) params.set("playlist", id);
+      return `https://www.youtube.com/embed/${id}?${params.toString()}`;
+    }
+    if (src === "vimeo" || (0,_utils_functions__WEBPACK_IMPORTED_MODULE_2__.isVimeo)(videoUrl)) {
+      const id = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_2__.getVimeoId)(videoUrl);
+      if (!id) return null;
+      const params = new URLSearchParams({
+        autoplay: autoplayOnOpen ? "1" : "0",
+        muted: muteOnOpen ? "1" : "0",
+        loop: loopVideo ? "1" : "0",
+        title: "0",
+        byline: "0",
+        portrait: "0"
+      });
+      return `https://player.vimeo.com/video/${id}?${params.toString()}`;
+    }
+    if (src === "wistia" || (0,_utils_functions__WEBPACK_IMPORTED_MODULE_2__.isWistia)(videoUrl)) {
+      const id = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_2__.getWistiaId)(videoUrl);
+      if (!id) return null;
+      const params = new URLSearchParams({
+        autoPlay: autoplayOnOpen ? "true" : "false",
+        muted: muteOnOpen ? "true" : "false"
+      });
+      return `https://fast.wistia.net/embed/iframe/${id}?${params.toString()}`;
+    }
+    return null;
+  };
+  const renderPlayer = () => {
+    if (!videoUrl) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: "vpb-vl-modal-empty",
+        children: "No video URL configured."
+      });
+    }
+    const iframeSrc = buildIframeSrc();
+    if (iframeSrc) {
+      const allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
+
+      // In the editor the modal is already portaled to the top window, so
+      // we can render the iframe directly — no need for EditorEmbedPortal.
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: "vpb-vl-modal-frame",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("iframe", {
+          src: iframeSrc,
+          title: a11yModalLabel,
+          allow: allow,
+          allowFullScreen: true,
+          loading: "eager"
+        })
+      });
+    }
+
+    // Native / HLS / DASH / Bunny / MP4
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "vpb-vl-modal-frame",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_shared_media_AdaptiveVideo__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        src: videoUrl,
+        sourceType: videoSource,
+        controls: true,
+        autoPlay: !!autoplayOnOpen,
+        muted: !!muteOnOpen,
+        loop: !!loopVideo,
+        playsInline: true,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("track", {
+          kind: "captions"
+        })
+      })
+    });
+  };
+  const node = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    "data-vpb-vl-modal": blockId,
+    className: `vpb-vl-modal vpb-vl-modal--theme-${modalTheme} vpb-vl-modal--size-${modalSize} vpb-vl-modal--anim-${modalAnimation}`,
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": a11yModalLabel,
+    ref: dialogRef,
+    tabIndex: "-1",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "vpb-vl-modal-backdrop",
+      onClick: closeOnOverlayClick ? onClose : undefined,
+      "aria-hidden": "true"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "vpb-vl-modal-body",
+      children: [showCloseButton && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+        type: "button",
+        className: `vpb-vl-close vpb-vl-close--${closeButtonStyle}`,
+        onClick: onClose,
+        "aria-label": "Close video",
+        children: _utils_icons__WEBPACK_IMPORTED_MODULE_3__.closeIcon
+      }), renderPlayer()]
+    })]
+  });
+  return (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.createPortal)(node, portalTarget);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Modal);
+
+/***/ },
+
+/***/ "./src/blocks/video-lightbox/Components/Common/Style.js"
+/*!**************************************************************!*\
+  !*** ./src/blocks/video-lightbox/Components/Common/Style.js ***!
+  \**************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/functions */ "./src/blocks/video-lightbox/utils/functions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+/**
+ * Per-instance CSS custom properties + rules. Inlined as a scoped <style>
+ * tag so the same logic works in the editor preview and on the frontend.
+ *
+ * When `inEditor` is true, the modal-specific rules are also injected into
+ * the top-level admin window (since the modal is portaled there).
+ */
+
+const Style = ({
+  attributes,
+  id,
+  inEditor = false
+}) => {
+  const {
+    thumbnailAspectRatio = "16:9",
+    thumbnailBorderRadius = 12,
+    playIconSize = 72,
+    playIconColor = "#ffffff",
+    playIconBgColor = "rgba(0,0,0,0.55)",
+    thumbnailOverlayColor = "rgba(0,0,0,0.15)",
+    buttonBgColor = "#136EF5",
+    buttonTextColor = "#ffffff",
+    buttonBorderRadius = 8,
+    triggerMaxWidth = "640px",
+    modalSize = "large",
+    modalMaxWidth = 1080,
+    modalAspectRatio = "16:9",
+    modalBgColor = "#000000",
+    modalOverlayColor = "#000000",
+    modalOverlayOpacity = 85,
+    modalBorderRadius = 10,
+    captionColor = "#000000"
+  } = attributes;
+  const sel = `#${id}`;
+  const thumbAr = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_1__.aspectToCss)(thumbnailAspectRatio);
+  const modalAr = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_1__.aspectToCss)(modalAspectRatio);
+  const maxW = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_1__.resolveModalMaxWidth)(modalSize, modalMaxWidth);
+
+  // Convert percent opacity to 0-1 with two decimal precision.
+  const overlayAlpha = Math.max(0, Math.min(100, modalOverlayOpacity)) / 100;
+  const triggerCss = `
+    ${sel} .vpb-vl-wrap { max-width: ${triggerMaxWidth || "100%"}; }
+    ${sel} .vpb-vl-thumb-wrap {
+      border-radius: ${thumbnailBorderRadius}px;
+      ${thumbAr ? `aspect-ratio: ${thumbAr};` : ""}
+    }
+    ${sel} .vpb-vl-overlay { background: ${thumbnailOverlayColor}; }
+    ${sel} .vpb-vl-play {
+      width: ${playIconSize}px;
+      height: ${playIconSize}px;
+      color: ${playIconColor};
+      background: ${playIconBgColor};
+    }
+    ${sel} .vpb-vl-play--minimal { color: ${playIconColor}; }
+    ${sel} .vpb-vl-btn {
+      background: ${buttonBgColor};
+      color: ${buttonTextColor};
+      border-radius: ${buttonBorderRadius}px;
+    }
+    ${sel} .vpb-vl-btn.vpb-vl-btn--outline,
+    ${sel} .vpb-vl-btn.vpb-vl-btn--ghost,
+    ${sel} .vpb-vl-btn.vpb-vl-btn--underline { color: ${buttonBgColor}; }
+    ${sel} .vpb-vl-caption { color: ${captionColor}; }
+  `;
+  const modalCss = `
+    /* Modal styles are scoped via a data attribute since the modal is
+       portaled to the document root, not nested inside the block.       */
+    [data-vpb-vl-modal="${id}"] .vpb-vl-modal-backdrop {
+      background: ${modalOverlayColor};
+      opacity: ${overlayAlpha};
+    }
+    [data-vpb-vl-modal="${id}"] .vpb-vl-modal-body {
+      max-width: ${maxW};
+      background: ${modalBgColor};
+      border-radius: ${modalBorderRadius}px;
+    }
+    [data-vpb-vl-modal="${id}"] .vpb-vl-modal-frame {
+      ${modalAr ? `aspect-ratio: ${modalAr};` : "aspect-ratio: 16 / 9;"}
+    }
+  `;
+  const styleId = `vpb-vl-modal-instance-${id}`;
+  const prevStyleRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
+  // In the editor the modal is portaled to the top window, so the
+  // per-instance modal CSS must also live there.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!inEditor) return undefined;
+    const topDoc = window.top?.document || window.document;
+
+    // Remove any previous version of this style.
+    topDoc.getElementById(styleId)?.remove();
+    const el = topDoc.createElement("style");
+    el.id = styleId;
+    el.textContent = modalCss;
+    topDoc.head.appendChild(el);
+    prevStyleRef.current = el;
+    return () => {
+      el.remove();
+      prevStyleRef.current = null;
+    };
+  }, [inEditor, modalCss, styleId]);
+
+  // On the frontend the full CSS (trigger + modal) lives inline.
+  const fullCss = `${triggerCss}\n${modalCss}`;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("style", {
+    dangerouslySetInnerHTML: {
+      __html: inEditor ? triggerCss : fullCss
+    }
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Style);
+
+/***/ },
+
+/***/ "./src/blocks/video-lightbox/Components/Common/Trigger.js"
+/*!****************************************************************!*\
+  !*** ./src/blocks/video-lightbox/Components/Common/Trigger.js ***!
+  \****************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/icons */ "./src/blocks/video-lightbox/utils/icons.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * Renders the visible "click to open" surface (thumbnail / button / icon).
+ * The actual modal mount is owned by <Lightbox>.
+ */
+
+const Trigger = ({
+  attributes,
+  onOpen,
+  a11yId
+}) => {
+  const {
+    triggerType = "thumbnail",
+    thumbnailImage = {},
+    buttonText = "Watch video",
+    buttonIcon = "play",
+    buttonStyle = "filled",
+    playIconStyle = "circle",
+    thumbnailHoverEffect = "zoom",
+    showDuration,
+    durationText,
+    showCaption,
+    captionText,
+    a11yLabel = "Play video"
+  } = attributes;
+  const baseAria = {
+    "aria-label": a11yLabel,
+    "aria-haspopup": "dialog",
+    "aria-controls": a11yId
+  };
+  if (triggerType === "button") {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+      type: "button",
+      className: `vpb-vl-trigger vpb-vl-btn vpb-vl-btn--${buttonStyle}`,
+      onClick: onOpen,
+      ...baseAria,
+      children: [buttonIcon === "play" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "vpb-vl-btn-icon",
+        "aria-hidden": "true",
+        children: _utils_icons__WEBPACK_IMPORTED_MODULE_0__.playIcon
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "vpb-vl-btn-label",
+        children: buttonText
+      })]
+    });
+  }
+  if (triggerType === "playIcon") {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      type: "button",
+      className: "vpb-vl-trigger vpb-vl-icon-trigger",
+      onClick: onOpen,
+      ...baseAria,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: `vpb-vl-play vpb-vl-play--${playIconStyle}`,
+        children: _utils_icons__WEBPACK_IMPORTED_MODULE_0__.playIcon
+      })
+    });
+  }
+
+  // Default: thumbnail
+  const hoverClass = `vpb-vl-hover-${thumbnailHoverEffect || "none"}`;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      type: "button",
+      className: `vpb-vl-trigger ${hoverClass}`,
+      onClick: onOpen,
+      ...baseAria,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+        className: "vpb-vl-thumb-wrap",
+        children: [thumbnailImage?.url ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+          src: thumbnailImage.url,
+          alt: thumbnailImage.alt || "",
+          className: "vpb-vl-thumb",
+          loading: "lazy"
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: "vpb-vl-thumb",
+          style: {
+            background: "#0a0a0a",
+            display: "block"
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: "vpb-vl-overlay",
+          "aria-hidden": "true"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: `vpb-vl-play vpb-vl-play--${playIconStyle}`,
+          "aria-hidden": "true",
+          children: _utils_icons__WEBPACK_IMPORTED_MODULE_0__.playIcon
+        }), showDuration && durationText && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          className: "vpb-vl-duration",
+          children: durationText
+        })]
+      })
+    }), showCaption && captionText && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "vpb-vl-meta",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "vpb-vl-caption",
+        children: captionText
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Trigger);
+
+/***/ },
+
+/***/ "./src/blocks/video-lightbox/utils/functions.js"
+/*!******************************************************!*\
+  !*** ./src/blocks/video-lightbox/utils/functions.js ***!
+  \******************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   aspectToCss: () => (/* binding */ aspectToCss),
+/* harmony export */   detectSource: () => (/* binding */ detectSource),
+/* harmony export */   getVimeoId: () => (/* binding */ getVimeoId),
+/* harmony export */   getWistiaId: () => (/* binding */ getWistiaId),
+/* harmony export */   getYoutubeId: () => (/* binding */ getYoutubeId),
+/* harmony export */   isBunny: () => (/* binding */ isBunny),
+/* harmony export */   isHls: () => (/* binding */ isHls),
+/* harmony export */   isVimeo: () => (/* binding */ isVimeo),
+/* harmony export */   isWistia: () => (/* binding */ isWistia),
+/* harmony export */   isYoutube: () => (/* binding */ isYoutube),
+/* harmony export */   readCookie: () => (/* binding */ readCookie),
+/* harmony export */   resolveModalMaxWidth: () => (/* binding */ resolveModalMaxWidth),
+/* harmony export */   writeCookie: () => (/* binding */ writeCookie)
+/* harmony export */ });
+/**
+ * URL helpers + small utilities shared between the editor and frontend.
+ */
+
+const getYoutubeId = url => {
+  if (!url) return "";
+  const m = url.match(/(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : "";
+};
+const isYoutube = url => !!url && /(?:youtube\.com|youtu\.be)/i.test(url);
+const getVimeoId = url => {
+  if (!url) return "";
+  const m = url.match(/vimeo\.com\/(?:.*#|.*\/videos?\/)?([0-9]+)/i);
+  return m ? m[1] : "";
+};
+const isVimeo = url => !!url && /vimeo\.com/i.test(url);
+const isHls = url => !!url && /\.m3u8(\?|$)/i.test(url);
+const isWistia = url => !!url && /(?:wistia\.com|wi\.st)/i.test(url);
+const isBunny = url => !!url && /(?:b-cdn\.net|mediadelivery\.net)/i.test(url);
+const detectSource = url => {
+  if (!url) return "mp4";
+  if (isYoutube(url)) return "youtube";
+  if (isVimeo(url)) return "vimeo";
+  if (isHls(url)) return "hls";
+  if (isWistia(url)) return "wistia";
+  if (isBunny(url)) return "bunny";
+  return "mp4";
+};
+
+/**
+ * Get the Wistia media ID from a typical Wistia link.
+ */
+const getWistiaId = url => {
+  if (!url) return "";
+  const m = url.match(/wistia\.(?:com|net)\/(?:medias|embed\/iframe)\/([a-zA-Z0-9]+)/);
+  if (m) return m[1];
+  const m2 = url.match(/wi\.st\/medias\/([a-zA-Z0-9]+)/);
+  return m2 ? m2[1] : "";
+};
+
+/**
+ * Aspect ratio string ('16:9') -> CSS aspect-ratio value ('16 / 9').
+ */
+const aspectToCss = ar => {
+  if (!ar || ar === "original") return null;
+  return ar.replace(":", " / ");
+};
+
+/**
+ * Resolve a modal max-width given the size preset.
+ */
+const resolveModalMaxWidth = (size, custom) => {
+  switch (size) {
+    case "small":
+      return "560px";
+    case "medium":
+      return "800px";
+    case "large":
+      return "1080px";
+    case "fullscreen":
+      return "100vw";
+    case "custom":
+      return `${custom || 1080}px`;
+    default:
+      return "1080px";
+  }
+};
+
+/**
+ * Simple cookie helpers - used to honour the "only auto-open once per
+ * visitor" Pro option.
+ */
+const readCookie = key => {
+  if (typeof document === "undefined" || !key) return "";
+  const parts = document.cookie.split("; ");
+  for (const part of parts) {
+    const [k, v] = part.split("=");
+    if (k === key) return decodeURIComponent(v || "");
+  }
+  return "";
+};
+const writeCookie = (key, value, days = 30) => {
+  if (typeof document === "undefined" || !key) return;
+  const exp = new Date();
+  exp.setTime(exp.getTime() + days * 86400000);
+  document.cookie = `${key}=${encodeURIComponent(value)}; expires=${exp.toUTCString()}; path=/; SameSite=Lax`;
+};
+
+/***/ },
+
+/***/ "./src/blocks/video-lightbox/utils/icons.js"
+/*!**************************************************!*\
+  !*** ./src/blocks/video-lightbox/utils/icons.js ***!
+  \**************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   blockIcon: () => (/* binding */ blockIcon),
+/* harmony export */   closeIcon: () => (/* binding */ closeIcon),
+/* harmony export */   playIcon: () => (/* binding */ playIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const iconColor = "#136EF5";
+const blockIcon = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "200",
+  height: "200",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: iconColor,
+  strokeWidth: "2",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  className: "video-lightbox-icon",
+  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("rect", {
+    x: "2",
+    y: "4",
+    width: "20",
+    height: "16",
+    rx: "2"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", {
+    cx: "12",
+    cy: "12",
+    r: "5",
+    fill: iconColor,
+    stroke: "none"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("polygon", {
+    points: "11,10 11,14 14,12",
+    fill: "#ffffff",
+    stroke: "none"
+  })]
+});
+const playIcon = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  width: "100%",
+  height: "100%",
+  fill: "currentColor",
+  "aria-hidden": "true",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("polygon", {
+    points: "7,5 19,12 7,19"
+  })
+});
+const closeIcon = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  width: "100%",
+  height: "100%",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: "2",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  "aria-hidden": "true",
+  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", {
+    x1: "6",
+    y1: "6",
+    x2: "18",
+    y2: "18"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", {
+    x1: "6",
+    y1: "18",
+    x2: "18",
+    y2: "6"
+  })]
+});
+
+/***/ },
+
+/***/ "./src/blocks/video-lightbox/style.scss"
+/*!**********************************************!*\
+  !*** ./src/blocks/video-lightbox/style.scss ***!
+  \**********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ },
+
+/***/ "react"
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+(module) {
+
+module.exports = window["React"];
+
+/***/ },
+
+/***/ "react-dom/client"
+/*!***************************!*\
+  !*** external "ReactDOM" ***!
+  \***************************/
+(module) {
+
+module.exports = window["ReactDOM"];
+
+/***/ },
+
+/***/ "react/jsx-runtime"
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+(module) {
+
+module.exports = window["ReactJSXRuntime"];
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		if (!(moduleId in __webpack_modules__)) {
+/******/ 			delete __webpack_module_cache__[moduleId];
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/ensure chunk */
+/******/ 	(() => {
+/******/ 		__webpack_require__.f = {};
+/******/ 		// This file contains only the entry chunk.
+/******/ 		// The chunk loading function for additional chunks
+/******/ 		__webpack_require__.e = (chunkId) => {
+/******/ 			return Promise.all(Object.keys(__webpack_require__.f).reduce((promises, key) => {
+/******/ 				__webpack_require__.f[key](chunkId, promises);
+/******/ 				return promises;
+/******/ 			}, []));
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get javascript chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__webpack_require__.u = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return "" + chunkId + ".js?ver=" + {"vendors-node_modules_dashjs_dist_modern_esm_dash_all_min_js":"b5c34e9251a7fa72ce76","vendors-node_modules_hls_js_dist_hls_mjs":"52b585a62dbdeb6ed62d"}[chunkId] + "";
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get mini-css chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__webpack_require__.miniCssF = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return undefined;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/load script */
+/******/ 	(() => {
+/******/ 		var inProgress = {};
+/******/ 		var dataWebpackPrefix = "video-player-block:";
+/******/ 		// loadScript function to load a script via script tag
+/******/ 		__webpack_require__.l = (url, done, key, chunkId) => {
+/******/ 			if(inProgress[url]) { inProgress[url].push(done); return; }
+/******/ 			var script, needAttach;
+/******/ 			if(key !== undefined) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				for(var i = 0; i < scripts.length; i++) {
+/******/ 					var s = scripts[i];
+/******/ 					if(s.getAttribute("src") == url || s.getAttribute("data-webpack") == dataWebpackPrefix + key) { script = s; break; }
+/******/ 				}
+/******/ 			}
+/******/ 			if(!script) {
+/******/ 				needAttach = true;
+/******/ 				script = document.createElement('script');
+/******/ 		
+/******/ 				script.charset = 'utf-8';
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.setAttribute("data-webpack", dataWebpackPrefix + key);
+/******/ 		
+/******/ 				script.src = url;
+/******/ 			}
+/******/ 			inProgress[url] = [done];
+/******/ 			var onScriptComplete = (prev, event) => {
+/******/ 				// avoid mem leaks in IE.
+/******/ 				script.onerror = script.onload = null;
+/******/ 				clearTimeout(timeout);
+/******/ 				var doneFns = inProgress[url];
+/******/ 				delete inProgress[url];
+/******/ 				script.parentNode && script.parentNode.removeChild(script);
+/******/ 				doneFns && doneFns.forEach((fn) => (fn(event)));
+/******/ 				if(prev) return prev(event);
+/******/ 			}
+/******/ 			var timeout = setTimeout(onScriptComplete.bind(null, undefined, { type: 'timeout', target: script }), 120000);
+/******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
+/******/ 			script.onload = onScriptComplete.bind(null, script.onload);
+/******/ 			needAttach && document.head.appendChild(script);
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (globalThis.importScripts) scriptUrl = globalThis.location + "";
+/******/ 		var document = globalThis.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript && document.currentScript.tagName.toUpperCase() === 'SCRIPT')
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && (!scriptUrl || !/^http(s?):/.test(scriptUrl))) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/^blob:/, "").replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl + "../../";
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"blocks/video-lightbox/view": 0
+/******/ 		};
+/******/ 		
+/******/ 		__webpack_require__.f.j = (chunkId, promises) => {
+/******/ 				// JSONP chunk loading for javascript
+/******/ 				var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
+/******/ 				if(installedChunkData !== 0) { // 0 means "already installed".
+/******/ 		
+/******/ 					// a Promise means "currently loading".
+/******/ 					if(installedChunkData) {
+/******/ 						promises.push(installedChunkData[2]);
+/******/ 					} else {
+/******/ 						if(true) { // all chunks have JS
+/******/ 							// setup Promise in chunk cache
+/******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
+/******/ 							promises.push(installedChunkData[2] = promise);
+/******/ 		
+/******/ 							// start chunk loading
+/******/ 							var url = __webpack_require__.p + __webpack_require__.u(chunkId);
+/******/ 							// create error before stack unwound to get useful stacktrace later
+/******/ 							var error = new Error();
+/******/ 							var loadingEnded = (event) => {
+/******/ 								if(__webpack_require__.o(installedChunks, chunkId)) {
+/******/ 									installedChunkData = installedChunks[chunkId];
+/******/ 									if(installedChunkData !== 0) installedChunks[chunkId] = undefined;
+/******/ 									if(installedChunkData) {
+/******/ 										var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 										var realSrc = event && event.target && event.target.src;
+/******/ 										error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 										error.name = 'ChunkLoadError';
+/******/ 										error.type = errorType;
+/******/ 										error.request = realSrc;
+/******/ 										installedChunkData[1](error);
+/******/ 									}
+/******/ 								}
+/******/ 							};
+/******/ 							__webpack_require__.l(url, loadingEnded, "chunk-" + chunkId, chunkId);
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 		};
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		// no on chunks loaded
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 		
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkvideo_player_block"] = globalThis["webpackChunkvideo_player_block"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!*******************************************!*\
+  !*** ./src/blocks/video-lightbox/view.js ***!
+  \*******************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom/client */ "react-dom/client");
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_dom_client__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/video-lightbox/style.scss");
+/* harmony import */ var _Components_Common_Style__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Common/Style */ "./src/blocks/video-lightbox/Components/Common/Style.js");
+/* harmony import */ var _Components_Common_Lightbox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Common/Lightbox */ "./src/blocks/video-lightbox/Components/Common/Lightbox.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const els = document.querySelectorAll(".wp-block-vpb-video-lightbox");
+  els.forEach(el => {
+    let attributes;
+    try {
+      attributes = JSON.parse(el.dataset.attributes || "{}");
+    } catch (err) {
+      attributes = {};
+    }
+    (0,react_dom_client__WEBPACK_IMPORTED_MODULE_0__.createRoot)(el).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Components_Common_Style__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        attributes: attributes,
+        id: el.id
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Components_Common_Lightbox__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        attributes: attributes,
+        blockId: el.id
+      })]
+    }));
+    el?.removeAttribute("data-attributes");
+  });
+});
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=view.js.map

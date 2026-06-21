@@ -1,1 +1,1841 @@
-(()=>{"use strict";var e,t,r={},n={};function i(e){var t=n[e];if(void 0!==t)return t.exports;var s=n[e]={exports:{}};return r[e](s,s.exports,i),s.exports}i.m=r,i.d=(e,t)=>{for(var r in t)i.o(t,r)&&!i.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})},i.f={},i.e=e=>Promise.all(Object.keys(i.f).reduce(((t,r)=>(i.f[r](e,t),t)),[])),i.u=e=>e+".js?ver="+{303:"0c02b6de7ad88a71090e",945:"1da712603e7a401afe80"}[e],i.miniCssF=e=>{},i.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),e={},t="video-player-block:",i.l=(r,n,s,a)=>{if(e[r])e[r].push(n);else{var o,l;if(void 0!==s)for(var c=document.getElementsByTagName("script"),d=0;d<c.length;d++){var u=c[d];if(u.getAttribute("src")==r||u.getAttribute("data-webpack")==t+s){o=u;break}}o||(l=!0,(o=document.createElement("script")).charset="utf-8",i.nc&&o.setAttribute("nonce",i.nc),o.setAttribute("data-webpack",t+s),o.src=r),e[r]=[n];var p=(t,n)=>{o.onerror=o.onload=null,clearTimeout(v);var i=e[r];if(delete e[r],o.parentNode&&o.parentNode.removeChild(o),i&&i.forEach((e=>e(n))),t)return t(n)},v=setTimeout(p.bind(null,void 0,{type:"timeout",target:o}),12e4);o.onerror=p.bind(null,o.onerror),o.onload=p.bind(null,o.onload),l&&document.head.appendChild(o)}},i.r=e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},(()=>{var e;globalThis.importScripts&&(e=globalThis.location+"");var t=globalThis.document;if(!e&&t&&(t.currentScript&&"SCRIPT"===t.currentScript.tagName.toUpperCase()&&(e=t.currentScript.src),!e)){var r=t.getElementsByTagName("script");if(r.length)for(var n=r.length-1;n>-1&&(!e||!/^http(s?):/.test(e));)e=r[n--].src}if(!e)throw new Error("Automatic publicPath is not supported in this browser");e=e.replace(/^blob:/,"").replace(/#.*$/,"").replace(/\?.*$/,"").replace(/\/[^\/]+$/,"/"),i.p=e+"../../"})(),(()=>{var e={864:0};i.f.j=(t,r)=>{var n=i.o(e,t)?e[t]:void 0;if(0!==n)if(n)r.push(n[2]);else{var s=new Promise(((r,i)=>n=e[t]=[r,i]));r.push(n[2]=s);var a=i.p+i.u(t),o=new Error;i.l(a,(r=>{if(i.o(e,t)&&(0!==(n=e[t])&&(e[t]=void 0),n)){var s=r&&("load"===r.type?"missing":r.type),a=r&&r.target&&r.target.src;o.message="Loading chunk "+t+" failed.\n("+s+": "+a+")",o.name="ChunkLoadError",o.type=s,o.request=a,n[1](o)}}),"chunk-"+t,t)}};var t=(t,r)=>{var n,s,[a,o,l]=r,c=0;if(a.some((t=>0!==e[t]))){for(n in o)i.o(o,n)&&(i.m[n]=o[n]);l&&l(i)}for(t&&t(r);c<a.length;c++)s=a[c],i.o(e,s)&&e[s]&&e[s][0](),e[s]=0},r=globalThis.webpackChunkvideo_player_block=globalThis.webpackChunkvideo_player_block||[];r.forEach(t.bind(null,0)),r.push=t.bind(null,r.push.bind(r))})();const s=window.ReactDOM,a=e=>{if(!e)return"";const t=e.match(/(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);return t?t[1]:""},o=e=>!!e&&/(?:youtube\.com|youtu\.be)/i.test(e),l=e=>{if(e?.poster)return e.poster;const t=e?.source||{},r=t.url||"";if("youtube"===t.type||o(r)){const e=t.mediaId||a(r);if(e)return`https://img.youtube.com/vi/${e}/hqdefault.jpg`}return""},c=e=>{if(!Number.isFinite(e)||e<0)return"0:00";const t=Math.floor(e%60),r=Math.floor(e/60%60),n=Math.floor(e/3600),i=t.toString().padStart(2,"0");return n>0?`${n}:${r.toString().padStart(2,"0")}:${i}`:`${r}:${i}`},d=()=>{if("undefined"==typeof window)return{index:null,time:null};const e=(window.location.hash||"").replace(/^#/,"");if(!e)return{index:null,time:null};const t=new URLSearchParams(e),r=t.get("video"),n=t.get("t");return{index:null!=r&&""!==r?parseInt(r,10):null,time:null!=n&&""!==n?parseFloat(n):null}},u=window.ReactJSXRuntime,p=({attributes:e,id:t})=>{const{accentColor:r="#136EF5",queueBackground:n="#0f1115",queueTextColor:i="#e6e7eb",queueMutedColor:s="rgba(230, 231, 235, 0.65)",activeItemBackground:a="rgba(19, 110, 245, 0.18)",hoverItemBackground:o="rgba(255, 255, 255, 0.06)",playerBackground:l="#000000",containerBackground:c="#0b0c10",borderRadius:d=12,boxShadow:p={},padding:v=0,gap:h=16,aspectRatio:m="16:9",customAspect:b="16/9",queueWidth:f=32,queueMaxHeight:g=560}=e,y=((e,t)=>"custom"===e?t||"16/9":e?e.replace(":","/"):"16/9")(m,b),w=`\n    #${t} {\n      --vpb-vp-accent: ${r};\n      --vpb-vp-queue-bg: ${n};\n      --vpb-vp-queue-text: ${i};\n      --vpb-vp-queue-muted: ${s};\n      --vpb-vp-active-bg: ${a};\n      --vpb-vp-hover-bg: ${o};\n      --vpb-vp-player-bg: ${l};\n      --vpb-vp-container-bg: ${c};\n      --vpb-vp-radius: ${d}px;\n      --vpb-vp-shadow: ${x=p,x?`${x.x||0}px ${x.y||0}px ${x.blur||0}px ${x.spread||0}px ${x.color||"rgba(0,0,0,0.35)"}`:"none"};\n      --vpb-vp-padding: ${v}px;\n      --vpb-vp-gap: ${h}px;\n      --vpb-vp-aspect: ${y};\n      --vpb-vp-queue-width: ${f}%;\n      --vpb-vp-queue-maxh: ${g}px;\n    }\n  `;var x;return(0,u.jsx)("style",{dangerouslySetInnerHTML:{__html:w}})},v=window.React,h=({src:e,title:t,allow:r,className:n,style:i,zIndex:s=1e5,clickThrough:a=!1})=>{const o=(0,v.useRef)(null),l=(0,v.useRef)(null),[c,d]=(0,v.useState)(null);return(0,v.useEffect)((()=>{const n=window.top?.document||window.document,i=n.createElement("div"),o=s<=0,c=o||a?"none":"auto";i.style.cssText=`position:fixed;z-index:${s};overflow:hidden;background:#000;pointer-events:${c};`;const d=n.createElement("iframe");return d.src=e,d.title=t||"Video",r&&d.setAttribute("allow",r),d.setAttribute("allowfullscreen",""),d.style.cssText=o?"position:absolute;width:300%;height:300%;top:-100%;left:-100%;border:0;display:block;":"width:100%;height:100%;border:0;display:block;",i.appendChild(d),n.body.appendChild(i),l.current=i,()=>{i.remove(),l.current=null}}),[e,t,r,s,a]),(0,v.useEffect)((()=>{const e=()=>{const e=o.current;if(!e)return;let t=e.getBoundingClientRect(),r=e.ownerDocument.defaultView;for(;r&&r!==window.top;){const e=r.frameElement;if(!e)break;const n=e.getBoundingClientRect();t={top:t.top+n.top,left:t.left+n.left,width:t.width,height:t.height},r=e.ownerDocument.defaultView}d((e=>e&&e.top===t.top&&e.left===t.left&&e.width===t.width&&e.height===t.height?e:{top:t.top,left:t.left,width:t.width,height:t.height}))};e();const t=setInterval(e,200);return()=>clearInterval(t)}),[]),(0,v.useEffect)((()=>{if(!l.current||!c)return;const e=l.current.style;e.top=`${c.top}px`,e.left=`${c.left}px`,e.width=`${c.width}px`,e.height=`${c.height}px`}),[c]),(0,u.jsx)("div",{ref:o,className:n,style:{width:"100%",height:"100%",minHeight:"180px",background:"transparent",...i}})},m=(0,v.forwardRef)((({src:e,sourceType:t,muted:r,children:n,...s},a)=>{const o=(0,v.useRef)(null);return(0,v.useImperativeHandle)(a,(()=>o.current),[]),(0,v.useEffect)((()=>{const e=o.current;e&&(e.muted=!!r)}),[r]),(0,v.useEffect)((()=>{const r=o.current;if(!r||!e)return;let n=!1,s=null,a=null;const l=(t||"").toLowerCase(),c="dash"===l||/\.mpd(\?|$)/i.test(e||""),d="hls"===l||/\.m3u8(\?|$)/i.test(e||"");return c?i.e(303).then(i.bind(i,303)).then((t=>{if(n||!o.current)return;const i=t.default||t;a=i.MediaPlayer().create(),a.initialize(r,e,!!r.autoplay)})).catch((()=>{r.src=e})):d&&!r.canPlayType("application/vnd.apple.mpegurl")?i.e(945).then(i.bind(i,4945)).then((t=>{if(n||!o.current)return;const i=t.default||t;i.isSupported()?(s=new i,s.loadSource(e),s.attachMedia(r),r.autoplay&&s.on(i.Events.MANIFEST_PARSED,(()=>{r.play().catch((()=>{}))}))):r.src=e})).catch((()=>{r.src=e})):r.src=e,()=>{if(n=!0,s)try{s.destroy()}catch(e){}if(a)try{a.reset()}catch(e){}}}),[e,t]),(0,u.jsx)("video",{ref:o,...s,children:n})}));m.displayName="AdaptiveVideo";const b=m,f="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",g="autoplay; fullscreen; picture-in-picture",y=({item:e,startTime:t=0,onEnded:r,onTimeUpdate:n,onLoaded:i,inEditor:s=!1})=>{const l=(0,v.useRef)(null),c=(0,v.useRef)(null),d=(0,v.useRef)(!1),p=(0,v.useRef)(n),m=(0,v.useRef)(i);p.current=n,m.current=i;const y=(e=>{const t=e?.source||{},r=t.url||"",n=(t.type||"").toLowerCase();if("youtube"===n||o(r))return{type:"youtube",url:r,mediaId:t.mediaId||a(r)};if("vimeo"===n||(e=>!!e&&/vimeo\.com/i.test(e))(r)){const e=t.mediaId||(e=>{if(!e)return"";const t=e.match(/vimeo\.com\/(?:.*#|.*\/videos?\/)?([0-9]+)/i);return t?t[1]:""})(r);return{type:"vimeo",url:r,mediaId:e}}return"mux"===n&&t.mediaId?{type:"native",url:`https://stream.mux.com/${t.mediaId}.m3u8`,mediaId:t.mediaId}:{type:"native",url:r,mediaId:""}})(e);if((0,v.useEffect)((()=>{d.current=!1}),[e?.id]),(0,v.useEffect)((()=>{if("native"!==y.type)return;const e=l.current;if(!e)return;const r=()=>{if(!d.current&&t&&t>0){try{e.currentTime=t}catch(e){}d.current=!0}m.current&&m.current({el:e,seek:t=>{try{e.currentTime=t,e.paused&&e.play().catch((()=>{}))}catch(e){}}})};return e.addEventListener("loadedmetadata",r),()=>{e.removeEventListener("loadedmetadata",r)}}),[y.type,y.url,t]),(0,v.useEffect)((()=>{if("youtube"!==y.type)return;const e=c.current;if(!e)return;const t=t=>{try{e.contentWindow?.postMessage(JSON.stringify(t),"https://www.youtube.com")}catch(e){}},r=()=>t({event:"listening",id:"vpb-vp",channel:"widget"}),n=e=>{if("string"!=typeof e.data||!/youtube\.com/.test(e.origin))return;let t;try{t=JSON.parse(e.data)}catch(e){return}"infoDelivery"===t?.event&&t.info&&"number"==typeof t.info.currentTime&&p.current?.(t.info.currentTime)};return window.addEventListener("message",n),e.addEventListener("load",r),r(),m.current?.({seek:e=>{t({event:"command",func:"seekTo",args:[e,!0]}),t({event:"command",func:"playVideo",args:[]})}}),()=>{window.removeEventListener("message",n),e.removeEventListener("load",r)}}),[y.type,y.mediaId]),(0,v.useEffect)((()=>{if("vimeo"!==y.type)return;const e=c.current;if(!e)return;const t=t=>{try{e.contentWindow?.postMessage(JSON.stringify(t),"https://player.vimeo.com")}catch(e){}},r=()=>t({method:"addEventListener",value:"timeupdate"}),n=e=>{if(!/player\.vimeo\.com/.test(e.origin))return;let t=e.data;if("string"==typeof t)try{t=JSON.parse(t)}catch(e){return}"timeupdate"===t?.event&&t.data&&"number"==typeof t.data.seconds&&p.current?.(t.data.seconds)};return window.addEventListener("message",n),e.addEventListener("load",r),r(),m.current?.({seek:e=>{t({method:"setCurrentTime",value:e}),t({method:"play"})}}),()=>{window.removeEventListener("message",n),e.removeEventListener("load",r)}}),[y.type,y.mediaId]),!y.url&&"native"===y.type)return(0,u.jsx)("div",{className:"vpb-vp-stage-empty",children:(0,u.jsx)("span",{children:"No source set for this item."})});if("youtube"===y.type){const r=new URLSearchParams({autoplay:"1",rel:"0",modestbranding:"1",playsinline:"1",enablejsapi:"1",origin:"undefined"!=typeof window?window.location.origin:""});t>0&&r.set("start",String(Math.floor(t)));const n=`https://www.youtube.com/embed/${y.mediaId}?${r.toString()}`;return s?(0,u.jsx)(h,{src:n,title:e?.title||"YouTube video",allow:f}):(0,u.jsx)("iframe",{ref:c,src:n,title:e?.title||"YouTube video",allow:f,allowFullScreen:!0})}if("vimeo"===y.type){const r=new URLSearchParams({autoplay:"1",title:"0",byline:"0",portrait:"0"});t>0&&r.set("#t",`${Math.floor(t)}s`);const n=`https://player.vimeo.com/video/${y.mediaId}?${r.toString()}`;return s?(0,u.jsx)(h,{src:n,title:e?.title||"Vimeo video",allow:g}):(0,u.jsx)("iframe",{ref:c,src:n,title:e?.title||"Vimeo video",allow:g,allowFullScreen:!0})}return(0,u.jsx)(b,{ref:l,src:y.url,sourceType:e?.source?.type,controls:!0,playsInline:!0,autoPlay:!0,poster:e?.poster||void 0,onEnded:r,onTimeUpdate:e=>n&&n(e.currentTarget.currentTime||0),children:(0,u.jsx)("track",{kind:"captions"})},y.url)},w=(0,u.jsx)("svg",{viewBox:"0 0 24 24",xmlns:"http://www.w3.org/2000/svg",children:(0,u.jsx)("polygon",{points:"6,4 20,12 6,20",fill:"currentColor"})}),x=(0,u.jsx)("svg",{viewBox:"0 0 24 24",xmlns:"http://www.w3.org/2000/svg",children:(0,u.jsx)("polyline",{points:"4,12 10,18 20,6",fill:"none",stroke:"currentColor",strokeWidth:"3",strokeLinecap:"round",strokeLinejoin:"round"})}),j=(0,u.jsxs)("svg",{viewBox:"0 0 24 24",xmlns:"http://www.w3.org/2000/svg",children:[(0,u.jsx)("circle",{cx:"11",cy:"11",r:"7",fill:"none",stroke:"currentColor",strokeWidth:"2"}),(0,u.jsx)("line",{x1:"16",y1:"16",x2:"21",y2:"21",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round"})]}),N=({item:e,index:t,isActive:r,isWatched:n,attributes:i,onSelect:s})=>{const{showThumbnails:a=!0,showDuration:o=!0,showDescription:c=!0,showWatchedCheckmarks:d=!0,showCounter:p=!0}=i,v=l(e);return(0,u.jsxs)("div",{className:`vpb-vp-qitem ${r?"is-active":""} ${n?"is-watched":""}`,role:"option","aria-selected":r,tabIndex:0,onClick:()=>s(t),onKeyDown:e=>{"Enter"!==e.key&&" "!==e.key||(e.preventDefault(),s(t))},children:[p&&(0,u.jsx)("span",{className:"vpb-vp-qnum",children:t+1}),a&&(0,u.jsxs)("div",{className:"vpb-vp-qthumb-wrap",children:[v?(0,u.jsx)("img",{className:"vpb-vp-qthumb",src:v,alt:e.title||"",loading:"lazy"}):(0,u.jsx)("div",{className:"vpb-vp-qthumb is-placeholder"}),r?(0,u.jsx)("span",{className:"vpb-vp-qbadge is-playing","aria-hidden":"true",children:w}):(0,u.jsx)("span",{className:"vpb-vp-qbadge is-play-hover","aria-hidden":"true",children:w}),o&&e.duration&&(0,u.jsx)("span",{className:"vpb-vp-qdur",children:e.duration})]}),(0,u.jsxs)("div",{className:"vpb-vp-qmeta",children:[(0,u.jsxs)("div",{className:"vpb-vp-qtitle-row",children:[(0,u.jsx)("h4",{className:"vpb-vp-qtitle",children:e.title||"Untitled"}),e.badge&&(0,u.jsx)("span",{className:"vpb-vp-qpill",children:e.badge})]}),c&&e.description&&(0,u.jsx)("p",{className:"vpb-vp-qdesc",children:e.description}),!a&&o&&e.duration&&(0,u.jsx)("span",{className:"vpb-vp-qdur is-inline",children:e.duration})]}),d&&n&&!r&&(0,u.jsx)("span",{className:"vpb-vp-qcheck","aria-label":"Watched",children:x})]})},S=({item:e,currentTime:t,onSeek:r})=>{const n=Array.isArray(e?.chapters)?e.chapters:[];return n.length?(0,u.jsxs)("div",{className:"vpb-vp-chapters","aria-label":"Chapters",children:[(0,u.jsx)("h5",{className:"vpb-vp-chapters-title",children:"Chapters"}),(0,u.jsx)("ul",{className:"vpb-vp-chapters-list",children:n.map(((e,i)=>{const s=n[i+1],a=t>=(e.time||0)&&(null==s||t<(s.time||0));return(0,u.jsx)("li",{className:"vpb-vp-chapter "+(a?"is-active":""),children:(0,u.jsxs)("button",{type:"button",className:"vpb-vp-chapter-btn",onClick:()=>r&&r(e.time||0),children:[(0,u.jsx)("span",{className:"vpb-vp-chapter-time",children:c(e.time||0)}),(0,u.jsx)("span",{className:"vpb-vp-chapter-label",children:e.label||`Chapter ${i+1}`})]})},`${e.time}-${i}`)}))})]}):null},$="vpb.vp.v1",k=e=>{if("undefined"==typeof window||!e)return null;try{const t=window.localStorage.getItem(`${$}.${e}`);return t?JSON.parse(t):null}catch(e){return null}},E=(e,t)=>{if("undefined"!=typeof window&&e)try{window.localStorage.setItem(`${$}.${e}`,JSON.stringify(t))}catch(e){}},I=({attributes:e,clientId:t,inEditor:r=!1})=>{const{items:n=[],layout:i="queue-right",startIndex:s=0,loopQueue:a=!1,shuffle:o=!1,autoAdvance:l=!0,autoAdvanceDelay:p=5,showChapters:h=!0,showSearch:m=!0,rememberProgress:b=!0,progressStorageKey:f="",deepLinkEnabled:g=!0,queueTitle:w="Up Next"}=e,x=f||t||"video-playlist",$=(0,v.useMemo)((()=>o?(e=>{const t=[...e];for(let e=t.length-1;e>0;e-=1){const r=Math.floor(Math.random()*(e+1));[t[e],t[r]]=[t[r],t[e]]}return t})(n):n),[n,o]),[I,T]=(0,v.useState)((()=>{let e=Math.max(0,Math.min(s,$.length-1));if(g){const t=d();null!=t.index&&Number.isFinite(t.index)&&t.index>=0&&t.index<$.length&&(e=t.index)}if(b){const t=k(x);t&&Number.isFinite(t.activeIndex)&&t.activeIndex>=0&&t.activeIndex<$.length&&(e=t.activeIndex)}return e})),[q,C]=(0,v.useState)((()=>{if(!b)return{};const e=k(x);return e?.watched||{}})),[L,M]=(0,v.useState)(0),R=(0,v.useRef)(null),[A,P]=(0,v.useState)((()=>{if(g){const e=d();if(null!=e.time&&Number.isFinite(e.time)&&e.time>0)return e.time}if(b){const e=k(x),t=e?.positions?.[$[I]?.id];if(Number.isFinite(t)&&t>0)return t}return 0})),[O,F]=(0,v.useState)(""),[B,U]=(0,v.useState)(0),_=(0,v.useRef)(null),D=(0,v.useMemo)((()=>{if(!O.trim())return $.map(((e,t)=>({it:e,idx:t})));const e=O.trim().toLowerCase();return $.map(((e,t)=>({it:e,idx:t}))).filter((({it:t})=>[t.title,t.description,t.badge].filter(Boolean).some((t=>String(t).toLowerCase().includes(e)))))}),[$,O]);(0,v.useEffect)((()=>{if(!b)return;const e=k(x)||{};e.activeIndex=I,e.watched=q,E(x,e)}),[I,q,b,x]),(0,v.useEffect)((()=>{if(!b)return;const e=$[I]?.id;if(!e||!L)return;const t=k(x)||{};t.positions=t.positions||{},t.positions[e]=L,E(x,t)}),[Math.floor(L/3),I,$,b,x]),(0,v.useEffect)((()=>{g&&((e,t)=>{if("undefined"!=typeof window)try{const r=new URLSearchParams;r.set("video",String(e)),Number.isFinite(t)&&t>0&&r.set("t",String(Math.round(t)));const n=`#${r.toString()}`;window.history&&window.history.replaceState?window.history.replaceState(null,"",n):window.location.hash=n}catch(e){}})(I,L)}),[I,Math.floor(L/5),g]),(0,v.useEffect)((()=>{if(b){const e=k(x),t=e?.positions?.[$[I]?.id];P(Number.isFinite(t)&&t>0?t:0)}else P(0);M(0),V()}),[I]),(0,v.useEffect)((()=>{if(!g||"undefined"==typeof window)return;const e=()=>{const e=d();null!=e.index&&e.index>=0&&e.index<$.length&&e.index!==I&&T(e.index)};return window.addEventListener("hashchange",e),()=>window.removeEventListener("hashchange",e)}),[g,$.length,I]);const V=()=>{_.current&&(clearInterval(_.current),_.current=null),U(0)},W=e=>{V(),e<0||e>=$.length||T(e)},J=()=>{const e=I+1;e>=$.length?a&&W(0):W(e)};if(!$.length)return(0,u.jsx)("div",{className:"vpb-vp-root is-empty",children:(0,u.jsx)("p",{children:"No playlist items configured."})});const z=$[Math.min(I,$.length-1)],H=Object.values(q).filter(Boolean).length,K=(0,u.jsxs)("div",{className:"vpb-vp-qhead",children:[(0,u.jsxs)("div",{children:[(0,u.jsx)("h3",{className:"vpb-vp-qhead-title",children:w}),(0,u.jsxs)("span",{className:"vpb-vp-qhead-count",children:[H," / ",$.length," watched"]})]}),m&&(0,u.jsxs)("div",{className:"vpb-vp-qsearch",children:[(0,u.jsx)("span",{className:"vpb-vp-qsearch-icon","aria-hidden":"true",children:j}),(0,u.jsx)("input",{type:"search",value:O,onChange:e=>F(e.target.value),placeholder:"Search…","aria-label":"Filter playlist"})]})]}),Y=(0,u.jsxs)("div",{className:"vpb-vp-qlist",role:"listbox","aria-label":"Playlist queue",children:[0===D.length&&(0,u.jsx)("div",{className:"vpb-vp-qempty",children:"No matches."}),D.map((({it:t,idx:r})=>(0,u.jsx)(N,{item:t,index:r,isActive:r===I,isWatched:!!q[t.id],attributes:e,onSelect:W},t.id||r)))]}),Q=(0,u.jsxs)("aside",{className:"vpb-vp-queue","aria-label":"Video queue",children:[K,Y]}),X=(0,u.jsxs)("section",{className:"vpb-vp-stage-wrap","aria-label":"Active video",children:[(0,u.jsxs)("div",{className:"vpb-vp-stage",children:[(0,u.jsx)(y,{item:z,attributes:e,startTime:A,onEnded:()=>{const e=$[I]?.id;if(e&&C((t=>({...t,[e]:!0}))),!l)return;if(I+1>=$.length&&!a)return;const t=Math.max(0,parseInt(p,10)||0);if(0===t)return void J();U(t);let r=t;_.current=setInterval((()=>{r-=1,r<=0?(clearInterval(_.current),_.current=null,U(0),J()):U(r)}),1e3)},onTimeUpdate:e=>{M(e)},onLoaded:e=>{R.current=e},inEditor:r},z.id||I),B>0&&(0,u.jsx)("div",{className:"vpb-vp-countdown",role:"status",children:(0,u.jsxs)("div",{className:"vpb-vp-countdown-inner",children:[(0,u.jsx)("span",{className:"vpb-vp-countdown-up",children:"Up next"}),(0,u.jsx)("span",{className:"vpb-vp-countdown-title",children:$[I+1]?.title||$[0]?.title}),(0,u.jsxs)("div",{className:"vpb-vp-countdown-actions",children:[(0,u.jsx)("button",{type:"button",className:"vpb-vp-cd-btn is-cancel",onClick:V,children:"Cancel"}),(0,u.jsxs)("button",{type:"button",className:"vpb-vp-cd-btn is-play",onClick:()=>{V(),J()},children:["Play now (",B,"s)"]})]})]})})]}),(0,u.jsxs)("div",{className:"vpb-vp-active-meta",children:[(0,u.jsx)("h2",{className:"vpb-vp-active-title",children:z.title}),z.description&&(0,u.jsx)("p",{className:"vpb-vp-active-desc",children:z.description}),(0,u.jsxs)("div",{className:"vpb-vp-active-row",children:[(0,u.jsxs)("span",{className:"vpb-vp-active-pos",children:[I+1," of ",$.length]}),L>0&&(0,u.jsx)("span",{className:"vpb-vp-active-time",children:c(L)})]})]}),h&&(0,u.jsx)(S,{item:z,currentTime:L,onSeek:e=>{const t=R.current;t&&"function"==typeof t.seek?t.seek(e):P(e)}})]});return(0,u.jsxs)("div",{className:`vpb-vp-root is-${i}`,children:[X,Q]})},T=({attributes:e})=>{const{items:t=[],playlistName:r="Featured Playlist"}=e;if(!t.length)return null;const n=t.map(((e,t)=>{const r=e?.source||{};return{"@type":"ListItem",position:t+1,item:{"@type":"VideoObject",name:e.title||`Video ${t+1}`,description:e.description||e.title||"",thumbnailUrl:l(e)||void 0,contentUrl:r.url||void 0}}})),i={"@context":"https://schema.org","@type":"ItemList",name:r,numberOfItems:t.length,itemListElement:n};return(0,u.jsx)("script",{type:"application/ld+json",dangerouslySetInnerHTML:{__html:JSON.stringify(i)}})};document.addEventListener("DOMContentLoaded",(()=>{document.querySelectorAll(".wp-block-vpb-video-playlist").forEach((e=>{let t;try{t=JSON.parse(e.dataset.attributes||"{}")}catch(e){t={}}(0,s.createRoot)(e).render((0,u.jsxs)(u.Fragment,{children:[(0,u.jsx)(p,{attributes:t,id:e.id}),(0,u.jsx)(I,{attributes:t,clientId:e.id}),!1!==t?.emitSchema&&(0,u.jsx)(T,{attributes:t})]})),e?.removeAttribute("data-attributes")}))}))})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/blocks/_shared/media/AdaptiveVideo.js"
+/*!***************************************************!*\
+  !*** ./src/blocks/_shared/media/AdaptiveVideo.js ***!
+  \***************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * A native <video> that transparently plays adaptive streams:
+ *   - DASH (.mpd)  -> dash.js
+ *   - HLS  (.m3u8) -> native on Safari, otherwise hls.js
+ *   - mp4/webm     -> plain native playback
+ *
+ * Both libraries are loaded with dynamic import() so they are code-split and
+ * only fetched when a DASH/HLS source actually plays. Any standard <video>
+ * prop (controls, autoPlay, muted, loop, poster, className, style, event
+ * handlers, children such as <track>) is passed straight through, and the
+ * underlying element ref is forwarded so callers can drive play state.
+ *
+ * NOTE: `src` is handled imperatively (not rendered as an attribute) so the
+ * adaptive libraries can attach cleanly.
+ */
+
+const isHlsUrl = u => /\.m3u8(\?|$)/i.test(u || "");
+const isDashUrl = u => /\.mpd(\?|$)/i.test(u || "");
+const AdaptiveVideo = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(({
+  src,
+  sourceType,
+  muted,
+  children,
+  ...rest
+}, ref) => {
+  const innerRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle)(ref, () => innerRef.current, []);
+
+  // React only sets the `muted` HTML attribute, not the DOM property, but
+  // browsers consult the property when enforcing autoplay policy. Setting it
+  // imperatively keeps muted autoplay (and mute toggles) working reliably.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const el = innerRef.current;
+    if (el) el.muted = !!muted;
+  }, [muted]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const el = innerRef.current;
+    if (!el || !src) return undefined;
+    let destroyed = false;
+    let hls = null;
+    let dash = null;
+    const type = (sourceType || "").toLowerCase();
+    const wantDash = type === "dash" || isDashUrl(src);
+    const wantHls = type === "hls" || isHlsUrl(src);
+    if (wantDash) {
+      __webpack_require__.e(/*! import() */ "vendors-node_modules_dashjs_dist_modern_esm_dash_all_min_js").then(__webpack_require__.bind(__webpack_require__, /*! dashjs */ "./node_modules/dashjs/dist/modern/esm/dash.all.min.js")).then(mod => {
+        if (destroyed || !innerRef.current) return;
+        const dashjs = mod.default || mod;
+        dash = dashjs.MediaPlayer().create();
+        dash.initialize(el, src, !!el.autoplay);
+      }).catch(() => {
+        el.src = src;
+      });
+    } else if (wantHls && !el.canPlayType("application/vnd.apple.mpegurl")) {
+      __webpack_require__.e(/*! import() */ "vendors-node_modules_hls_js_dist_hls_mjs").then(__webpack_require__.bind(__webpack_require__, /*! hls.js */ "./node_modules/hls.js/dist/hls.mjs")).then(mod => {
+        if (destroyed || !innerRef.current) return;
+        const Hls = mod.default || mod;
+        if (Hls.isSupported()) {
+          hls = new Hls();
+          hls.loadSource(src);
+          hls.attachMedia(el);
+          if (el.autoplay) {
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+              el.play().catch(() => {});
+            });
+          }
+        } else {
+          el.src = src;
+        }
+      }).catch(() => {
+        el.src = src;
+      });
+    } else {
+      el.src = src;
+    }
+    return () => {
+      destroyed = true;
+      if (hls) {
+        try {
+          hls.destroy();
+        } catch (_) {
+          /* ignore */
+        }
+      }
+      if (dash) {
+        try {
+          dash.reset();
+        } catch (_) {
+          /* ignore */
+        }
+      }
+    };
+  }, [src, sourceType]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("video", {
+    ref: innerRef,
+    ...rest,
+    children: children
+  });
+});
+AdaptiveVideo.displayName = "AdaptiveVideo";
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AdaptiveVideo);
+
+/***/ },
+
+/***/ "./src/blocks/_shared/media/EditorEmbedPortal.js"
+/*!*******************************************************!*\
+  !*** ./src/blocks/_shared/media/EditorEmbedPortal.js ***!
+  \*******************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * Editor-only YouTube/Vimeo (or any third-party) embed for the apiVersion-3
+ * canvas.
+ *
+ * Under WordPress Studio the editor canvas is a sandboxed iframe that lacks
+ * `allow-same-origin`, so any third-party embed nested inside it crashes and
+ * shows a black box. We render the embed iframe into the TOP-LEVEL admin window
+ * (a real, unsandboxed origin) and keep it positioned over a placeholder that
+ * lives in the canvas. On the frontend this component is never used — callers
+ * render a normal inline iframe there.
+ *
+ * `className` / `style` are applied to the in-canvas placeholder so it can fill
+ * whatever container the block uses (modal frame, tile, stage, etc.).
+ *
+ * `zIndex` allows positioning the portaled embed. For overlay widgets/modals,
+ * a high z-index (e.g. 100000) keeps it on top. For background videos, a low
+ * z-index (e.g. 0) coupled with transparent editor canvas styles lets the embed
+ * sit behind the block's text/controls.
+ */
+
+const EditorEmbedPortal = ({
+  src,
+  title,
+  allow,
+  className,
+  style,
+  zIndex = 100000,
+  clickThrough = false
+}) => {
+  const placeholderRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const portalRoot = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const [rect, setRect] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+
+  // Build the container + embed iframe in the top-level admin document.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const topDoc = window.top?.document || window.document;
+    const div = topDoc.createElement("div");
+    // If zIndex is low (e.g. background video), or the caller opts into
+    // click-through (e.g. a scrollable reels feed), disable pointer-events so
+    // the overlay doesn't hijack clicks/wheel.
+    const isBg = zIndex <= 0;
+    const pointerEvents = isBg || clickThrough ? "none" : "auto";
+    div.style.cssText = `position:fixed;z-index:${zIndex};overflow:hidden;background:#000;pointer-events:${pointerEvents};`;
+    const iframe = topDoc.createElement("iframe");
+    iframe.src = src;
+    iframe.title = title || "Video";
+    if (allow) iframe.setAttribute("allow", allow);
+    iframe.setAttribute("allowfullscreen", "");
+
+    // For background videos, scale up and center the iframe to achieve cover/crop behavior
+    // and hide YouTube/Vimeo control bars, matching the frontend CSS.
+    if (isBg) {
+      iframe.style.cssText = "position:absolute;width:300%;height:300%;top:-100%;left:-100%;border:0;display:block;";
+    } else {
+      iframe.style.cssText = "width:100%;height:100%;border:0;display:block;";
+    }
+    div.appendChild(iframe);
+    topDoc.body.appendChild(div);
+    portalRoot.current = div;
+    return () => {
+      div.remove();
+      portalRoot.current = null;
+    };
+  }, [src, title, allow, zIndex, clickThrough]);
+
+  // Track the placeholder position (walking iframe boundaries to top-window
+  // coordinates) so the overlay stays aligned as the canvas scrolls.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const update = () => {
+      const el = placeholderRef.current;
+      if (!el) return;
+      let box = el.getBoundingClientRect();
+      let win = el.ownerDocument.defaultView;
+      while (win && win !== window.top) {
+        const frameEl = win.frameElement;
+        if (!frameEl) break;
+        const frameBox = frameEl.getBoundingClientRect();
+        box = {
+          top: box.top + frameBox.top,
+          left: box.left + frameBox.left,
+          width: box.width,
+          height: box.height
+        };
+        win = frameEl.ownerDocument.defaultView;
+      }
+      setRect(prev => prev && prev.top === box.top && prev.left === box.left && prev.width === box.width && prev.height === box.height ? prev : {
+        top: box.top,
+        left: box.left,
+        width: box.width,
+        height: box.height
+      });
+    };
+    update();
+    const id = setInterval(update, 200);
+    return () => clearInterval(id);
+  }, []);
+
+  // Keep the top-window container positioned over the placeholder.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!portalRoot.current || !rect) return;
+    const s = portalRoot.current.style;
+    s.top = `${rect.top}px`;
+    s.left = `${rect.left}px`;
+    s.width = `${rect.width}px`;
+    s.height = `${rect.height}px`;
+  }, [rect]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    ref: placeholderRef,
+    className: className,
+    style: {
+      width: "100%",
+      height: "100%",
+      minHeight: "180px",
+      background: "transparent",
+      ...style
+    }
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditorEmbedPortal);
+
+/***/ },
+
+/***/ "./src/blocks/video-playlist/Components/Common/Chapters.js"
+/*!*****************************************************************!*\
+  !*** ./src/blocks/video-playlist/Components/Common/Chapters.js ***!
+  \*****************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/functions */ "./src/blocks/video-playlist/utils/functions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const Chapters = ({
+  item,
+  currentTime,
+  onSeek
+}) => {
+  const chapters = Array.isArray(item?.chapters) ? item.chapters : [];
+  if (!chapters.length) return null;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "vpb-vp-chapters",
+    "aria-label": "Chapters",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h5", {
+      className: "vpb-vp-chapters-title",
+      children: "Chapters"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
+      className: "vpb-vp-chapters-list",
+      children: chapters.map((c, i) => {
+        const next = chapters[i + 1];
+        const isActive = currentTime >= (c.time || 0) && (next == null || currentTime < (next.time || 0));
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+          className: `vpb-vp-chapter ${isActive ? "is-active" : ""}`,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+            type: "button",
+            className: "vpb-vp-chapter-btn",
+            onClick: () => onSeek && onSeek(c.time || 0),
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "vpb-vp-chapter-time",
+              children: (0,_utils_functions__WEBPACK_IMPORTED_MODULE_0__.formatTime)(c.time || 0)
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "vpb-vp-chapter-label",
+              children: c.label || `Chapter ${i + 1}`
+            })]
+          })
+        }, `${c.time}-${i}`);
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Chapters);
+
+/***/ },
+
+/***/ "./src/blocks/video-playlist/Components/Common/Player.js"
+/*!***************************************************************!*\
+  !*** ./src/blocks/video-playlist/Components/Common/Player.js ***!
+  \***************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/functions */ "./src/blocks/video-playlist/utils/functions.js");
+/* harmony import */ var _shared_media_EditorEmbedPortal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../_shared/media/EditorEmbedPortal */ "./src/blocks/_shared/media/EditorEmbedPortal.js");
+/* harmony import */ var _shared_media_AdaptiveVideo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../_shared/media/AdaptiveVideo */ "./src/blocks/_shared/media/AdaptiveVideo.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+const YT_ALLOW = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+const VIMEO_ALLOW = "autoplay; fullscreen; picture-in-picture";
+
+/**
+ * Resolves a playable URL for an item.
+ * Returns { type, url, mediaId } – type one of: youtube | vimeo | native.
+ */
+const resolveSource = item => {
+  const src = item?.source || {};
+  const url = src.url || "";
+  const type = (src.type || "").toLowerCase();
+  if (type === "youtube" || (0,_utils_functions__WEBPACK_IMPORTED_MODULE_1__.isYoutube)(url)) {
+    const id = src.mediaId || (0,_utils_functions__WEBPACK_IMPORTED_MODULE_1__.getYoutubeId)(url);
+    return {
+      type: "youtube",
+      url,
+      mediaId: id
+    };
+  }
+  if (type === "vimeo" || (0,_utils_functions__WEBPACK_IMPORTED_MODULE_1__.isVimeo)(url)) {
+    const id = src.mediaId || (0,_utils_functions__WEBPACK_IMPORTED_MODULE_1__.getVimeoId)(url);
+    return {
+      type: "vimeo",
+      url,
+      mediaId: id
+    };
+  }
+  if (type === "mux" && src.mediaId) {
+    return {
+      type: "native",
+      url: `https://stream.mux.com/${src.mediaId}.m3u8`,
+      mediaId: src.mediaId
+    };
+  }
+  return {
+    type: "native",
+    url,
+    mediaId: ""
+  };
+};
+const Player = ({
+  item,
+  startTime = 0,
+  onEnded,
+  onTimeUpdate,
+  onLoaded,
+  inEditor = false
+}) => {
+  const videoRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const iframeRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const seekedRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
+
+  // Keep the latest callbacks in refs so the postMessage effects below don't
+  // re-subscribe on every parent render (the parent passes inline callbacks).
+  const onTimeUpdateRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(onTimeUpdate);
+  const onLoadedRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(onLoaded);
+  onTimeUpdateRef.current = onTimeUpdate;
+  onLoadedRef.current = onLoaded;
+  const resolved = resolveSource(item);
+
+  // Native <video>: handle initial seek + play
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    seekedRef.current = false;
+  }, [item?.id]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (resolved.type !== "native") return undefined;
+    const el = videoRef.current;
+    if (!el) return undefined;
+    const handleLoaded = () => {
+      if (!seekedRef.current && startTime && startTime > 0) {
+        try {
+          el.currentTime = startTime;
+        } catch (e) {
+          /* noop */
+        }
+        seekedRef.current = true;
+      }
+      // Expose a uniform controller so chapter seeking is source-agnostic.
+      if (onLoadedRef.current) {
+        onLoadedRef.current({
+          el,
+          seek: t => {
+            try {
+              el.currentTime = t;
+              if (el.paused) el.play().catch(() => {});
+            } catch (e) {
+              /* noop */
+            }
+          }
+        });
+      }
+    };
+    el.addEventListener("loadedmetadata", handleLoaded);
+    return () => {
+      el.removeEventListener("loadedmetadata", handleLoaded);
+    };
+  }, [resolved.type, resolved.url, startTime]);
+
+  // YouTube: drive seek/play and read currentTime over the iframe postMessage
+  // API so chapter clicks work without reloading the embed.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (resolved.type !== "youtube") return undefined;
+    const iframe = iframeRef.current;
+    if (!iframe) return undefined;
+    const post = msg => {
+      try {
+        iframe.contentWindow?.postMessage(JSON.stringify(msg), "https://www.youtube.com");
+      } catch (e) {
+        /* noop */
+      }
+    };
+    const startListening = () => post({
+      event: "listening",
+      id: "vpb-vp",
+      channel: "widget"
+    });
+    const onMessage = e => {
+      if (typeof e.data !== "string" || !/youtube\.com/.test(e.origin)) return;
+      let data;
+      try {
+        data = JSON.parse(e.data);
+      } catch (_) {
+        return;
+      }
+      if (data?.event === "infoDelivery" && data.info && typeof data.info.currentTime === "number") {
+        onTimeUpdateRef.current?.(data.info.currentTime);
+      }
+    };
+    window.addEventListener("message", onMessage);
+    iframe.addEventListener("load", startListening);
+    startListening();
+    onLoadedRef.current?.({
+      seek: t => {
+        post({
+          event: "command",
+          func: "seekTo",
+          args: [t, true]
+        });
+        post({
+          event: "command",
+          func: "playVideo",
+          args: []
+        });
+      }
+    });
+    return () => {
+      window.removeEventListener("message", onMessage);
+      iframe.removeEventListener("load", startListening);
+    };
+  }, [resolved.type, resolved.mediaId]);
+
+  // Vimeo: same idea via the Vimeo player postMessage protocol.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (resolved.type !== "vimeo") return undefined;
+    const iframe = iframeRef.current;
+    if (!iframe) return undefined;
+    const post = msg => {
+      try {
+        iframe.contentWindow?.postMessage(JSON.stringify(msg), "https://player.vimeo.com");
+      } catch (e) {
+        /* noop */
+      }
+    };
+    const subscribe = () => post({
+      method: "addEventListener",
+      value: "timeupdate"
+    });
+    const onMessage = e => {
+      if (!/player\.vimeo\.com/.test(e.origin)) return;
+      let data = e.data;
+      if (typeof data === "string") {
+        try {
+          data = JSON.parse(data);
+        } catch (_) {
+          return;
+        }
+      }
+      if (data?.event === "timeupdate" && data.data && typeof data.data.seconds === "number") {
+        onTimeUpdateRef.current?.(data.data.seconds);
+      }
+    };
+    window.addEventListener("message", onMessage);
+    iframe.addEventListener("load", subscribe);
+    subscribe();
+    onLoadedRef.current?.({
+      seek: t => {
+        post({
+          method: "setCurrentTime",
+          value: t
+        });
+        post({
+          method: "play"
+        });
+      }
+    });
+    return () => {
+      window.removeEventListener("message", onMessage);
+      iframe.removeEventListener("load", subscribe);
+    };
+  }, [resolved.type, resolved.mediaId]);
+  if (!resolved.url && resolved.type === "native") {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "vpb-vp-stage-empty",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+        children: "No source set for this item."
+      })
+    });
+  }
+  if (resolved.type === "youtube") {
+    const params = new URLSearchParams({
+      autoplay: "1",
+      rel: "0",
+      modestbranding: "1",
+      playsinline: "1",
+      // enablejsapi + origin let us drive seek/play and read currentTime via
+      // postMessage, so chapter clicks work for YouTube (not just MP4/HTML5).
+      enablejsapi: "1",
+      origin: typeof window !== "undefined" ? window.location.origin : ""
+    });
+    if (startTime > 0) params.set("start", String(Math.floor(startTime)));
+    const src = `https://www.youtube.com/embed/${resolved.mediaId}?${params.toString()}`;
+    if (inEditor) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_shared_media_EditorEmbedPortal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        src: src,
+        title: item?.title || "YouTube video",
+        allow: YT_ALLOW
+      });
+    }
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("iframe", {
+      ref: iframeRef,
+      src: src,
+      title: item?.title || "YouTube video",
+      allow: YT_ALLOW,
+      allowFullScreen: true
+    });
+  }
+  if (resolved.type === "vimeo") {
+    const params = new URLSearchParams({
+      autoplay: "1",
+      title: "0",
+      byline: "0",
+      portrait: "0"
+    });
+    if (startTime > 0) params.set("#t", `${Math.floor(startTime)}s`);
+    const src = `https://player.vimeo.com/video/${resolved.mediaId}?${params.toString()}`;
+    if (inEditor) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_shared_media_EditorEmbedPortal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        src: src,
+        title: item?.title || "Vimeo video",
+        allow: VIMEO_ALLOW
+      });
+    }
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("iframe", {
+      ref: iframeRef,
+      src: src,
+      title: item?.title || "Vimeo video",
+      allow: VIMEO_ALLOW,
+      allowFullScreen: true
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_shared_media_AdaptiveVideo__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    ref: videoRef,
+    src: resolved.url,
+    sourceType: item?.source?.type,
+    controls: true,
+    playsInline: true,
+    autoPlay: true,
+    poster: item?.poster || undefined,
+    onEnded: onEnded,
+    onTimeUpdate: e => onTimeUpdate && onTimeUpdate(e.currentTarget.currentTime || 0),
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("track", {
+      kind: "captions"
+    })
+  }, resolved.url);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Player);
+
+/***/ },
+
+/***/ "./src/blocks/video-playlist/Components/Common/Playlist.js"
+/*!*****************************************************************!*\
+  !*** ./src/blocks/video-playlist/Components/Common/Playlist.js ***!
+  \*****************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Player */ "./src/blocks/video-playlist/Components/Common/Player.js");
+/* harmony import */ var _QueueItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QueueItem */ "./src/blocks/video-playlist/Components/Common/QueueItem.js");
+/* harmony import */ var _Chapters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Chapters */ "./src/blocks/video-playlist/Components/Common/Chapters.js");
+/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/icons */ "./src/blocks/video-playlist/utils/icons.js");
+/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/functions */ "./src/blocks/video-playlist/utils/functions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+const STORAGE_VERSION = "vpb.vp.v1";
+const loadProgress = key => {
+  if (typeof window === "undefined" || !key) return null;
+  try {
+    const raw = window.localStorage.getItem(`${STORAGE_VERSION}.${key}`);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) {
+    return null;
+  }
+};
+const saveProgress = (key, data) => {
+  if (typeof window === "undefined" || !key) return;
+  try {
+    window.localStorage.setItem(`${STORAGE_VERSION}.${key}`, JSON.stringify(data));
+  } catch (e) {
+    /* ignore quota errors */
+  }
+};
+const Playlist = ({
+  attributes,
+  clientId,
+  inEditor = false
+}) => {
+  const {
+    items: rawItems = [],
+    layout = "queue-right",
+    startIndex = 0,
+    loopQueue = false,
+    shuffle = false,
+    autoAdvance = true,
+    autoAdvanceDelay = 5,
+    showChapters = true,
+    showSearch = true,
+    rememberProgress = true,
+    progressStorageKey = "",
+    deepLinkEnabled = true,
+    queueTitle = "Up Next"
+  } = attributes;
+  const storageKey = progressStorageKey || clientId || "video-playlist";
+
+  // Build the order – optionally shuffle on first load.
+  const items = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    if (!shuffle) return rawItems;
+    return (0,_utils_functions__WEBPACK_IMPORTED_MODULE_5__.shuffleArray)(rawItems);
+  }, [rawItems, shuffle]);
+  const [activeIndex, setActiveIndex] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(() => {
+    let init = Math.max(0, Math.min(startIndex, items.length - 1));
+    if (deepLinkEnabled) {
+      const dl = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_5__.readDeepLink)();
+      if (dl.index != null && Number.isFinite(dl.index) && dl.index >= 0 && dl.index < items.length) {
+        init = dl.index;
+      }
+    }
+    if (rememberProgress) {
+      const persisted = loadProgress(storageKey);
+      if (persisted && Number.isFinite(persisted.activeIndex) && persisted.activeIndex >= 0 && persisted.activeIndex < items.length) {
+        init = persisted.activeIndex;
+      }
+    }
+    return init;
+  });
+  const [watched, setWatched] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(() => {
+    if (!rememberProgress) return {};
+    const persisted = loadProgress(storageKey);
+    return persisted?.watched || {};
+  });
+  const [currentTime, setCurrentTime] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  const playerElRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
+  // Initial seek time (deep link or stored position).
+  const [initialSeek, setInitialSeek] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(() => {
+    if (deepLinkEnabled) {
+      const dl = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_5__.readDeepLink)();
+      if (dl.time != null && Number.isFinite(dl.time) && dl.time > 0) {
+        return dl.time;
+      }
+    }
+    if (rememberProgress) {
+      const persisted = loadProgress(storageKey);
+      const t = persisted?.positions?.[items[activeIndex]?.id];
+      if (Number.isFinite(t) && t > 0) return t;
+    }
+    return 0;
+  });
+  const [search, setSearch] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  const [countdown, setCountdown] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  const countdownTimer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+
+  // Filtered queue (search) – kept indices stable by reading from items[].
+  const visibleItems = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    if (!search.trim()) return items.map((it, idx) => ({
+      it,
+      idx
+    }));
+    const q = search.trim().toLowerCase();
+    return items.map((it, idx) => ({
+      it,
+      idx
+    })).filter(({
+      it
+    }) => [it.title, it.description, it.badge].filter(Boolean).some(s => String(s).toLowerCase().includes(q)));
+  }, [items, search]);
+
+  // Persist progress.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!rememberProgress) return;
+    const data = loadProgress(storageKey) || {};
+    data.activeIndex = activeIndex;
+    data.watched = watched;
+    saveProgress(storageKey, data);
+  }, [activeIndex, watched, rememberProgress, storageKey]);
+
+  // Persist position every few seconds.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!rememberProgress) return;
+    const id = items[activeIndex]?.id;
+    if (!id || !currentTime) return;
+    const data = loadProgress(storageKey) || {};
+    data.positions = data.positions || {};
+    data.positions[id] = currentTime;
+    saveProgress(storageKey, data);
+  }, [Math.floor(currentTime / 3), activeIndex, items, rememberProgress, storageKey]);
+
+  // Deep link writer.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!deepLinkEnabled) return;
+    (0,_utils_functions__WEBPACK_IMPORTED_MODULE_5__.writeDeepLink)(activeIndex, currentTime);
+  }, [activeIndex, Math.floor(currentTime / 5), deepLinkEnabled]);
+
+  // When the active item changes, reset initialSeek to either stored
+  // position or zero (no carry-over from previous item).
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (rememberProgress) {
+      const persisted = loadProgress(storageKey);
+      const t = persisted?.positions?.[items[activeIndex]?.id];
+      setInitialSeek(Number.isFinite(t) && t > 0 ? t : 0);
+    } else {
+      setInitialSeek(0);
+    }
+    setCurrentTime(0);
+    cancelCountdown();
+  }, [activeIndex]);
+
+  // Listen for hash changes (deep link navigation).
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!deepLinkEnabled || typeof window === "undefined") return undefined;
+    const handler = () => {
+      const dl = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_5__.readDeepLink)();
+      if (dl.index != null && dl.index >= 0 && dl.index < items.length && dl.index !== activeIndex) {
+        setActiveIndex(dl.index);
+      }
+    };
+    window.addEventListener("hashchange", handler);
+    return () => window.removeEventListener("hashchange", handler);
+  }, [deepLinkEnabled, items.length, activeIndex]);
+  const cancelCountdown = () => {
+    if (countdownTimer.current) {
+      clearInterval(countdownTimer.current);
+      countdownTimer.current = null;
+    }
+    setCountdown(0);
+  };
+  const goTo = idx => {
+    cancelCountdown();
+    if (idx < 0 || idx >= items.length) return;
+    setActiveIndex(idx);
+  };
+  const advance = () => {
+    const next = activeIndex + 1;
+    if (next >= items.length) {
+      if (loopQueue) goTo(0);
+      return;
+    }
+    goTo(next);
+  };
+  const handleEnded = () => {
+    // Mark watched.
+    const id = items[activeIndex]?.id;
+    if (id) setWatched(prev => ({
+      ...prev,
+      [id]: true
+    }));
+    if (!autoAdvance) return;
+    if (activeIndex + 1 >= items.length && !loopQueue) return;
+    const delay = Math.max(0, parseInt(autoAdvanceDelay, 10) || 0);
+    if (delay === 0) {
+      advance();
+      return;
+    }
+    setCountdown(delay);
+    let remaining = delay;
+    countdownTimer.current = setInterval(() => {
+      remaining -= 1;
+      if (remaining <= 0) {
+        clearInterval(countdownTimer.current);
+        countdownTimer.current = null;
+        setCountdown(0);
+        advance();
+      } else {
+        setCountdown(remaining);
+      }
+    }, 1000);
+  };
+  const handleTimeUpdate = t => {
+    setCurrentTime(t);
+  };
+  const handleLoaded = controller => {
+    playerElRef.current = controller;
+  };
+  const handleSeekChapter = t => {
+    const ctrl = playerElRef.current;
+    if (ctrl && typeof ctrl.seek === "function") {
+      // Native <video>, YouTube and Vimeo all expose a uniform seek().
+      ctrl.seek(t);
+    } else {
+      // Fallback (controller not ready yet): reload the embed at the timestamp.
+      setInitialSeek(t);
+    }
+  };
+  if (!items.length) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "vpb-vp-root is-empty",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+        children: "No playlist items configured."
+      })
+    });
+  }
+  const activeItem = items[Math.min(activeIndex, items.length - 1)];
+  const totalWatched = Object.values(watched).filter(Boolean).length;
+  const headerLine = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    className: "vpb-vp-qhead",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
+        className: "vpb-vp-qhead-title",
+        children: queueTitle
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+        className: "vpb-vp-qhead-count",
+        children: [totalWatched, " / ", items.length, " watched"]
+      })]
+    }), showSearch && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: "vpb-vp-qsearch",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+        className: "vpb-vp-qsearch-icon",
+        "aria-hidden": "true",
+        children: _utils_icons__WEBPACK_IMPORTED_MODULE_4__.searchIcon
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+        type: "search",
+        value: search,
+        onChange: e => setSearch(e.target.value),
+        placeholder: "Search\u2026",
+        "aria-label": "Filter playlist"
+      })]
+    })]
+  });
+  const queueList = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    className: "vpb-vp-qlist",
+    role: "listbox",
+    "aria-label": "Playlist queue",
+    children: [visibleItems.length === 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "vpb-vp-qempty",
+      children: "No matches."
+    }), visibleItems.map(({
+      it,
+      idx
+    }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_QueueItem__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      item: it,
+      index: idx,
+      isActive: idx === activeIndex,
+      isWatched: !!watched[it.id],
+      attributes: attributes,
+      onSelect: goTo
+    }, it.id || idx))]
+  });
+  const queuePanel = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("aside", {
+    className: "vpb-vp-queue",
+    "aria-label": "Video queue",
+    children: [headerLine, queueList]
+  });
+  const stage = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("section", {
+    className: "vpb-vp-stage-wrap",
+    "aria-label": "Active video",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: "vpb-vp-stage",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Player__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        item: activeItem,
+        attributes: attributes,
+        startTime: initialSeek,
+        onEnded: handleEnded,
+        onTimeUpdate: handleTimeUpdate,
+        onLoaded: handleLoaded,
+        inEditor: inEditor
+      }, activeItem.id || activeIndex), countdown > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        className: "vpb-vp-countdown",
+        role: "status",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "vpb-vp-countdown-inner",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+            className: "vpb-vp-countdown-up",
+            children: "Up next"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+            className: "vpb-vp-countdown-title",
+            children: items[activeIndex + 1]?.title || items[0]?.title
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+            className: "vpb-vp-countdown-actions",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+              type: "button",
+              className: "vpb-vp-cd-btn is-cancel",
+              onClick: cancelCountdown,
+              children: "Cancel"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("button", {
+              type: "button",
+              className: "vpb-vp-cd-btn is-play",
+              onClick: () => {
+                cancelCountdown();
+                advance();
+              },
+              children: ["Play now (", countdown, "s)"]
+            })]
+          })]
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: "vpb-vp-active-meta",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+        className: "vpb-vp-active-title",
+        children: activeItem.title
+      }), activeItem.description && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+        className: "vpb-vp-active-desc",
+        children: activeItem.description
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "vpb-vp-active-row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+          className: "vpb-vp-active-pos",
+          children: [activeIndex + 1, " of ", items.length]
+        }), currentTime > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+          className: "vpb-vp-active-time",
+          children: (0,_utils_functions__WEBPACK_IMPORTED_MODULE_5__.formatTime)(currentTime)
+        })]
+      })]
+    }), showChapters && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Chapters__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      item: activeItem,
+      currentTime: currentTime,
+      onSeek: handleSeekChapter
+    })]
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    className: `vpb-vp-root is-${layout}`,
+    children: [stage, queuePanel]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Playlist);
+
+/***/ },
+
+/***/ "./src/blocks/video-playlist/Components/Common/QueueItem.js"
+/*!******************************************************************!*\
+  !*** ./src/blocks/video-playlist/Components/Common/QueueItem.js ***!
+  \******************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/functions */ "./src/blocks/video-playlist/utils/functions.js");
+/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/icons */ "./src/blocks/video-playlist/utils/icons.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const QueueItem = ({
+  item,
+  index,
+  isActive,
+  isWatched,
+  attributes,
+  onSelect
+}) => {
+  const {
+    showThumbnails = true,
+    showDuration = true,
+    showDescription = true,
+    showWatchedCheckmarks = true,
+    showCounter = true
+  } = attributes;
+  const poster = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_0__.resolvePoster)(item);
+  const handleKey = e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onSelect(index);
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: `vpb-vp-qitem ${isActive ? "is-active" : ""} ${isWatched ? "is-watched" : ""}`,
+    role: "option",
+    "aria-selected": isActive,
+    tabIndex: 0,
+    onClick: () => onSelect(index),
+    onKeyDown: handleKey,
+    children: [showCounter && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+      className: "vpb-vp-qnum",
+      children: index + 1
+    }), showThumbnails && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "vpb-vp-qthumb-wrap",
+      children: [poster ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+        className: "vpb-vp-qthumb",
+        src: poster,
+        alt: item.title || "",
+        loading: "lazy"
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "vpb-vp-qthumb is-placeholder"
+      }), isActive ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "vpb-vp-qbadge is-playing",
+        "aria-hidden": "true",
+        children: _utils_icons__WEBPACK_IMPORTED_MODULE_1__.playIcon
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "vpb-vp-qbadge is-play-hover",
+        "aria-hidden": "true",
+        children: _utils_icons__WEBPACK_IMPORTED_MODULE_1__.playIcon
+      }), showDuration && item.duration && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "vpb-vp-qdur",
+        children: item.duration
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "vpb-vp-qmeta",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "vpb-vp-qtitle-row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+          className: "vpb-vp-qtitle",
+          children: item.title || "Untitled"
+        }), item.badge && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          className: "vpb-vp-qpill",
+          children: item.badge
+        })]
+      }), showDescription && item.description && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        className: "vpb-vp-qdesc",
+        children: item.description
+      }), !showThumbnails && showDuration && item.duration && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        className: "vpb-vp-qdur is-inline",
+        children: item.duration
+      })]
+    }), showWatchedCheckmarks && isWatched && !isActive && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+      className: "vpb-vp-qcheck",
+      "aria-label": "Watched",
+      children: _utils_icons__WEBPACK_IMPORTED_MODULE_1__.checkIcon
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QueueItem);
+
+/***/ },
+
+/***/ "./src/blocks/video-playlist/Components/Common/Schema.js"
+/*!***************************************************************!*\
+  !*** ./src/blocks/video-playlist/Components/Common/Schema.js ***!
+  \***************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/functions */ "./src/blocks/video-playlist/utils/functions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const Schema = ({
+  attributes
+}) => {
+  const {
+    items = [],
+    playlistName = "Featured Playlist"
+  } = attributes;
+  if (!items.length) return null;
+  const itemListEl = items.map((item, idx) => {
+    const src = item?.source || {};
+    return {
+      "@type": "ListItem",
+      position: idx + 1,
+      item: {
+        "@type": "VideoObject",
+        name: item.title || `Video ${idx + 1}`,
+        description: item.description || item.title || "",
+        thumbnailUrl: (0,_utils_functions__WEBPACK_IMPORTED_MODULE_0__.resolvePoster)(item) || undefined,
+        contentUrl: src.url || undefined
+      }
+    };
+  });
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: playlistName,
+    numberOfItems: items.length,
+    itemListElement: itemListEl
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("script", {
+    type: "application/ld+json",
+    dangerouslySetInnerHTML: {
+      __html: JSON.stringify(data)
+    }
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Schema);
+
+/***/ },
+
+/***/ "./src/blocks/video-playlist/Components/Common/Style.js"
+/*!**************************************************************!*\
+  !*** ./src/blocks/video-playlist/Components/Common/Style.js ***!
+  \**************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/functions */ "./src/blocks/video-playlist/utils/functions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const shadowToCss = s => {
+  if (!s) return "none";
+  return `${s.x || 0}px ${s.y || 0}px ${s.blur || 0}px ${s.spread || 0}px ${s.color || "rgba(0,0,0,0.35)"}`;
+};
+const Style = ({
+  attributes,
+  id
+}) => {
+  const {
+    accentColor = "#136EF5",
+    queueBackground = "#0f1115",
+    queueTextColor = "#e6e7eb",
+    queueMutedColor = "rgba(230, 231, 235, 0.65)",
+    activeItemBackground = "rgba(19, 110, 245, 0.18)",
+    hoverItemBackground = "rgba(255, 255, 255, 0.06)",
+    playerBackground = "#000000",
+    containerBackground = "#0b0c10",
+    borderRadius = 12,
+    boxShadow = {},
+    padding = 0,
+    gap = 16,
+    aspectRatio = "16:9",
+    customAspect = "16/9",
+    queueWidth = 32,
+    queueMaxHeight = 560
+  } = attributes;
+  const aspect = (0,_utils_functions__WEBPACK_IMPORTED_MODULE_0__.resolveAspect)(aspectRatio, customAspect);
+  const sel = `#${id}`;
+  const css = `
+    ${sel} {
+      --vpb-vp-accent: ${accentColor};
+      --vpb-vp-queue-bg: ${queueBackground};
+      --vpb-vp-queue-text: ${queueTextColor};
+      --vpb-vp-queue-muted: ${queueMutedColor};
+      --vpb-vp-active-bg: ${activeItemBackground};
+      --vpb-vp-hover-bg: ${hoverItemBackground};
+      --vpb-vp-player-bg: ${playerBackground};
+      --vpb-vp-container-bg: ${containerBackground};
+      --vpb-vp-radius: ${borderRadius}px;
+      --vpb-vp-shadow: ${shadowToCss(boxShadow)};
+      --vpb-vp-padding: ${padding}px;
+      --vpb-vp-gap: ${gap}px;
+      --vpb-vp-aspect: ${aspect};
+      --vpb-vp-queue-width: ${queueWidth}%;
+      --vpb-vp-queue-maxh: ${queueMaxHeight}px;
+    }
+  `;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("style", {
+    dangerouslySetInnerHTML: {
+      __html: css
+    }
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Style);
+
+/***/ },
+
+/***/ "./src/blocks/video-playlist/utils/functions.js"
+/*!******************************************************!*\
+  !*** ./src/blocks/video-playlist/utils/functions.js ***!
+  \******************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   detectSourceType: () => (/* binding */ detectSourceType),
+/* harmony export */   formatTime: () => (/* binding */ formatTime),
+/* harmony export */   getVimeoId: () => (/* binding */ getVimeoId),
+/* harmony export */   getYoutubeId: () => (/* binding */ getYoutubeId),
+/* harmony export */   isDash: () => (/* binding */ isDash),
+/* harmony export */   isHls: () => (/* binding */ isHls),
+/* harmony export */   isMux: () => (/* binding */ isMux),
+/* harmony export */   isVimeo: () => (/* binding */ isVimeo),
+/* harmony export */   isYoutube: () => (/* binding */ isYoutube),
+/* harmony export */   makeId: () => (/* binding */ makeId),
+/* harmony export */   parseTimeToSeconds: () => (/* binding */ parseTimeToSeconds),
+/* harmony export */   readDeepLink: () => (/* binding */ readDeepLink),
+/* harmony export */   resolveAspect: () => (/* binding */ resolveAspect),
+/* harmony export */   resolvePoster: () => (/* binding */ resolvePoster),
+/* harmony export */   shuffleArray: () => (/* binding */ shuffleArray),
+/* harmony export */   writeDeepLink: () => (/* binding */ writeDeepLink)
+/* harmony export */ });
+const getYoutubeId = url => {
+  if (!url) return "";
+  const match = url.match(/(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  return match ? match[1] : "";
+};
+const isYoutube = url => !!url && /(?:youtube\.com|youtu\.be)/i.test(url);
+const getVimeoId = url => {
+  if (!url) return "";
+  const match = url.match(/vimeo\.com\/(?:.*#|.*\/videos?\/)?([0-9]+)/i);
+  return match ? match[1] : "";
+};
+const isVimeo = url => !!url && /vimeo\.com/i.test(url);
+const isHls = url => !!url && /\.m3u8(\?|$)/i.test(url);
+const isDash = url => !!url && /\.mpd(\?|$)/i.test(url);
+const isMux = url => !!url && /stream\.mux\.com/i.test(url);
+const detectSourceType = url => {
+  if (!url) return "mp4";
+  if (isYoutube(url)) return "youtube";
+  if (isVimeo(url)) return "vimeo";
+  if (isHls(url)) return "hls";
+  if (isDash(url)) return "dash";
+  if (isMux(url)) return "mux";
+  return "mp4";
+};
+const resolveAspect = (aspectRatio, customAspect) => {
+  if (aspectRatio === "custom") return customAspect || "16/9";
+  if (!aspectRatio) return "16/9";
+  return aspectRatio.replace(":", "/");
+};
+const resolvePoster = item => {
+  if (item?.poster) return item.poster;
+  const src = item?.source || {};
+  const url = src.url || "";
+  if (src.type === "youtube" || isYoutube(url)) {
+    const id = src.mediaId || getYoutubeId(url);
+    if (id) return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+  }
+  return "";
+};
+const makeId = () => `vp-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
+const formatTime = seconds => {
+  if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
+  const s = Math.floor(seconds % 60);
+  const m = Math.floor(seconds / 60 % 60);
+  const h = Math.floor(seconds / 3600);
+  const ss = s.toString().padStart(2, "0");
+  if (h > 0) {
+    return `${h}:${m.toString().padStart(2, "0")}:${ss}`;
+  }
+  return `${m}:${ss}`;
+};
+const parseTimeToSeconds = val => {
+  if (val == null) return 0;
+  if (typeof val === "number") return val;
+  const str = String(val).trim();
+  if (!str) return 0;
+  if (!str.includes(":")) {
+    const n = parseFloat(str);
+    return Number.isFinite(n) ? n : 0;
+  }
+  const parts = str.split(":").map(p => parseInt(p, 10) || 0);
+  if (parts.length === 2) return parts[0] * 60 + parts[1];
+  if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+  return 0;
+};
+const shuffleArray = arr => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+const readDeepLink = () => {
+  if (typeof window === "undefined") return {
+    index: null,
+    time: null
+  };
+  const hash = (window.location.hash || "").replace(/^#/, "");
+  if (!hash) return {
+    index: null,
+    time: null
+  };
+  const params = new URLSearchParams(hash);
+  const idx = params.get("video");
+  const t = params.get("t");
+  return {
+    index: idx != null && idx !== "" ? parseInt(idx, 10) : null,
+    time: t != null && t !== "" ? parseFloat(t) : null
+  };
+};
+const writeDeepLink = (index, time) => {
+  if (typeof window === "undefined") return;
+  try {
+    const params = new URLSearchParams();
+    params.set("video", String(index));
+    if (Number.isFinite(time) && time > 0) {
+      params.set("t", String(Math.round(time)));
+    }
+    const next = `#${params.toString()}`;
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, "", next);
+    } else {
+      window.location.hash = next;
+    }
+  } catch (e) {
+    // ignore
+  }
+};
+
+/***/ },
+
+/***/ "./src/blocks/video-playlist/utils/icons.js"
+/*!**************************************************!*\
+  !*** ./src/blocks/video-playlist/utils/icons.js ***!
+  \**************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   blockIcon: () => (/* binding */ blockIcon),
+/* harmony export */   checkIcon: () => (/* binding */ checkIcon),
+/* harmony export */   pauseIcon: () => (/* binding */ pauseIcon),
+/* harmony export */   playIcon: () => (/* binding */ playIcon),
+/* harmony export */   searchIcon: () => (/* binding */ searchIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const iconColor = "#136EF5";
+const blockIcon = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "200",
+  height: "200",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: iconColor,
+  strokeWidth: "2",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  className: "video-playlist-icon",
+  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("rect", {
+    x: "2",
+    y: "4",
+    width: "13",
+    height: "14",
+    rx: "2"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("polygon", {
+    points: "7,8 7,14 12,11",
+    fill: iconColor,
+    stroke: "none"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", {
+    x1: "17",
+    y1: "6",
+    x2: "22",
+    y2: "6"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", {
+    x1: "17",
+    y1: "10",
+    x2: "22",
+    y2: "10"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", {
+    x1: "17",
+    y1: "14",
+    x2: "22",
+    y2: "14"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", {
+    x1: "17",
+    y1: "18",
+    x2: "20",
+    y2: "18"
+  })]
+});
+const playIcon = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
+  viewBox: "0 0 24 24",
+  xmlns: "http://www.w3.org/2000/svg",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("polygon", {
+    points: "6,4 20,12 6,20",
+    fill: "currentColor"
+  })
+});
+const pauseIcon = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
+  viewBox: "0 0 24 24",
+  xmlns: "http://www.w3.org/2000/svg",
+  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("rect", {
+    x: "6",
+    y: "5",
+    width: "4",
+    height: "14",
+    fill: "currentColor"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("rect", {
+    x: "14",
+    y: "5",
+    width: "4",
+    height: "14",
+    fill: "currentColor"
+  })]
+});
+const checkIcon = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
+  viewBox: "0 0 24 24",
+  xmlns: "http://www.w3.org/2000/svg",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("polyline", {
+    points: "4,12 10,18 20,6",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "3",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })
+});
+const searchIcon = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
+  viewBox: "0 0 24 24",
+  xmlns: "http://www.w3.org/2000/svg",
+  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", {
+    cx: "11",
+    cy: "11",
+    r: "7",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2"
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", {
+    x1: "16",
+    y1: "16",
+    x2: "21",
+    y2: "21",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round"
+  })]
+});
+
+/***/ },
+
+/***/ "./src/blocks/video-playlist/style.scss"
+/*!**********************************************!*\
+  !*** ./src/blocks/video-playlist/style.scss ***!
+  \**********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ },
+
+/***/ "react"
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+(module) {
+
+module.exports = window["React"];
+
+/***/ },
+
+/***/ "react-dom/client"
+/*!***************************!*\
+  !*** external "ReactDOM" ***!
+  \***************************/
+(module) {
+
+module.exports = window["ReactDOM"];
+
+/***/ },
+
+/***/ "react/jsx-runtime"
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+(module) {
+
+module.exports = window["ReactJSXRuntime"];
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		if (!(moduleId in __webpack_modules__)) {
+/******/ 			delete __webpack_module_cache__[moduleId];
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/ensure chunk */
+/******/ 	(() => {
+/******/ 		__webpack_require__.f = {};
+/******/ 		// This file contains only the entry chunk.
+/******/ 		// The chunk loading function for additional chunks
+/******/ 		__webpack_require__.e = (chunkId) => {
+/******/ 			return Promise.all(Object.keys(__webpack_require__.f).reduce((promises, key) => {
+/******/ 				__webpack_require__.f[key](chunkId, promises);
+/******/ 				return promises;
+/******/ 			}, []));
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get javascript chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__webpack_require__.u = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return "" + chunkId + ".js?ver=" + {"vendors-node_modules_dashjs_dist_modern_esm_dash_all_min_js":"b5c34e9251a7fa72ce76","vendors-node_modules_hls_js_dist_hls_mjs":"52b585a62dbdeb6ed62d"}[chunkId] + "";
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get mini-css chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__webpack_require__.miniCssF = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return undefined;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/load script */
+/******/ 	(() => {
+/******/ 		var inProgress = {};
+/******/ 		var dataWebpackPrefix = "video-player-block:";
+/******/ 		// loadScript function to load a script via script tag
+/******/ 		__webpack_require__.l = (url, done, key, chunkId) => {
+/******/ 			if(inProgress[url]) { inProgress[url].push(done); return; }
+/******/ 			var script, needAttach;
+/******/ 			if(key !== undefined) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				for(var i = 0; i < scripts.length; i++) {
+/******/ 					var s = scripts[i];
+/******/ 					if(s.getAttribute("src") == url || s.getAttribute("data-webpack") == dataWebpackPrefix + key) { script = s; break; }
+/******/ 				}
+/******/ 			}
+/******/ 			if(!script) {
+/******/ 				needAttach = true;
+/******/ 				script = document.createElement('script');
+/******/ 		
+/******/ 				script.charset = 'utf-8';
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.setAttribute("data-webpack", dataWebpackPrefix + key);
+/******/ 		
+/******/ 				script.src = url;
+/******/ 			}
+/******/ 			inProgress[url] = [done];
+/******/ 			var onScriptComplete = (prev, event) => {
+/******/ 				// avoid mem leaks in IE.
+/******/ 				script.onerror = script.onload = null;
+/******/ 				clearTimeout(timeout);
+/******/ 				var doneFns = inProgress[url];
+/******/ 				delete inProgress[url];
+/******/ 				script.parentNode && script.parentNode.removeChild(script);
+/******/ 				doneFns && doneFns.forEach((fn) => (fn(event)));
+/******/ 				if(prev) return prev(event);
+/******/ 			}
+/******/ 			var timeout = setTimeout(onScriptComplete.bind(null, undefined, { type: 'timeout', target: script }), 120000);
+/******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
+/******/ 			script.onload = onScriptComplete.bind(null, script.onload);
+/******/ 			needAttach && document.head.appendChild(script);
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (globalThis.importScripts) scriptUrl = globalThis.location + "";
+/******/ 		var document = globalThis.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript && document.currentScript.tagName.toUpperCase() === 'SCRIPT')
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && (!scriptUrl || !/^http(s?):/.test(scriptUrl))) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/^blob:/, "").replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl + "../../";
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"blocks/video-playlist/view": 0
+/******/ 		};
+/******/ 		
+/******/ 		__webpack_require__.f.j = (chunkId, promises) => {
+/******/ 				// JSONP chunk loading for javascript
+/******/ 				var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
+/******/ 				if(installedChunkData !== 0) { // 0 means "already installed".
+/******/ 		
+/******/ 					// a Promise means "currently loading".
+/******/ 					if(installedChunkData) {
+/******/ 						promises.push(installedChunkData[2]);
+/******/ 					} else {
+/******/ 						if(true) { // all chunks have JS
+/******/ 							// setup Promise in chunk cache
+/******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
+/******/ 							promises.push(installedChunkData[2] = promise);
+/******/ 		
+/******/ 							// start chunk loading
+/******/ 							var url = __webpack_require__.p + __webpack_require__.u(chunkId);
+/******/ 							// create error before stack unwound to get useful stacktrace later
+/******/ 							var error = new Error();
+/******/ 							var loadingEnded = (event) => {
+/******/ 								if(__webpack_require__.o(installedChunks, chunkId)) {
+/******/ 									installedChunkData = installedChunks[chunkId];
+/******/ 									if(installedChunkData !== 0) installedChunks[chunkId] = undefined;
+/******/ 									if(installedChunkData) {
+/******/ 										var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 										var realSrc = event && event.target && event.target.src;
+/******/ 										error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 										error.name = 'ChunkLoadError';
+/******/ 										error.type = errorType;
+/******/ 										error.request = realSrc;
+/******/ 										installedChunkData[1](error);
+/******/ 									}
+/******/ 								}
+/******/ 							};
+/******/ 							__webpack_require__.l(url, loadingEnded, "chunk-" + chunkId, chunkId);
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 		};
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		// no on chunks loaded
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 		
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkvideo_player_block"] = globalThis["webpackChunkvideo_player_block"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!*******************************************!*\
+  !*** ./src/blocks/video-playlist/view.js ***!
+  \*******************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom/client */ "react-dom/client");
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_dom_client__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/video-playlist/style.scss");
+/* harmony import */ var _Components_Common_Style__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/Common/Style */ "./src/blocks/video-playlist/Components/Common/Style.js");
+/* harmony import */ var _Components_Common_Playlist__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Common/Playlist */ "./src/blocks/video-playlist/Components/Common/Playlist.js");
+/* harmony import */ var _Components_Common_Schema__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Common/Schema */ "./src/blocks/video-playlist/Components/Common/Schema.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const els = document.querySelectorAll(".wp-block-vpb-video-playlist");
+  els.forEach(el => {
+    let attributes;
+    try {
+      attributes = JSON.parse(el.dataset.attributes || "{}");
+    } catch (err) {
+      attributes = {};
+    }
+    (0,react_dom_client__WEBPACK_IMPORTED_MODULE_0__.createRoot)(el).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Components_Common_Style__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        attributes: attributes,
+        id: el.id
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Components_Common_Playlist__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        attributes: attributes,
+        clientId: el.id
+      }), attributes?.emitSchema !== false && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Components_Common_Schema__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        attributes: attributes
+      })]
+    }));
+    el?.removeAttribute("data-attributes");
+  });
+});
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=view.js.map

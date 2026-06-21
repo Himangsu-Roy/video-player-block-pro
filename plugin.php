@@ -3,7 +3,7 @@
  * Plugin Name: Video Player Block
  * Plugin URI: https://wordpress.org/plugins/video-player-block/
  * Description: A Simple, accessible, Easy to Use & fully Customizable video player.
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: bPlugins
  * Author URI: https://bplugins.com
  * License: GPLv3
@@ -29,7 +29,7 @@ function vpbp_bootstrap() {
 	$host = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
 	$is_local = 'localhost' === $host || str_starts_with( $host, 'localhost:' ) || str_ends_with( $host, '.local' );
 
-	define( 'VPBP_PLUGIN_VERSION', $is_local ? time() : '2.0.0' );
+	define( 'VPBP_PLUGIN_VERSION', $is_local ? time() : '2.0.1' );
 	define( 'VPBP_DIR_URL', plugin_dir_url( __FILE__ ) );
 	define( 'VPBP_PUBLIC_DIR', VPBP_DIR_URL . 'public/' );
 	define( 'VPBP_DIR_PATH', plugin_dir_path( __FILE__ ) );
