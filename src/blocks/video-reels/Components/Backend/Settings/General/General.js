@@ -163,15 +163,16 @@ const General = ({ attributes, setAttributes }) => {
                       onChange={(val) => updateReel(index, { source: val })}
                     />
 
-                    <TextControl
+                    <InlineMediaUpload
                       label={__("Video URL", "video-player-block")}
                       value={reel.url || ""}
-                      onChange={(val) => {
+                      types={["video"]}
+                      onChange={(val) =>
                         updateReel(index, {
                           url: val,
                           source: detectSourceType(val),
-                        });
-                      }}
+                        })
+                      }
                       placeholder="https://..."
                       help={
                         reel.source === "youtube" || reel.source === "vimeo"

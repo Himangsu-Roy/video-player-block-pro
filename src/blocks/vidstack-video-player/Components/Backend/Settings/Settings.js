@@ -12,7 +12,7 @@ const Settings = ({ attributes, setAttributes }) => {
 
 	return <>
 		<InspectorControls>
-			<TabPanel className='bPlTabPanel' activeClass='activeTab'
+			<TabPanel className='bPlTabPanel vpb-inspector' activeClass='activeTab'
 				tabs={generalStyleTabs}
 				onSelect={tabController}
 			>

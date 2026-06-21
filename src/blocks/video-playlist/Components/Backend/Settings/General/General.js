@@ -210,9 +210,10 @@ const General = ({ attributes, setAttributes }) => {
                       }
                     />
 
-                    <TextControl
+                    <InlineMediaUpload
                       label={__("Video URL", "video-player-block")}
                       value={src.url || ""}
+                      types={["video"]}
                       onChange={(val) => {
                         const detected = detectSourceType(val);
                         updateItemSource(index, {

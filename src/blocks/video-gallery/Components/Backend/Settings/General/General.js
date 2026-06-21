@@ -177,9 +177,10 @@ const General = ({ attributes, setAttributes }) => {
                       onChange={(val) => updateVideo(index, "source", val)}
                     />
 
-                    <TextControl
+                    <InlineMediaUpload
                       label={__("Video URL", "video-player-block")}
                       value={video.url || ""}
+                      types={["video"]}
                       onChange={(val) => {
                         updateVideo(index, "url", val);
                         // Auto-detect source on paste

@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { createPortal } from "@wordpress/element";
 import { withSelect } from "@wordpress/data";
 import { useBlockProps } from "@wordpress/block-editor";
-import { useRefEffect } from "@wordpress/compose";
 import { MediaPlaceholder } from "../../../../../../bpl-tools/Components";
 import Settings from "./Settings/Settings";
 import Style from "../Common/Style";

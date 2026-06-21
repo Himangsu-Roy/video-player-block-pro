@@ -9,7 +9,6 @@ import {
   isWistia,
 } from "../../utils/functions";
 import { closeIcon } from "../../utils/icons";
-import EditorEmbedPortal from "../../../_shared/media/EditorEmbedPortal";
 import AdaptiveVideo from "../../../_shared/media/AdaptiveVideo";
 
 /**

@@ -33,7 +33,7 @@ module.exports = {
   plugins: ["react"],
   rules: {
     "func-names": "off",
-    "no-console": "warn",
+    "no-console": ["warn", { allow: ["warn", "error"] }],
     "no-unused-vars": ["warn", { argsIgnorePattern: "^__" }],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "react/prop-types": "off",

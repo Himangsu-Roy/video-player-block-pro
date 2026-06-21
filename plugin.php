@@ -85,6 +85,19 @@ function vpbp_bootstrap() {
 				// wp_enqueue_style( 'plyr' );
 				wp_add_inline_style( 'wp-block-editor', '.dashicons-categories-icon,.dashicons.dashicons-media-video.categories-icon{color:#136EF5!important}' );
 
+				// The shared blocks editor bundle (build/blocks/index.js) emits a
+				// sibling build/blocks/index.css containing every shared block's
+				// editor styles plus the inspector polish. None of those blocks
+				// declare an editorStyle for it, so enqueue it explicitly here.
+				if ( file_exists( VPBP_DIR_PATH . 'build/blocks/index.css' ) ) {
+					wp_enqueue_style(
+						'vpb-blocks-editor',
+						VPBP_DIR_URL . 'build/blocks/index.css',
+						[ 'wp-edit-blocks' ],
+						VPBP_PLUGIN_VERSION
+					);
+				}
+
 				$disabled_blocks = get_option( 'vpbDisabledBlocks', [] );
 				if ( ! is_array( $disabled_blocks ) ) $disabled_blocks = [];
 

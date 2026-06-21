@@ -1,4 +1,5 @@
 // import "./video-player-block";
+import "./_shared/inspector.scss";
 import "./react-video-player";
 import "./videojs-player";
 import "./vidstack-video-player";

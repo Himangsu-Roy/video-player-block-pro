@@ -3,7 +3,6 @@ import { __ } from "@wordpress/i18n";
 import {
   formatTime,
   findActiveCueIndex,
-  getAspectRatioCss,
 } from "../../utils/functions";
 import EditorEmbedPortal from "../../../_shared/media/EditorEmbedPortal";
 import AdaptiveVideo from "../../../_shared/media/AdaptiveVideo";
@@ -15,12 +14,9 @@ const VideoElement = ({
   videoSource,
   videoUrl,
   posterUrl,
-  aspectRatio,
   onRef,
   isEditor = false,
 }) => {
-  const arCss = getAspectRatioCss(aspectRatio);
-
   if (videoSource === "youtube") {
     const ytId = extractYouTubeId(videoUrl);
     const src = ytId

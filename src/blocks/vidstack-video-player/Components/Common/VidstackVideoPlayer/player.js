@@ -47,7 +47,7 @@ export function Player({
     }
   }, []);
 
-  function onProviderChange(provider, nativeEvent) {
+  function onProviderChange(provider, __nativeEvent) {
     // We can configure provider's here.
     if (isHLSProvider(provider)) {
       provider.config = {};
@@ -59,7 +59,7 @@ export function Player({
   }
 
   // We can listen for the `can-play` event to be notified when the player is ready.
-  function onCanPlay(detail, nativeEvent) {
+  function onCanPlay(__detail, __nativeEvent) {
     // ...
   }
 

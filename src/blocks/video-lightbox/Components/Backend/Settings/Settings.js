@@ -17,7 +17,7 @@ const Settings = ({ attributes, setAttributes }) => {
     <>
       <InspectorControls>
         <TabPanel
-          className="bPlTabPanel"
+          className="bPlTabPanel vpb-inspector"
           activeClass="activeTab"
           tabs={generalStyleTabs}
           onSelect={tabController}

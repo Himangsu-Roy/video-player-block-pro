@@ -36,7 +36,7 @@ import {
 
 const ReactVideoPlayer = ({
   attributes = {},
-  iframeWindow,
+  iframeWindow: __iframeWindow,
   children,
   ...restProps
 }) => {

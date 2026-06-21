@@ -3,7 +3,6 @@ import {
 	PanelBody,
 	RangeControl,
 	ColorPicker,
-	__experimentalHStack as HStack,
 } from '@wordpress/components';
 
 const ColorField = ({ label, value, onChange }) => (

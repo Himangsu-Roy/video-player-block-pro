@@ -106,7 +106,7 @@ export function VideoLayout({
   );
 }
 
-function Gestures({ doc, win }) {
+function Gestures() {
   return (
     <>
       <Gesture

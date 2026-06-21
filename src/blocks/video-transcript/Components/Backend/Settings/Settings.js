@@ -1,4 +1,3 @@
-import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { TabPanel } from '@wordpress/components';
 import { tabController } from '../../../../../../../bpl-tools/utils/functions';
@@ -10,7 +9,7 @@ const Settings = ({ attributes, setAttributes }) => {
 	return (
 		<InspectorControls>
 			<TabPanel
-				className="bPlTabPanel"
+				className="bPlTabPanel vpb-inspector"
 				activeClass="activeTab"
 				tabs={generalStyleTabs}
 				onSelect={tabController}

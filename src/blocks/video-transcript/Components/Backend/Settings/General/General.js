@@ -9,7 +9,7 @@ import {
 	Button,
 	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
-import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
+import { InlineMediaUpload } from '../../../../../../../../bpl-tools/Components';
 import {
 	layoutOptions,
 	aspectRatioOptions,
@@ -78,9 +78,10 @@ const General = ({ attributes, setAttributes }) => {
 				title={__('Video Source', 'video-player-block')}
 				initialOpen={true}
 			>
-				<TextControl
+				<InlineMediaUpload
 					label={__('Video URL', 'video-player-block')}
 					value={videoUrl}
+					types={['video']}
 					placeholder="https://example.com/video.mp4"
 					onChange={(val) =>
 						setAttributes({ videoUrl: val, videoSource: detectSource(val) })
@@ -94,31 +95,15 @@ const General = ({ attributes, setAttributes }) => {
 				/>
 
 				{(videoSource === 'url' || videoSource === 'self') && (
-					<>
-						<div className="mt15">
-							<TextControl
-								label={__('Poster Image URL', 'video-player-block')}
-								value={posterUrl}
-								placeholder="https://example.com/poster.jpg"
-								onChange={(val) => setAttributes({ posterUrl: val })}
-							/>
-						</div>
-						<MediaUploadCheck>
-							<MediaUpload
-								onSelect={(media) => setAttributes({ posterUrl: media.url })}
-								allowedTypes={['image']}
-								render={({ open }) => (
-									<Button
-										className="mt5"
-										variant="secondary"
-										onClick={open}
-									>
-										{__('Select Poster from Library', 'video-player-block')}
-									</Button>
-								)}
-							/>
-						</MediaUploadCheck>
-					</>
+					<div className="mt15">
+						<InlineMediaUpload
+							label={__('Poster Image URL', 'video-player-block')}
+							value={posterUrl}
+							types={['image']}
+							placeholder="https://example.com/poster.jpg"
+							onChange={(val) => setAttributes({ posterUrl: val })}
+						/>
+					</div>
 				)}
 
 				<div className="mt15">
