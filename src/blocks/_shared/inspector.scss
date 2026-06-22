@@ -49,16 +49,6 @@
     }
   }
 
-  // Comprehensive fallback: every control gets bottom spacing regardless of how
-  // deeply it is nested (some blocks wrap controls in <div className="mt15"> or
-  // conditional group wrappers, which the direct-child rule above can't reach).
-  // This overrides the bpl-tools `margin-bottom: 0 !important` via higher
-  // specificity. Adjacent margins collapse, so this never double-spaces the
-  // top-level controls handled above.
-  .components-panel__body .components-base-control:not(:last-child) {
-    margin-bottom: 16px !important;
-  }
-
   // Tidy up the legacy spacing utilities so they don't stack with the rules
   // above — let our rhythm own the vertical spacing.
   .components-panel__body .mt15 {
